@@ -252,8 +252,8 @@
 //}
 import UIKit
 
-class FloatingTextField: UITextField {
-    
+class FloatingTextField: UITextField,UITextFieldDelegate {
+    weak var forwardDelegate: UITextFieldDelegate?//newline
     private let floatingLabel = UILabel()
     private let borderLayer = CAShapeLayer()
     private var isLabelFloated = false
@@ -262,12 +262,14 @@ class FloatingTextField: UITextField {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setup()
+        delegate = self
+                setup()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        setup()
+        delegate = self
+                setup()
     }
     
     private func setup() {
@@ -343,12 +345,17 @@ class FloatingTextField: UITextField {
     }
 }
 
-extension FloatingTextField: UITextFieldDelegate {
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        floatLabel()
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        hideLabel()
-    }
-}
+extension FloatingTextField {
+    // MARK: - Delegate forwarding
+       func textFieldDidBeginEditing(_ textField: UITextField) {
+           floatLabel()
+           layer.borderColor = UIColor.green.cgColor
+           forwardDelegate?.textFieldDidBeginEditing?(textField)
+       }
+
+       func textFieldDidEndEditing(_ textField: UITextField) {
+           hideLabel()
+           forwardDelegate?.textFieldDidEndEditing?(textField)
+       }
+   }
+

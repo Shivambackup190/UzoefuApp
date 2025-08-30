@@ -8,7 +8,7 @@
 import UIKit
 
 class BookingCell: UITableViewCell {
-
+    
     @IBOutlet weak var bookingImg: UIImageView!
     @IBOutlet weak var viewlayer: UIView!
     override func awakeFromNib() {
@@ -16,8 +16,8 @@ class BookingCell: UITableViewCell {
         setupViewLayer()
         bookingImg.layer.cornerRadius = 5
     }
-
-    private func setupViewLayer() {
+    
+    func setupViewLayer() {
         viewlayer.layer.cornerRadius = 10
         viewlayer.layer.borderWidth = 0.5
         viewlayer.layer.shadowColor = UIColor.gray.cgColor
@@ -25,9 +25,7 @@ class BookingCell: UITableViewCell {
         viewlayer.layer.shadowRadius = 2
         viewlayer.layer.shadowOpacity = 0.3
         viewlayer.layer.masksToBounds = false
-      
+        
         
     }
-
-    
 }

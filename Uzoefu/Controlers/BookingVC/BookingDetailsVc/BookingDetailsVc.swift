@@ -13,10 +13,13 @@ class BookingDetailsVc: UIViewController {
         super.viewDidLoad()
 
     }
-    
 
     @IBAction func backAction(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
     
+    @IBAction func bookforbard(_ sender: Any) {
+//        let nav = self.storyboard?.instantiateViewController(withIdentifier: "BookActivityStepIstVc") as! BookActivityStepIstVc
+//        self.navigationController?.pushViewController(nav, animated: true)
+    }
 }

@@ -3,9 +3,6 @@ import UIKit
 class FirstView: UIView {
     var BookingAction : (()->()) = {}
     var WishListAction : (()->()) = {}
-     
-    
-
     @IBAction func bookingActionButton(_ sender: Any) {
         BookingAction()
     }

@@ -1,29 +1,19 @@
-//
-//  FilterVC.swift
-//  Uzoefu
-//
-//  Created by Narendra Kumar on 25/08/25.
-//
-
 import UIKit
 
 class FilterVC: UIViewController {
-
+    
+    // MARK: - Outlets
+    @IBOutlet weak var distanceDetailStack: UIStackView!
+    @IBOutlet weak var categoryDetailStack: UIStackView!
+    @IBOutlet weak var ratingDetailStack: UIStackView!
+    @IBOutlet weak var priceDetailStack: UIStackView!
+    
+    @IBOutlet weak var distanceButton: UIButton!
+    @IBOutlet weak var categoryButton: UIButton!
+    @IBOutlet weak var ratingButton: UIButton!
+    @IBOutlet weak var priceButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

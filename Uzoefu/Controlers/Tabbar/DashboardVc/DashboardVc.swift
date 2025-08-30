@@ -10,7 +10,6 @@ class DashboardVc: UIViewController {
     @IBOutlet weak var experinceActiviyvollotionViewSecond: UICollectionView!
     
     @IBOutlet weak var scroolView: UIScrollView!
-    
     var categoryNames = [
         "Near Me",
         "Adventure",
@@ -28,11 +27,7 @@ class DashboardVc: UIViewController {
         "Urban",
         "Nature",
         "Tours"
-        ]
-    
-    
-    
-    
+    ]
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -62,21 +57,20 @@ class DashboardVc: UIViewController {
         experinceActiviyvollotionView.collectionViewLayout = layout2
         experinceActiviyvollotionView.showsHorizontalScrollIndicator = false
     }
+    
     @IBAction func discoverDestinationBtnAction(_ sender: UIButton) {
-        let nav = self.storyboard?.instantiateViewController(withIdentifier: "DestinationExploreVc") as! DestinationExploreVc
-        
-        nav.hidevalue = "ok"
-        
-        self.navigationController?.pushViewController(nav, animated: true)
+//        let nav = self.storyboard?.instantiateViewController(withIdentifier: "DestinationExploreVc") as! DestinationExploreVc
+//        
+//        nav.hidevalue = "ok"
+//        
+//        self.navigationController?.pushViewController(nav, animated: true)
+        tabBarController?.selectedIndex = 1
         
     }
     
     @IBAction func AxerienceViewMoreAction(_ sender: UIButton) {
         
-        let nav = self.storyboard?.instantiateViewController(withIdentifier: "DestinationExploreVc") as! DestinationExploreVc
-        nav.hidevalue = "ok"
-        
-        self.navigationController?.pushViewController(nav, animated: true)
+        tabBarController?.selectedIndex = 1
     }
     
     @IBAction func exporeCatagoriesActionViewMore(_ sender: UIButton) {
@@ -84,7 +78,64 @@ class DashboardVc: UIViewController {
         
         self.navigationController?.pushViewController(nav, animated: true)
     }
+    
+    
+    @IBAction func filterBtnAction(_ sender: UIButton) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "FilterVC") as! FilterVC
+        vc.modalPresentationStyle = .pageSheet
+        
+        if let sheet = vc.sheetPresentationController {
+            if #available(iOS 16.0, *) {
+                sheet.detents = [
+                    .custom { _ in
+                        return 350
+                    }
+                ]
+            } else {
+                sheet.detents = [.large()]
+            }
+            sheet.prefersGrabberVisible = true
+        }
+        
+        if let presentationController = vc.presentationController as? UISheetPresentationController {
+            
+            presentationController.prefersGrabberVisible = true
+        }
+        vc.view.layer.cornerRadius = 30
+        vc.view.clipsToBounds = true
+        
+        present(vc, animated: true)
+    }
+    
+    @IBAction func exploreSearchAction(_ sender: UIButton) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "ExploreexpericeFilter") as! ExploreexpericeFilter
+        vc.modalPresentationStyle = .pageSheet
+        
+        if let sheet = vc.sheetPresentationController {
+            if #available(iOS 16.0, *) {     sheet.detents = [
+                .custom { _ in
+                    return 850
+                }
+            ]
+            } else {
+                sheet.detents = [.large()]
+            }
+            sheet.prefersGrabberVisible = true
+        }
+        
+        present(vc, animated: true)
+    }
 }
+/*
+ let vc = storyboard?.instantiateViewController(withIdentifier: "FilterVC") as! FilterVC
+ if let sheet = vc.sheetPresentationController {
+ sheet.detents = [.medium(), .large()] // bottom sheet style
+ sheet.prefersGrabberVisible = true
+ }
+ present(vc, animated: true)
+ }
+ }
+ */
 
 // MARK: - UICollectionView Delegate & DataSource
 extension DashboardVc: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -111,14 +162,11 @@ extension DashboardVc: UICollectionViewDelegate, UICollectionViewDataSource, UIC
             
             
         } else if collectionView == exploreCollectionView {
-            
-//            return collectionView.dequeueReusableCell(withReuseIdentifier: "explorecell", for: indexPath) as! ExplreCatagoriesCell
             let cell = exploreCollectionView.dequeueReusableCell(withReuseIdentifier: "explorecell", for: indexPath) as! ExplreCatagoriesCell
             cell.categoryLable.text = categoryNames[indexPath.row]
-            // check if selected here
-                  let isSelected = collectionView.indexPathsForSelectedItems?.contains(indexPath) ?? false
-                  cell.setSelected(isSelected)
-            //newcode
+            let isSelected = collectionView.indexPathsForSelectedItems?.contains(indexPath) ?? false
+            cell.setSelected(isSelected)
+            
             return cell
             
         } else if collectionView == experinceActiviyvollotionViewSecond {
@@ -144,11 +192,10 @@ extension DashboardVc: UICollectionViewDelegate, UICollectionViewDataSource, UIC
         let defaultSize = (collectionView.frame.width - 2) / 2
         return CGSize(width: defaultSize, height: defaultSize)
     }
-    // new code for selction
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-           if let cell = collectionView.cellForItem(at: indexPath) as? ExplreCatagoriesCell {
-               cell.setSelected(true)
-           }
-       }
+        if let cell = collectionView.cellForItem(at: indexPath) as? ExplreCatagoriesCell {
+            cell.setSelected(true)
+        }
+    }
     
 }

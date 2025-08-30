@@ -8,7 +8,11 @@
 import UIKit
 
 class OverViewClassUiView: UIView {
+    var BookingActionBtn : (()->()) = {}
 
-
-
+    @IBOutlet weak var bokingActionButton: UIButton!
+    
+    @IBAction func bookAction(_ sender: UIButton) {
+        BookingActionBtn()
+    }
 }

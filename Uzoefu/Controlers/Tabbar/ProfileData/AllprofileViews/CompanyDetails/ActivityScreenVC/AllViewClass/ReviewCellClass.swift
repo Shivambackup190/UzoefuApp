@@ -8,15 +8,14 @@
 import UIKit
 
 class ReviewCellClass: UITableViewCell {
-
+    
     @IBOutlet weak var reviewsPhotoCollectionView: UICollectionView!
     override func awakeFromNib() {
         super.awakeFromNib()
         loadreviewsPhotoCollectionView()
         
-        
     }
-
+    
     func loadreviewsPhotoCollectionView() {
         let nib = UINib(nibName: "ReviewPhotoCollectionCell", bundle: nil)
         reviewsPhotoCollectionView.register(nib, forCellWithReuseIdentifier: "ReviewPhotoCollectionCell")
@@ -60,6 +59,6 @@ extension ReviewCellClass :UICollectionViewDelegate,UICollectionViewDataSource,U
         return UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
     }
 }
-    
-    
+
+
 

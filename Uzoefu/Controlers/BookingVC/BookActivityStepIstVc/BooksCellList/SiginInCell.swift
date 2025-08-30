@@ -1,23 +1,36 @@
-//
-//  SiginInCell.swift
-//  Uzoefu
-//
-//  Created by Narendra Kumar on 28/08/25.
-//
-
 import UIKit
-
+//oo
 class SiginInCell: UITableViewCell {
+    var signatureView: SignatureView!
 
+
+
+    @IBOutlet weak var signatureContainerView: FloatingSignatureView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+
+        // SignatureView ko container ke andar fit karna
+        signatureView = SignatureView(frame: signatureContainerView.bounds)
+        signatureView.backgroundColor = .white
+        signatureView.translatesAutoresizingMaskIntoConstraints = false
+        signatureContainerView.addSubview(signatureView)
+
+        // Auto Layout constraints -> puri jagah fill karega
+        NSLayoutConstraint.activate([
+            signatureView.leadingAnchor.constraint(equalTo: signatureContainerView.leadingAnchor),
+            signatureView.trailingAnchor.constraint(equalTo: signatureContainerView.trailingAnchor),
+            signatureView.topAnchor.constraint(equalTo: signatureContainerView.topAnchor),
+            signatureView.bottomAnchor.constraint(equalTo: signatureContainerView.bottomAnchor)
+        ])
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    @objc func clearSignature() {
+        signatureView.clear()
     }
-    
+
+    @objc func saveSignature() {
+        let image = signatureView.getSignatureImage()
+        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil) // Save to Photos
+    }
 }

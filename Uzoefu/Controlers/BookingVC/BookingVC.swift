@@ -63,8 +63,6 @@ class BookingVC: UIViewController {
             removeBottomBorder(from: $0)
             $0?.setTitleColor(.gray, for: .normal) // default color
         }
-        
-        // Apply style to selected
         addBottomBorder(to: selectedButton, color: .green, height: 2)
         selectedButton.setTitleColor(.green, for: .normal) // highlight color
     }
@@ -94,6 +92,7 @@ extension BookingVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = bookingTableView.dequeueReusableCell(withIdentifier: "BookingCell", for: indexPath) as! BookingCell
+        cell.selectionStyle = .none
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -9,5 +9,6 @@ import UIKit
 
 class FAQClassUiView: UIView {
 
- 
+    @IBOutlet weak var faqTableView: UITableView!
+    
 }

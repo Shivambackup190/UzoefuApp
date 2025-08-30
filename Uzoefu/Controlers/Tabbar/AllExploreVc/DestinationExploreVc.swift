@@ -3,23 +3,16 @@
 //  Uzoefu
 //
 //  Created by Narendra Kumar on 12/08/25.
-//
 
 import UIKit
 
 class DestinationExploreVc: UIViewController {
-
-    
     @IBOutlet weak var weidthBackConstraint: NSLayoutConstraint!
-    
-    
-
     @IBOutlet weak var backHideShowBtn: UIButton!
     @IBOutlet weak var exploreDestinationColltionView: UICollectionView!
     
     @IBOutlet weak var destinationplacesCollectionView: UICollectionView!
     var hidevalue:String?
-    
     var categoryNames = [
          "Near Me",
          "Adventure",
@@ -56,9 +49,6 @@ class DestinationExploreVc: UIViewController {
         200,
         123
     ]
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -70,16 +60,13 @@ class DestinationExploreVc: UIViewController {
             backHideShowBtn.isHidden = true
             weidthBackConstraint.constant = 0
         }
-        
-        
-       
         exploreDestinationColltionView.register(
             UINib(nibName: "DestinationExploreCollectionViewCell", bundle: nil),
             forCellWithReuseIdentifier: "cell")
         exploreDestinationColltionView.delegate = self
         exploreDestinationColltionView.dataSource = self
         
-     
+        
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         exploreDestinationColltionView.collectionViewLayout = layout
@@ -107,18 +94,10 @@ extension DestinationExploreVc: UICollectionViewDelegate, UICollectionViewDataSo
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         if collectionView == destinationplacesCollectionView {
-            //            guard let cell = destinationplacesCollectionView.dequeueReusableCell(
-            //                withReuseIdentifier: "cell",
-            //                for: indexPath
-            //                .
-            //            ) as? DestinationplacesCollectionViewCell else {
-            //                return UICollectionViewCell()
-            //            }
-            //            return cell
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! DestinationplacesCollectionViewCell
             cell.categoryLable.text = categoryNames[indexPath.row]
             cell.countLable.text = "(\(countValues[indexPath.row]))"
-
+            
             return cell
         } else {
             let cell = exploreDestinationColltionView.dequeueReusableCell(
@@ -126,17 +105,14 @@ extension DestinationExploreVc: UICollectionViewDelegate, UICollectionViewDataSo
                 for: indexPath) as! DestinationExploreCollectionViewCell
             return cell
         }
-        
-        
     }
-    
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let itemsPerRow: CGFloat = 2
-        let spacing: CGFloat = 10 // space between cells
-        let sectionInsets = UIEdgeInsets(top: 10, left: 5, bottom: 10, right: 5) // reduced sides
+        let spacing: CGFloat = 10
+        let sectionInsets = UIEdgeInsets(top: 10, left: 5, bottom: 10, right: 5)
         
         let totalSpacing = sectionInsets.left + sectionInsets.right + (spacing * (itemsPerRow - 1))
         let availableWidth = collectionView.frame.width - totalSpacing
@@ -145,22 +121,22 @@ extension DestinationExploreVc: UICollectionViewDelegate, UICollectionViewDataSo
         return CGSize(width: widthPerItem, height: 120)
     }
     
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 10, left: 5, bottom: 10, right: 5) // smaller side padding
-    }
+    //    func collectionView(_ collectionView: UICollectionView,
+    //                        layout collectionViewLayout: UICollectionViewLayout,
+    //                        insetForSectionAt section: Int) -> UIEdgeInsets {
+    //        return UIEdgeInsets(top: 10, left: 5, bottom: 10, right: 5) // smaller side padding
+    //    }
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 10
+        return 5
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 10
+        return 5
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == exploreDestinationColltionView {

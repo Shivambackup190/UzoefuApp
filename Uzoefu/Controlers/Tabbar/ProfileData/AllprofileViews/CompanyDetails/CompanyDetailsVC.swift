@@ -8,7 +8,7 @@
 import UIKit
 
 class CompanyDetailsVC: UIViewController {
-
+    
     @IBOutlet weak var companyDetailCollectionView: UICollectionView!
     @IBOutlet weak var companyDetailCollectionViewSecond: UICollectionView!
     
@@ -24,13 +24,13 @@ class CompanyDetailsVC: UIViewController {
         companyDetailCollectionViewSecond.delegate = self
         companyDetailCollectionViewSecond.dataSource = self
         
-     
+        
         let layout1 = UICollectionViewFlowLayout()
         layout1.scrollDirection = .horizontal
         companyDetailCollectionView.collectionViewLayout = layout1
         companyDetailCollectionView.showsHorizontalScrollIndicator = false
         
-
+        
         let layout2 = UICollectionViewFlowLayout()
         layout2.scrollDirection = .vertical
         companyDetailCollectionViewSecond.collectionViewLayout = layout2
@@ -38,6 +38,11 @@ class CompanyDetailsVC: UIViewController {
     }
     @IBAction func BackBtnAction(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func sideMenuAction(_ sender: UIButton) {
+        let nav = self.storyboard?.instantiateViewController(withIdentifier: "SettingsVC") as! SettingsVC
+        self.navigationController?.pushViewController(nav, animated: true)
     }
 }
 
@@ -96,7 +101,6 @@ extension CompanyDetailsVC: UICollectionViewDelegate, UICollectionViewDataSource
         }
         
     }
-    
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
@@ -109,7 +113,5 @@ extension CompanyDetailsVC: UICollectionViewDelegate, UICollectionViewDataSource
         }
         
     }
-    
-    
 }
 

@@ -1,21 +1,49 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13142" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12042"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="AgreementCell" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AgreementCell" rowHeight="214" id="KGk-i7-Jjw" customClass="AgreementCell" customModule="Uzoefu" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="394" height="214"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <rect key="frame" x="0.0" y="0.0" width="394" height="214"/>
                 <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JSY-3N-cfa">
+                        <rect key="frame" x="10" y="10" width="374" height="194"/>
+                        <mutableString key="text">Acknowledgement of Risk and Indemnity Agreement
+
+I, the undersigned, acknowledge that Magalies Adventures is operated on a working farm and understand that participation in any activities may involve inherent risks. These risks may include, but are not limited to, loss or damage to personal property, personal injury, or even death.
+
+I further acknowledge that horses and other animals may act unpredictably, which may result in kicking, biting, or other behavior causing physical harm or death.
+
+By signing this agreement, I voluntarily assume all such risks and agree that Magalies Adventures, its owners, employees, and representatives shall not be held liable for any injury, loss, or damage that may occur during my participation.
+
+I hereby release and indemnify Magalies Adventures from any claims, demands, or legal actions arising out of or in connection with my participation in the activities.
+
+Participant Name &amp; Signature: _______________________
+Date: _______________________</mutableString>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="JSY-3N-cfa" secondAttribute="bottom" constant="10" id="Fhd-EP-YRn"/>
+                    <constraint firstItem="JSY-3N-cfa" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="kJy-cF-5lg"/>
+                    <constraint firstItem="JSY-3N-cfa" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="oQG-aP-cEq"/>
+                    <constraint firstAttribute="trailing" secondItem="JSY-3N-cfa" secondAttribute="trailing" constant="10" id="u1V-vF-F2a"/>
+                </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <point key="canvasLocation" x="186.25954198473281" y="27.464788732394368"/>
         </tableViewCell>
     </objects>
 </document>

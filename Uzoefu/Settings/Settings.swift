@@ -7,23 +7,61 @@
 
 import UIKit
 
-class Settings: UIViewController {
-
+class SettingsVC: UIViewController {
+    @IBOutlet weak var setttleTbleView: UITableView!
+    
+    @IBOutlet weak var showSettingPopUp: UIView!
+    @IBOutlet weak var SettingblurView: UIView!
+    
+    let menuItems: [(icon: String, title: String)] = [
+        ("about_icon", "About"),
+        ("settings_icon", "Settings"),
+        ("help_icon", "Help Centre"),
+        ("feedback_icon", "Feedback"),
+        ("legal_icon", "Legal"),
+        ("share_icon", "Share"),
+        ("signout_icon", "Sign Out")
+    ]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        showSettingPopUp.layer.cornerRadius = 20
+        showSettingPopUp.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        showSettingPopUp.clipsToBounds = true
+      //  SettingblurView.isHidden = true
+        setttleTbleView.separatorStyle = .none
+       
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    @IBAction func dissMissblurViewAction(_ sender: UIButton) {
+        SettingblurView.isHidden = true
     }
-    */
-
+    
+    @IBAction func backAction(_ sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func opensettingBtn(_ sender: UIButton) {
+        SettingblurView.isHidden = false
+    }
+    
+}
+extension SettingsVC :UITableViewDelegate,UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return menuItems.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = setttleTbleView.dequeueReusableCell(withIdentifier: "SettingTableCellID") as! SettingTableCell
+        cell.titleLable.text = menuItems[indexPath.row].title
+        
+        cell.iconImage.image = UIImage(named: menuItems[indexPath.row].icon)
+        cell.selectionStyle = .none
+        return cell
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let nav = self.storyboard?.instantiateViewController(identifier: "SettingsVC") as! SettingsVC
+        SettingblurView.isHidden = true
+    }
 }

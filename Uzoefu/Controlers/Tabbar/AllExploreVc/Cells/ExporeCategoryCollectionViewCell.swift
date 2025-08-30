@@ -4,12 +4,14 @@ class ExporeCategoryCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var viewlayer: UIView!
     
+    @IBOutlet weak var countLable: UILabel!
+    @IBOutlet weak var categoryLable: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         setupViewLayer()
     }
     
-    private func setupViewLayer() {
+    func setupViewLayer() {
         viewlayer.layer.cornerRadius = 10
         viewlayer.layer.borderWidth = 0.5
         viewlayer.layer.borderColor = UIColor.lightGray.cgColor

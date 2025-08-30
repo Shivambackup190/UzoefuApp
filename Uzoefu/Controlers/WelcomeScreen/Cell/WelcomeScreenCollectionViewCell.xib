@@ -19,12 +19,6 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oop-46-1eB">
                         <rect key="frame" x="0.0" y="0.0" width="853" height="971"/>
                         <subviews>
-                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="4" translatesAutoresizingMaskIntoConstraints="NO" id="4WX-bP-wxl">
-                                <rect key="frame" x="360" y="816" width="133.33333333333337" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="yAE-Lh-yAi"/>
-                                </constraints>
-                            </pageControl>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ScreenImage" translatesAutoresizingMaskIntoConstraints="NO" id="58Z-CL-6iy">
                                 <rect key="frame" x="0.0" y="0.0" width="853" height="450"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -101,16 +95,13 @@
                             <constraint firstItem="e2Z-lA-1Do" firstAttribute="top" secondItem="5po-Ub-43E" secondAttribute="bottom" constant="50" id="Qnt-WB-3AP"/>
                             <constraint firstItem="58Z-CL-6iy" firstAttribute="leading" secondItem="oop-46-1eB" secondAttribute="leading" id="SDZ-AC-LWp"/>
                             <constraint firstItem="SRJ-yQ-SRB" firstAttribute="bottom" secondItem="58Z-CL-6iy" secondAttribute="bottom" id="bII-Xh-z3H"/>
-                            <constraint firstItem="4WX-bP-wxl" firstAttribute="centerX" secondItem="Ga8-S6-Iys" secondAttribute="centerX" id="bPV-RS-Ir7"/>
                             <constraint firstAttribute="bottom" secondItem="Ga8-S6-Iys" secondAttribute="bottom" constant="60" id="bgC-eK-lAa"/>
                             <constraint firstAttribute="trailing" secondItem="e2Z-lA-1Do" secondAttribute="trailing" constant="43" id="cIR-bm-CTv"/>
                             <constraint firstAttribute="trailing" secondItem="58Z-CL-6iy" secondAttribute="trailing" id="cJb-Tl-ixk"/>
                             <constraint firstItem="Ga8-S6-Iys" firstAttribute="centerX" secondItem="oop-46-1eB" secondAttribute="centerX" id="eMf-mS-O9X"/>
                             <constraint firstItem="08C-DF-jlT" firstAttribute="top" secondItem="58Z-CL-6iy" secondAttribute="top" id="epp-4C-eiW"/>
-                            <constraint firstItem="4WX-bP-wxl" firstAttribute="centerX" secondItem="e2Z-lA-1Do" secondAttribute="centerX" id="m8S-Se-eg9"/>
                             <constraint firstItem="5po-Ub-43E" firstAttribute="top" secondItem="58Z-CL-6iy" secondAttribute="bottom" constant="-30" id="mPU-la-QFh"/>
                             <constraint firstItem="SRJ-yQ-SRB" firstAttribute="leading" secondItem="58Z-CL-6iy" secondAttribute="leading" id="qlW-kc-jPz"/>
-                            <constraint firstItem="Ga8-S6-Iys" firstAttribute="top" secondItem="4WX-bP-wxl" secondAttribute="bottom" constant="30" id="rTY-tP-ABB"/>
                             <constraint firstItem="e2Z-lA-1Do" firstAttribute="leading" secondItem="oop-46-1eB" secondAttribute="leading" constant="43" id="tjE-qB-rKL"/>
                             <constraint firstItem="5po-Ub-43E" firstAttribute="centerX" secondItem="58Z-CL-6iy" secondAttribute="centerX" id="xYY-m3-9d4"/>
                         </constraints>
@@ -129,7 +120,6 @@
                 <outlet property="descriptionLable" destination="e2Z-lA-1Do" id="wxO-9U-3QR"/>
                 <outlet property="exploreLable" destination="5po-Ub-43E" id="k4s-Zw-u4w"/>
                 <outlet property="gradiantView" destination="08C-DF-jlT" id="Phi-XX-hbQ"/>
-                <outlet property="pageControlBtn" destination="4WX-bP-wxl" id="Xgq-fC-u6w"/>
                 <outlet property="screenImage" destination="58Z-CL-6iy" id="Lhn-c5-3IQ"/>
             </connections>
             <point key="canvasLocation" x="654.19847328244271" y="391.19718309859155"/>

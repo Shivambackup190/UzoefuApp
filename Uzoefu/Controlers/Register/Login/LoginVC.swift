@@ -9,11 +9,7 @@ import UIKit
 import AVKit
 
 class LoginVC: UIViewController {
-    
-    
     @IBOutlet weak var videoView: UIView!
-    
-    
     @IBOutlet weak var mainView: UIView!
     var videoPlayer: AVPlayer?
     var videoPlayerLayer: AVPlayerLayer?
@@ -50,14 +46,11 @@ class LoginVC: UIViewController {
             UIApplication.shared.windows.first?.rootViewController = signup
             UIApplication.shared.windows.first?.makeKeyAndVisible()
     }
-    
-   
     private func setupVideoPlayer() {
         guard let url = Bundle.main.url(forResource: "onboard", withExtension: "mp4") else {
             print("Video not found")
             return
         }
-
         videoPlayer = AVPlayer(url: url)
         videoPlayerLayer = AVPlayerLayer(player: videoPlayer)
 
@@ -84,7 +77,6 @@ class LoginVC: UIViewController {
 
     @objc func videoDidFinishPlaying() {
         print("Video finished playing")
-        // Optionally loop or navigate here
          videoPlayer?.seek(to: .zero)
          videoPlayer?.play()
     }

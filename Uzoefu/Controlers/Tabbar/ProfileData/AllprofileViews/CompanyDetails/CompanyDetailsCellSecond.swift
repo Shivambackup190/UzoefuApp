@@ -14,8 +14,8 @@ class CompanyDetailsCellSecond: UICollectionViewCell {
         setupViewLayer()
         
     }
-
-    private func setupViewLayer() {
+    
+    func setupViewLayer() {
         viewlayer.layer.cornerRadius = 10
         viewlayer.layer.borderWidth = 0.5
         viewlayer.layer.shadowColor = UIColor.gray.cgColor
@@ -23,9 +23,8 @@ class CompanyDetailsCellSecond: UICollectionViewCell {
         viewlayer.layer.shadowRadius = 2
         viewlayer.layer.shadowOpacity = 0.3
         viewlayer.layer.masksToBounds = false
-      
         
     }
-
+    
     
 }

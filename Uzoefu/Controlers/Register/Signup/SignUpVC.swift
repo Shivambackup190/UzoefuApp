@@ -10,7 +10,6 @@ class SignUpVC: UIViewController {
     var videoPlayer: AVPlayer?
     var videoPlayerLayer: AVPlayerLayer?
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -20,27 +19,27 @@ class SignUpVC: UIViewController {
         
         setupVideoPlayer()
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
-            view.addGestureRecognizer(tapGesture)
-        }
-
-        @objc func hideKeyboard() {
-            view.endEditing(true)
-        }
-
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc func hideKeyboard() {
+        view.endEditing(true)
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true) // Hide keyboard
+        self.view.endEditing(true)
     }
     
     @IBAction func alreadyacccontBtnAction(_ sender: UIButton) {
-      if  let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+        if  let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
             let sceneDelegate = windowScene.delegate as? SceneDelegate {
-                
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let tabBarVC = storyboard.instantiateViewController(withIdentifier: "LoginVC")
-                
-                sceneDelegate.window?.rootViewController = tabBarVC
-                sceneDelegate.window?.makeKeyAndVisible()
-            }
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let tabBarVC = storyboard.instantiateViewController(withIdentifier: "LoginVC")
+            
+            sceneDelegate.window?.rootViewController = tabBarVC
+            sceneDelegate.window?.makeKeyAndVisible()
+        }
     }
     private func setupVideoPlayer() {
         guard let url = Bundle.main.url(forResource: "onboard", withExtension: "mp4") else {

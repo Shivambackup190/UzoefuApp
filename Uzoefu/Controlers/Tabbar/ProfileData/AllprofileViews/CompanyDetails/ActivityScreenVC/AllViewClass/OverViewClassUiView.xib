@@ -182,6 +182,9 @@
                             <real key="value" value="10"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="bookAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="b4Q-cI-aw3"/>
+                    </connections>
                 </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="F2G-Vy-pDO"/>
@@ -203,6 +206,9 @@
                 <constraint firstItem="F2G-Vy-pDO" firstAttribute="trailing" secondItem="ZeB-PZ-gc7" secondAttribute="trailing" id="y3N-F4-8FH"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="bokingActionButton" destination="Rmj-JR-qVF" id="4uu-VC-aaY"/>
+            </connections>
             <point key="canvasLocation" x="138.93129770992365" y="-16.549295774647888"/>
         </view>
     </objects>

@@ -21,9 +21,6 @@ class SearcResultExplorVc: UIViewController {
         super.viewDidLoad()
         hideViewheight.constant = 0
         hideView.isHidden = true
-        
-       // fileterView.isHidden = true
-       // fileterViewHeight.constant = 0
         exploreCollectionView.register(
             UINib(nibName: "SearcResultExplorCell", bundle: nil),
             forCellWithReuseIdentifier: "cell"
@@ -32,7 +29,7 @@ class SearcResultExplorVc: UIViewController {
         exploreCollectionView.delegate = self
         exploreCollectionView.dataSource = self
         
-     
+        
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         exploreCollectionView.collectionViewLayout = layout
@@ -66,7 +63,7 @@ extension SearcResultExplorVc: UICollectionViewDelegate, UICollectionViewDataSou
         return cell
     }
     
-
+    
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -77,7 +74,6 @@ extension SearcResultExplorVc: UICollectionViewDelegate, UICollectionViewDataSou
         let height = widthPerItem * 1.3
         
         print(height)
-        //256.75
         return CGSize(width: widthPerItem, height: 200)
     }
     

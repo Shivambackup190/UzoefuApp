@@ -26,8 +26,8 @@ class ExploreActivitySecondCell: UICollectionViewCell {
         viewlayer.layer.shadowRadius = 2
         viewlayer.layer.shadowOpacity = 0.3
         viewlayer.layer.masksToBounds = false
-      
+        
         
     }
-
+    
 }

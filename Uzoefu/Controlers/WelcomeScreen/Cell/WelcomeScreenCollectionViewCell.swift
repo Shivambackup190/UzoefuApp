@@ -1,10 +1,3 @@
-//
-//  HomeScreenCollectionViewCell.swift
-//  Uzoefu
-//
-//  Created by Narendra Kumar on 07/08/25.
-//
-
 import UIKit
 import AVKit
 
@@ -14,7 +7,6 @@ class WelcomeScreenCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var exploreLable: UILabel!
     @IBOutlet weak var VideoView: UIView!
     @IBOutlet weak var gradiantView: UIView!
-    @IBOutlet weak var pageControlBtn: UIPageControl!
     @IBOutlet weak var screenImage: UIImageView!
     
     var skipBtnClick: (() -> ()) = {}
@@ -28,8 +20,6 @@ class WelcomeScreenCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        //  applyGradientToView()
     }
     
     override func layoutSubviews() {
@@ -41,19 +31,12 @@ class WelcomeScreenCollectionViewCell: UICollectionViewCell {
         skipBtnClick()
     }
     
-    func configurePageControl(currentPage: Int, totalPages: Int) {
-        pageControlBtn.numberOfPages = totalPages
-        pageControlBtn.currentPage = currentPage
-    }
-    
     private func setupVideoPlayer() {
         guard let videoName = videoName,
               let url = Bundle.main.url(forResource: videoName, withExtension: "mp4") else {
             print("Video file not found for name: \(videoName ?? "nil")")
             return
         }
-        
-        
         videoPlayer?.pause()
         avpController.view.removeFromSuperview()
         
@@ -75,7 +58,6 @@ class WelcomeScreenCollectionViewCell: UICollectionViewCell {
         
         NotificationCenter.default.removeObserver(self, name: .AVPlayerItemDidPlayToEndTime, object: videoPlayer?.currentItem)
         
-        
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(videoDidFinishPlaying),
@@ -86,10 +68,7 @@ class WelcomeScreenCollectionViewCell: UICollectionViewCell {
         videoPlayer?.play()
     }
     
-    
-    
     @objc func videoDidFinishPlaying() {
-        
         print(" Video finished playing.")
         videoPlayer?.seek(to: .zero)
         videoPlayer?.play()
@@ -102,11 +81,10 @@ class WelcomeScreenCollectionViewCell: UICollectionViewCell {
         gradientLayer.frame = gradiantView.bounds
         
         gradientLayer.colors = [
-            UIColor(red: 126/255, green: 210/255, blue: 0/255, alpha: 0.0).cgColor,  // Top - transparent
-            UIColor(red: 126/255, green: 210/255, blue: 0/255, alpha: 0.5).cgColor,  // Middle - semi
-            UIColor(red: 126/255, green: 210/255, blue: 0/255, alpha: 1.0).cgColor   // Bottom - solid
+            UIColor(red: 126/255, green: 210/255, blue: 0/255, alpha: 0.0).cgColor,
+            UIColor(red: 126/255, green: 210/255, blue: 0/255, alpha: 0.5).cgColor,
+            UIColor(red: 126/255, green: 210/255, blue: 0/255, alpha: 1.0).cgColor
         ]
-        
         gradientLayer.locations = [0.0, 0.5, 1.0]
         gradientLayer.startPoint = CGPoint(x: 0.5, y: 0.0)
         gradientLayer.endPoint = CGPoint(x: 0.5, y: 1.0)

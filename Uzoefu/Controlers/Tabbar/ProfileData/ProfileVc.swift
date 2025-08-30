@@ -1,9 +1,8 @@
 import UIKit
+
 class ProfileVc: UIViewController {
     
     // MARK: - Outlets
-    
-    
     @IBOutlet weak var stackView: UIStackView!
     
     @IBOutlet weak var containerView: UIView!
@@ -30,15 +29,14 @@ class ProfileVc: UIViewController {
     
     @IBOutlet weak var companiesColor: UIView!
     
-    
-    
-    
+    var currentIndex = 0
     private var currentView: UIView?
     var firstView:FirstView!
     var secondView:SecondView!
     var thirdView:ThirdView!
     var fourthView:FourthView!
     var loadNib = [UIView]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -65,49 +63,88 @@ class ProfileVc: UIViewController {
         loadfouthViewCell()
         
         selectFavourteNib()
+        
         bookingBtnAction()
+        
         wishlistBtnAction()
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         tapGesture.cancelsTouchesInView = false
         view.addGestureRecognizer(tapGesture)
-
-        }
-
-        @objc func hideKeyboard() {
-            view.endEditing(true)
-        }
-
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true) // Hide keyboard
+        
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
+        swipeLeft.direction = .left
+        containerView.addGestureRecognizer(swipeLeft)
+        
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
+        swipeRight.direction = .right
+        containerView.addGestureRecognizer(swipeRight)
+        
     }
-        
-        
-        
+    @objc func handleSwipe(_ gesture: UISwipeGestureRecognizer) {
+        if gesture.direction == .left {
+            if currentIndex < loadNib.count - 1 {
+                changeTab(index: currentIndex + 1)
+            }
+        } else if gesture.direction == .right {
+            if currentIndex > 0 {
+                changeTab(index: currentIndex - 1)
+            }
+        }
+    }
     
+    func changeTab(index: Int) {
+        guard index != currentIndex else { return }
+        
+        let oldView = loadNib[currentIndex]
+        let newView = loadNib[index]
+        let direction: CGFloat = index > currentIndex ? 1 : -1
+        let width = containerView.bounds.width
+        
+        newView.frame = containerView.bounds.offsetBy(dx: direction * width, dy: 0)
+        containerView.addSubview(newView)
+        
+        UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseInOut], animations: {
+            oldView.frame = self.containerView.bounds.offsetBy(dx: -direction * width, dy: 0)
+            newView.frame = self.containerView.bounds
+        }, completion: { _ in
+            oldView.removeFromSuperview()
+        })
+        
+        resetAllTabs()
+        switch index {
+        case 0: selectTab(colorView: overViewcolor, label: overViewLable)
+        case 1: selectTab(colorView: profileColor, label: profileLabel)
+        case 2: selectTab(colorView: rewardsColor, label: rewardsLabel)
+        case 3: selectTab(colorView: companiesColor, label: companiesLabel)
+        default: break
+        }
+        
+        currentIndex = index
+    }
+    
+    @objc func hideKeyboard() {
+        view.endEditing(true)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
     // MARK: - Button Actions
     @IBAction func overViewBtnAction(_ sender: UIButton) {
-        resetAllTabs()
-        selectTab(colorView: overViewcolor, label: overViewLable)
-        containerView.bringSubviewToFront(loadNib[0])
+        changeTab(index: 0)
     }
     
     @IBAction func profileBtnAction(_ sender: UIButton) {
-        resetAllTabs()
-        selectTab(colorView: profileColor, label: profileLabel)
-        containerView.bringSubviewToFront(loadNib[1])
+        changeTab(index: 1)
     }
     
     @IBAction func rewardBtnAction(_ sender: UIButton) {
-        resetAllTabs()
-        selectTab(colorView: rewardsColor, label: rewardsLabel)
-        containerView.bringSubviewToFront(loadNib[2])
+        changeTab(index: 2)
     }
     
     @IBAction func companiesBtnAction(_ sender: UIButton) {
-        resetAllTabs()
-        selectTab(colorView: companiesColor, label: companiesLabel)
-        containerView.bringSubviewToFront(loadNib[3])
+        changeTab(index: 3)
     }
     
     func loadfouthViewCell() {
@@ -144,7 +181,6 @@ extension ProfileVc:UITableViewDelegate,UITableViewDataSource {
     func resetAllTabs() {
         let defaultColor = #colorLiteral(red: 0.4512393475, green: 0.4832214117, blue: 0.4951165318, alpha: 1)
         let defaultText = #colorLiteral(red: 0.4512393475, green: 0.4832214117, blue: 0.4951165318, alpha: 1)
-        // Hide all color views
         overViewcolor.isHidden = true
         profileColor.isHidden = true
         rewardsColor.isHidden = true
@@ -177,7 +213,7 @@ extension ProfileVc: UICollectionViewDelegate, UICollectionViewDataSource, UICol
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SelectFavouriteActivityCell", for: indexPath) as! SelectFavouriteActivityCell
-       
+        
         return cell
     }
     
@@ -188,8 +224,6 @@ extension ProfileVc: UICollectionViewDelegate, UICollectionViewDataSource, UICol
         let width = collectionView.bounds.width/3
         return CGSize(width: width, height: height)
     }
-    
-    // Optional: spacing
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 10
@@ -206,12 +240,14 @@ extension ProfileVc: UICollectionViewDelegate, UICollectionViewDataSource, UICol
             self.navigationController?.pushViewController(nav, animated: true)
         }
     }
-        func wishlistBtnAction() {
-            firstView.WishListAction = {
-                let nav = self.storyboard?.instantiateViewController(withIdentifier: "WishListVC") as! WishListVC
-                nav.hidevalue = "ok"
-                self.navigationController?.pushViewController(nav, animated: true)
-            }
+    func wishlistBtnAction() {
+        firstView.WishListAction = {
+//            let nav = self.storyboard?.instantiateViewController(withIdentifier: "WishListVC") as! WishListVC
+//            nav.hidevalue = "ok"
+//            self.navigationController?.pushViewController(nav, animated: true)
+            
+            self.tabBarController?.selectedIndex = 2
         }
     }
+}
 

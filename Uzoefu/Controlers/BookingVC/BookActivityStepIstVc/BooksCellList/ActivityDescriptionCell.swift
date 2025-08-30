@@ -7,7 +7,7 @@
 
 import UIKit
 
-class Activity_DescriptionCell: UITableViewCell {
+class ActivityDescriptionCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()

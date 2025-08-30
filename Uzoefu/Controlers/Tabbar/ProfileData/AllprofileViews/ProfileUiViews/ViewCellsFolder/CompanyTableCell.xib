@@ -4,7 +4,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -20,15 +19,15 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xaY-Y3-6OR">
                         <rect key="frame" x="10" y="10" width="365" height="82"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Magalies Adventures" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="olz-oX-W0H">
-                                <rect key="frame" x="100" y="21" width="255" height="19.333333333333329"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Magalies Adventures" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="olz-oX-W0H">
+                                <rect key="frame" x="100" y="15.999999999999998" width="255" height="19.333333333333329"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" red="0.37647058823529411" green="0.40784313725490196" blue="0.41960784313725491" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3 Activities" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nNL-kJ-GLu">
-                                <rect key="frame" x="100" y="48.666666666666664" width="75.666666666666686" height="17.999999999999993"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3 Activities" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nNL-kJ-GLu">
+                                <rect key="frame" x="100" y="40.333333333333336" width="71.666666666666686" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="0.37647058820000001" green="0.40784313729999999" blue="0.41960784309999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -40,18 +39,28 @@
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.96078431372549022" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="u3X-px-Kpv" firstAttribute="leading" secondItem="xaY-Y3-6OR" secondAttribute="leading" id="4SL-79-jaE"/>
                             <constraint firstItem="olz-oX-W0H" firstAttribute="leading" secondItem="u3X-px-Kpv" secondAttribute="trailing" constant="20" id="PS5-l7-bAh"/>
                             <constraint firstItem="nNL-kJ-GLu" firstAttribute="leading" secondItem="olz-oX-W0H" secondAttribute="leading" id="Pep-Pi-V6x"/>
                             <constraint firstItem="u3X-px-Kpv" firstAttribute="centerY" secondItem="xaY-Y3-6OR" secondAttribute="centerY" id="ddd-Qh-MdZ"/>
-                            <constraint firstItem="olz-oX-W0H" firstAttribute="top" secondItem="u3X-px-Kpv" secondAttribute="top" constant="20" id="ddh-Go-Nhp"/>
-                            <constraint firstAttribute="bottom" secondItem="nNL-kJ-GLu" secondAttribute="bottom" constant="15.333333333333343" id="elS-ta-y3Z"/>
-                            <constraint firstItem="nNL-kJ-GLu" firstAttribute="top" secondItem="olz-oX-W0H" secondAttribute="bottom" constant="8.3333333333333428" id="gAD-AR-bgS"/>
+                            <constraint firstItem="olz-oX-W0H" firstAttribute="top" secondItem="u3X-px-Kpv" secondAttribute="top" constant="15" id="ddh-Go-Nhp"/>
+                            <constraint firstItem="nNL-kJ-GLu" firstAttribute="top" secondItem="olz-oX-W0H" secondAttribute="bottom" constant="5" id="gAD-AR-bgS"/>
                             <constraint firstAttribute="bottom" secondItem="u3X-px-Kpv" secondAttribute="bottom" constant="1" id="lq0-kd-URk"/>
                             <constraint firstAttribute="trailing" secondItem="olz-oX-W0H" secondAttribute="trailing" constant="10" id="wCw-y4-Znp"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="10"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                <real key="value" value="0.20000000000000001"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                <color key="value" red="0.58823529409999997" green="0.63137254899999995" blue="0.65098039220000004" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </view>
                 </subviews>
                 <constraints>
@@ -70,8 +79,5 @@
     </objects>
     <resources>
         <image name="ballonImg" width="52" height="56"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>

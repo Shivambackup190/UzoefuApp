@@ -8,17 +8,20 @@
 import UIKit
 
 class BookActivityStep2ndVc: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-       
+        
+        
     }
     
-
     @IBAction func backBtnAction(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+        self.navigationController?.popViewController(animated: false)
     }
     
+    @IBAction func nextBtnAction(_ sender: UIButton) {
+        let nav = self.storyboard?.instantiateViewController(withIdentifier: "BookActivityStep3rdVc") as! BookActivityStep3rdVc
+        self.navigationController?.pushViewController(nav, animated: false)
+    }
     
 }
