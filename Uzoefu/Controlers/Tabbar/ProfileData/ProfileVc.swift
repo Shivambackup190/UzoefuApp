@@ -67,6 +67,7 @@ class ProfileVc: UIViewController {
         bookingBtnAction()
         
         wishlistBtnAction()
+        plusCompannyActionBtn()
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         tapGesture.cancelsTouchesInView = false
@@ -239,6 +240,7 @@ extension ProfileVc: UICollectionViewDelegate, UICollectionViewDataSource, UICol
             
             self.navigationController?.pushViewController(nav, animated: true)
         }
+
     }
     func wishlistBtnAction() {
         firstView.WishListAction = {
@@ -247,6 +249,13 @@ extension ProfileVc: UICollectionViewDelegate, UICollectionViewDataSource, UICol
 //            self.navigationController?.pushViewController(nav, animated: true)
             
             self.tabBarController?.selectedIndex = 2
+        }
+    }
+    func plusCompannyActionBtn() {
+        fourthView.addMoreCampanyActionBtn = {
+            let nav = self.storyboard?.instantiateViewController(withIdentifier: "BussinessProfileSetupVc") as! BussinessProfileSetupVc
+            
+            self.navigationController?.pushViewController(nav, animated: true)
         }
     }
 }

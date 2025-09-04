@@ -14,13 +14,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        window = UIWindow(windowScene: windowScene)
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let initialVC = storyboard.instantiateViewController(withIdentifier: "WelcomeScreenVc") // WelcomeScreenVc ka storyboard ID
-        
-        window?.rootViewController = initialVC
-        window?.makeKeyAndVisible()
+//        window = UIWindow(windowScene: windowScene)
+//        
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        let initialVC = storyboard.instantiateViewController(withIdentifier: "WelcomeScreenVc") // WelcomeScreenVc ka storyboard ID
+//        
+//        window?.rootViewController = initialVC
+//        window?.makeKeyAndVisible()
     }
 
 

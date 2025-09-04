@@ -17,7 +17,12 @@
     </array>
 
     <!-- 🔼 End of font list -->
-    
+    <!-- 🔽 Location permission messages -->
+     <key>NSLocationWhenInUseUsageDescription</key>
+     <string>This app needs access to your location to show it on the map.</string>
+     <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+     <string>This app requires location access to display your position accurately.</string>
+     <!-- 🔼 End of location permission -->
     
 	<key>UIApplicationSceneManifest</key>
 	<dict>

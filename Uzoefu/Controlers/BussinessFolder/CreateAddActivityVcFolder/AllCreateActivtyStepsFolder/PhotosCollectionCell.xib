@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotosCollectionCell" id="gTV-IL-0wX" customClass="PhotosCollectionCell" customModule="Uzoefu" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="112" height="110"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="112" height="110"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ca0-4o-BfD">
+                        <rect key="frame" x="0.0" y="0.0" width="112" height="110"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="companyimg" translatesAutoresizingMaskIntoConstraints="NO" id="qDj-Av-6Hc">
+                                <rect key="frame" x="5" y="5" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="5gE-Qt-Fqb"/>
+                                    <constraint firstAttribute="height" constant="100" id="gf8-8S-LwM"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                        <real key="value" value="0.20000000000000001"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                        <real key="value" value="0.29999999999999999"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="qDj-Av-6Hc" secondAttribute="trailing" constant="7" id="6zF-c0-UvG"/>
+                            <constraint firstItem="qDj-Av-6Hc" firstAttribute="leading" secondItem="Ca0-4o-BfD" secondAttribute="leading" constant="5" id="8oU-06-gZM"/>
+                            <constraint firstItem="qDj-Av-6Hc" firstAttribute="top" secondItem="Ca0-4o-BfD" secondAttribute="top" constant="5" id="H1U-4o-1GA"/>
+                            <constraint firstAttribute="bottom" secondItem="qDj-Av-6Hc" secondAttribute="bottom" constant="5" id="Njv-CA-38q"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="Ca0-4o-BfD" firstAttribute="trailing" secondItem="gTV-IL-0wX" secondAttribute="trailing" id="Kd7-lE-xBm"/>
+                <constraint firstAttribute="top" secondItem="Ca0-4o-BfD" secondAttribute="top" id="kCk-hR-18G"/>
+                <constraint firstAttribute="leading" secondItem="Ca0-4o-BfD" secondAttribute="leading" id="x5N-7K-PFS"/>
+            </constraints>
+            <size key="customSize" width="112" height="110"/>
+            <point key="canvasLocation" x="154.19847328244273" y="-11.267605633802818"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="companyimg" width="90" height="90"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
