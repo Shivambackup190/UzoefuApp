@@ -15,13 +15,13 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3en-m1-IzD">
-                    <rect key="frame" x="0.0" y="46" width="393.66666666666669" height="759"/>
+                    <rect key="frame" x="0.0" y="0.0" width="393.66666666666669" height="839"/>
                     <subviews>
                         <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q8p-sI-qZz">
-                            <rect key="frame" x="0.0" y="0.0" width="393.66666666666669" height="759"/>
+                            <rect key="frame" x="0.0" y="0.0" width="393.66666666666669" height="839"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="we6-cK-b75">
-                                    <rect key="frame" x="0.0" y="0.0" width="393.66666666666669" height="791"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="393.66666666666669" height="855"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iCy-gT-LUo">
                                             <rect key="frame" x="10" y="10" width="373.66666666666669" height="110"/>
@@ -255,7 +255,7 @@
                                             </constraints>
                                         </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="JRh-46-1hr">
-                                            <rect key="frame" x="10" y="229.66666666666669" width="373.66666666666669" height="200"/>
+                                            <rect key="frame" x="10" y="229.66666666666663" width="373.66666666666669" height="200"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="0ss-7U-8Hr">
                                                     <rect key="frame" x="0.0" y="0.0" width="373.66666666666669" height="200"/>
@@ -270,20 +270,20 @@
                                                                             <rect key="frame" x="0.0" y="0.0" width="177" height="56.666666666666664"/>
                                                                             <subviews>
                                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Adventure Sports" translatesAutoresizingMaskIntoConstraints="NO" id="Tck-Bb-Ooc">
-                                                                                    <rect key="frame" x="10" y="21.666666666666629" width="25" height="25"/>
+                                                                                    <rect key="frame" x="10" y="21.666666666666686" width="25" height="25"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="width" constant="25" id="L0d-pi-KST"/>
                                                                                         <constraint firstAttribute="height" constant="25" id="ts3-7Y-TF0"/>
                                                                                     </constraints>
                                                                                 </imageView>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Messages" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q9P-a6-1f3">
-                                                                                    <rect key="frame" x="44.999999999999993" y="25.666666666666629" width="65.333333333333314" height="17"/>
+                                                                                    <rect key="frame" x="44.999999999999993" y="25.666666666666686" width="65.333333333333314" height="17"/>
                                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                                     <color key="textColor" red="0.37647058820000001" green="0.40784313729999999" blue="0.41960784309999999" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fUb-87-bAL">
-                                                                                    <rect key="frame" x="135.33333333333334" y="18.666666666666629" width="11.666666666666657" height="24"/>
+                                                                                    <rect key="frame" x="135.33333333333334" y="18.666666666666686" width="11.666666666666657" height="24"/>
                                                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                                                     <color key="textColor" red="0.37647058820000001" green="0.40784313729999999" blue="0.41960784309999999" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                                                     <nil key="highlightedColor"/>
@@ -297,7 +297,7 @@
                                                                                     </constraints>
                                                                                 </imageView>
                                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="top" translatesAutoresizingMaskIntoConstraints="NO" id="clT-3a-epL">
-                                                                                    <rect key="frame" x="152" y="35" width="15" height="15"/>
+                                                                                    <rect key="frame" x="152" y="35.000000000000028" width="15" height="15"/>
                                                                                     <color key="tintColor" red="0.4941176471" green="0.82352941180000006" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="height" constant="15" id="G6E-OA-7mz"/>
@@ -332,7 +332,7 @@
                                                                             </userDefinedRuntimeAttributes>
                                                                         </view>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xVg-Rt-sha">
-                                                                            <rect key="frame" x="0.0" y="71.666666666666629" width="177" height="56.666666666666657"/>
+                                                                            <rect key="frame" x="0.0" y="71.666666666666657" width="177" height="56.666666666666657"/>
                                                                             <subviews>
                                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Adventure Sports" translatesAutoresizingMaskIntoConstraints="NO" id="21g-bQ-uxk">
                                                                                     <rect key="frame" x="10" y="21.666666666666686" width="25" height="25"/>
@@ -397,7 +397,7 @@
                                                                             </userDefinedRuntimeAttributes>
                                                                         </view>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4eT-ZS-0LL">
-                                                                            <rect key="frame" x="0.0" y="143.33333333333331" width="177" height="56.666666666666657"/>
+                                                                            <rect key="frame" x="0.0" y="143.33333333333334" width="177" height="56.666666666666657"/>
                                                                             <subviews>
                                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Adventure Sports" translatesAutoresizingMaskIntoConstraints="NO" id="Jds-9o-r4K">
                                                                                     <rect key="frame" x="10" y="21.666666666666686" width="25" height="25"/>
@@ -489,7 +489,7 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </imageView>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7RF-7d-1pQ">
-                                                                    <rect key="frame" x="0.0" y="133.33333333333331" width="176.66666666666666" height="56.666666666666657"/>
+                                                                    <rect key="frame" x="0.0" y="133.33333333333334" width="176.66666666666666" height="56.666666666666657"/>
                                                                     <subviews>
                                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photoImg" translatesAutoresizingMaskIntoConstraints="NO" id="niJ-rK-hY8">
                                                                             <rect key="frame" x="5" y="21.666666666666686" width="25" height="25"/>
@@ -583,14 +583,14 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="177" height="56.666666666666664"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Adventure Sports" translatesAutoresizingMaskIntoConstraints="NO" id="m37-v4-aH9">
-                                                                    <rect key="frame" x="10" y="21.666666666666686" width="25" height="25"/>
+                                                                    <rect key="frame" x="10" y="21.666666666666629" width="25" height="25"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="25" id="Hlh-Ef-yQQ"/>
                                                                         <constraint firstAttribute="height" constant="25" id="uxD-DV-ctA"/>
                                                                     </constraints>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Visited" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZGb-y8-oeb">
-                                                                    <rect key="frame" x="45" y="25.666666666666686" width="44.333333333333343" height="17"/>
+                                                                    <rect key="frame" x="45" y="25.666666666666629" width="44.333333333333343" height="17"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <color key="textColor" red="0.37647058820000001" green="0.40784313729999999" blue="0.41960784309999999" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -610,7 +610,7 @@
                                                                     </constraints>
                                                                 </imageView>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="top" translatesAutoresizingMaskIntoConstraints="NO" id="LcP-xb-q6f">
-                                                                    <rect key="frame" x="152" y="34.999999999999943" width="15" height="15"/>
+                                                                    <rect key="frame" x="152" y="35" width="15" height="15"/>
                                                                     <color key="tintColor" red="0.4941176471" green="0.82352941180000006" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="15" id="0ac-Uh-YXI"/>
@@ -648,14 +648,14 @@
                                                             <rect key="frame" x="197" y="0.0" width="176.66666666666663" height="56.666666666666664"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Adventure Sports" translatesAutoresizingMaskIntoConstraints="NO" id="pQc-Mb-Ufk">
-                                                                    <rect key="frame" x="10" y="21.666666666666686" width="25" height="25"/>
+                                                                    <rect key="frame" x="10" y="21.666666666666629" width="25" height="25"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="25" id="BNt-Id-bLw"/>
                                                                         <constraint firstAttribute="height" constant="25" id="YXO-vj-I1L"/>
                                                                     </constraints>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Views" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PbN-fK-Z4F">
-                                                                    <rect key="frame" x="45" y="25.666666666666686" width="38.333333333333343" height="17"/>
+                                                                    <rect key="frame" x="45" y="25.666666666666629" width="38.333333333333343" height="17"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <color key="textColor" red="0.37647058820000001" green="0.40784313729999999" blue="0.41960784309999999" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -675,7 +675,7 @@
                                                                     </constraints>
                                                                 </imageView>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="top" translatesAutoresizingMaskIntoConstraints="NO" id="g9y-dq-FLT">
-                                                                    <rect key="frame" x="151.66666666666669" y="34.999999999999943" width="15" height="15"/>
+                                                                    <rect key="frame" x="151.66666666666669" y="35" width="15" height="15"/>
                                                                     <color key="tintColor" red="0.4941176471" green="0.82352941180000006" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="15" id="BJe-zU-m2X"/>
@@ -903,13 +903,21 @@
                     </constraints>
                 </view>
             </subviews>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <viewLayoutGuide key="safeArea" id="ejt-ss-hYa"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="3en-m1-IzD" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" constant="0.66666666666668561" id="LXM-Om-cJ3"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="top" secondItem="3en-m1-IzD" secondAttribute="top" constant="13" id="ZFq-xc-uBh"/>
-                <constraint firstItem="3en-m1-IzD" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="mbv-Jq-vQi"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="3en-m1-IzD" secondAttribute="bottom" constant="13" id="ste-gQ-nYL"/>
+                <constraint firstAttribute="top" secondItem="3en-m1-IzD" secondAttribute="top" id="1Ms-4z-e3v"/>
+                <constraint firstItem="we6-cK-b75" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" constant="0.66666666666668561" id="5Vt-Kg-to3"/>
+                <constraint firstItem="we6-cK-b75" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" constant="3" id="Cvc-6L-Xyw"/>
+                <constraint firstItem="q8p-sI-qZz" firstAttribute="trailing" secondItem="ejt-ss-hYa" secondAttribute="trailing" constant="0.66666666666668561" id="EvB-rF-cSk"/>
+                <constraint firstItem="q8p-sI-qZz" firstAttribute="leading" secondItem="ejt-ss-hYa" secondAttribute="leading" id="Iqw-a8-epj"/>
+                <constraint firstItem="3en-m1-IzD" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" constant="0.66666666666668561" id="LXM-Om-cJ3"/>
+                <constraint firstAttribute="top" secondItem="3en-m1-IzD" secondAttribute="top" id="ZFq-xc-uBh"/>
+                <constraint firstItem="q8p-sI-qZz" firstAttribute="bottom" secondItem="ejt-ss-hYa" secondAttribute="bottom" constant="21" id="a3N-Ug-VWC"/>
+                <constraint firstItem="we6-cK-b75" firstAttribute="bottom" secondItem="ejt-ss-hYa" secondAttribute="bottom" constant="37" id="aGC-uH-YYP"/>
+                <constraint firstItem="3en-m1-IzD" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="mbv-Jq-vQi"/>
+                <constraint firstItem="we6-cK-b75" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="phl-Jr-4TG"/>
+                <constraint firstAttribute="bottom" secondItem="3en-m1-IzD" secondAttribute="bottom" constant="13" id="ste-gQ-nYL"/>
             </constraints>
             <point key="canvasLocation" x="130.53435114503816" y="-32.394366197183103"/>
         </view>
@@ -929,7 +937,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray6Color">
-            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

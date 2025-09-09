@@ -5,10 +5,9 @@ class SignatureView: UIView {
     
     private var path = UIBezierPath()
     private var previousPoint: CGPoint!
+    private var previousMidPoint: CGPoint!
     
-    private let floatingLabel = UILabel()   // Floating placeholder
-    private let borderLayer = CAShapeLayer() // Border
-    
+    private let borderLayer = CAShapeLayer()
     private var hasSignature = false
     
     override init(frame: CGRect) {
@@ -32,17 +31,10 @@ class SignatureView: UIView {
         borderLayer.path = UIBezierPath(roundedRect: self.bounds, cornerRadius: 8).cgPath
         self.layer.addSublayer(borderLayer)
         
-        // Floating placeholder
-        floatingLabel.text = "Signature"
-        floatingLabel.textColor = .lightGray
-        floatingLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-        floatingLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(floatingLabel)
-        
-        NSLayoutConstraint.activate([
-            floatingLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
-            floatingLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: -8)
-        ])
+        // Path setup
+        path.lineWidth = 2.0
+        path.lineCapStyle = .round
+        path.lineJoinStyle = .round
     }
     
     override func layoutSubviews() {
@@ -50,16 +42,16 @@ class SignatureView: UIView {
         borderLayer.path = UIBezierPath(roundedRect: self.bounds, cornerRadius: 8).cgPath
     }
     
-    // Start drawing
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
-            previousPoint = touch.location(in: self)
+            let point = touch.location(in: self)
+            previousPoint = point
+            previousMidPoint = point
+            
             hasSignature = true
-            
-            // Change border color when signing
             borderLayer.strokeColor = #colorLiteral(red: 0.1960784314, green: 0.8039215686, blue: 0.03807460484, alpha: 1).cgColor
-            floatingLabel.textColor = #colorLiteral(red: 0.1960784314, green: 0.8039215686, blue: 0.03807460484, alpha: 1)
             
+            path.move(to: point)
             self.findParentTableView()?.isScrollEnabled = false
         }
     }
@@ -67,14 +59,25 @@ class SignatureView: UIView {
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
             let currentPoint = touch.location(in: self)
-            path.move(to: previousPoint)
-            path.addLine(to: currentPoint)
+            
+            // Midpoint nikal ke quadratic curve draw karo
+            let midPoint = CGPoint(x: (previousPoint.x + currentPoint.x) / 2,
+                                   y: (previousPoint.y + currentPoint.y) / 2)
+            
+            path.addQuadCurve(to: midPoint, controlPoint: previousPoint)
+            
             previousPoint = currentPoint
+            previousMidPoint = midPoint
+            
             setNeedsDisplay()
         }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.findParentTableView()?.isScrollEnabled = true
+    }
+    
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.findParentTableView()?.isScrollEnabled = true
     }
     
@@ -91,14 +94,13 @@ class SignatureView: UIView {
     }
     
     func getSignatureImage() -> UIImage {
-        UIGraphicsBeginImageContext(self.bounds.size)
+        UIGraphicsBeginImageContextWithOptions(self.bounds.size, false, 0.0)
         self.layer.render(in: UIGraphicsGetCurrentContext()!)
         let signatureImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return signatureImage ?? UIImage()
     }
     
-    // Helper: parent UITableView dhoondho
     private func findParentTableView() -> UITableView? {
         var view = self.superview
         while view != nil {
@@ -110,6 +112,8 @@ class SignatureView: UIView {
         return nil
     }
 }
+
+
 
 
 

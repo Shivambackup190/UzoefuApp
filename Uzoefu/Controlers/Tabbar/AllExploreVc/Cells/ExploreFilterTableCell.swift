@@ -6,9 +6,11 @@
 //
 
 import UIKit
+import Cosmos
 
 class ExploreFilterTableCell: UITableViewCell {
     
+    @IBOutlet weak var ratingView: CosmosView!
     @IBOutlet weak var searchimg: UIImageView!
     @IBOutlet weak var viewlayer: UIView!
     override func awakeFromNib() {

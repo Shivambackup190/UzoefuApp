@@ -8,7 +8,8 @@
 import UIKit
 
 class SearcResultExplorVc: UIViewController {
-    
+  
+    @IBOutlet weak var categoryLbl: UILabel!
     @IBOutlet weak var fileterView: UIView!
     @IBOutlet weak var hideView: UIView!
     @IBOutlet weak var exploreCollectionView: UICollectionView!
@@ -17,8 +18,11 @@ class SearcResultExplorVc: UIViewController {
     
     @IBOutlet weak var fileterViewHeight: NSLayoutConstraint!
     @IBOutlet weak var expolreTableview: UITableView!
+    var myvalue:String?
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        categoryLbl.text = myvalue
         hideViewheight.constant = 0
         hideView.isHidden = true
         exploreCollectionView.register(
@@ -74,7 +78,7 @@ extension SearcResultExplorVc: UICollectionViewDelegate, UICollectionViewDataSou
         let height = widthPerItem * 1.3
         
         print(height)
-        return CGSize(width: widthPerItem, height: 200)
+        return CGSize(width: widthPerItem, height: 220)
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -103,6 +107,9 @@ extension SearcResultExplorVc : UITableViewDataSource,UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ExploreFilterTableCell
         return cell
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+         
     }
     
     

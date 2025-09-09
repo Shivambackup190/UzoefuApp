@@ -68,6 +68,12 @@ class SiguUpBussnessVc: UIViewController {
         videoPlayer?.seek(to: .zero)
         videoPlayer?.play()
     }
+    
+    @IBAction func signInAction(_ sender: UIButton) {
+        let nav = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
+        nav.regitervalue = "2"
+        self.navigationController?.pushViewController(nav, animated: false)
+    }
 }
 
     

@@ -121,6 +121,7 @@
                 <outlet property="exploreLable" destination="5po-Ub-43E" id="k4s-Zw-u4w"/>
                 <outlet property="gradiantView" destination="08C-DF-jlT" id="Phi-XX-hbQ"/>
                 <outlet property="screenImage" destination="58Z-CL-6iy" id="Lhn-c5-3IQ"/>
+                <outlet property="skipBtnTittle" destination="Ga8-S6-Iys" id="LTY-tE-Ouu"/>
             </connections>
             <point key="canvasLocation" x="654.19847328244271" y="391.19718309859155"/>
         </collectionViewCell>

@@ -1,6 +1,6 @@
 
 
-
+//poin sir Code  ( sep 2025)
 import Foundation
 import UIKit
 import SystemConfiguration

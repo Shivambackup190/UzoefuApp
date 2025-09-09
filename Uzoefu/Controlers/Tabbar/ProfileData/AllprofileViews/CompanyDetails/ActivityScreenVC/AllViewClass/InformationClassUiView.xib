@@ -21,14 +21,14 @@
                             <rect key="frame" x="0.0" y="0.0" width="393" height="759"/>
                             <subviews>
                                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="kae-ki-2F7">
-                                    <rect key="frame" x="0.0" y="0.0" width="393" height="689"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="684"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 </tableView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JMQ-4x-j4X">
-                                    <rect key="frame" x="20" y="699" width="353" height="40"/>
+                                    <rect key="frame" x="20" y="694" width="353" height="45"/>
                                     <color key="backgroundColor" red="0.4941176471" green="0.82352941180000006" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="40" id="LbW-Gq-dcS"/>
+                                        <constraint firstAttribute="height" constant="45" id="LbW-Gq-dcS"/>
                                     </constraints>
                                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <state key="normal" title="Button"/>
@@ -38,6 +38,9 @@
                                             <real key="value" value="10"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="BookActionBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="9pB-ZK-Owj"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -76,6 +79,7 @@
                 <constraint firstItem="hBg-c5-19f" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="ybA-9e-1GI"/>
             </constraints>
             <connections>
+                <outlet property="bookAction" destination="JMQ-4x-j4X" id="GdC-dS-gLW"/>
                 <outlet property="informationTbale" destination="kae-ki-2F7" id="utg-Gc-Nao"/>
             </connections>
             <point key="canvasLocation" x="132" y="-11"/>

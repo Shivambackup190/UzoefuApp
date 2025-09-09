@@ -5,7 +5,8 @@ class SiginInCell: UITableViewCell {
 
 
 
-    @IBOutlet weak var signatureContainerView: FloatingSignatureView!
+    @IBOutlet weak var signatureContainerView: SignatureView!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()

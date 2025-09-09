@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import Cosmos
 
 class WishListTableViewCell: UITableViewCell {
     @IBOutlet weak var viewlayer: UIView!
     
+    @IBOutlet weak var ratingView: CosmosView!
     override func awakeFromNib() {
         super.awakeFromNib()
         setupViewLayer()

@@ -6,9 +6,11 @@
 //
 
 import UIKit
+import Cosmos
 
 class ReviewCellClass: UITableViewCell {
     
+    @IBOutlet weak var ratingView: CosmosView!
     @IBOutlet weak var reviewsPhotoCollectionView: UICollectionView!
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -21,12 +23,14 @@ class ReviewCellClass: UITableViewCell {
         reviewsPhotoCollectionView.register(nib, forCellWithReuseIdentifier: "ReviewPhotoCollectionCell")
         reviewsPhotoCollectionView.delegate = self
         reviewsPhotoCollectionView.dataSource = self
+        reviewsPhotoCollectionView.showsHorizontalScrollIndicator = false
+        reviewsPhotoCollectionView.showsVerticalScrollIndicator = false
     }
     
 }
 extension ReviewCellClass :UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return 5
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -38,7 +42,7 @@ extension ReviewCellClass :UICollectionViewDelegate,UICollectionViewDataSource,U
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == reviewsPhotoCollectionView {
             let size = reviewsPhotoCollectionView.bounds.width / 5
-            return CGSize(width: size, height: 80)
+            return CGSize(width: size, height: 100)
         } else {
             let size = collectionView.bounds.width / 5
             return CGSize(width: size, height: 80)

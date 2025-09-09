@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import Cosmos
 
 class ExploreActivitySecondCell: UICollectionViewCell {
     @IBOutlet weak var experinceImg: UIImageView!
     @IBOutlet weak var viewlayer: UIView!
+    @IBOutlet weak var ratingView: CosmosView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

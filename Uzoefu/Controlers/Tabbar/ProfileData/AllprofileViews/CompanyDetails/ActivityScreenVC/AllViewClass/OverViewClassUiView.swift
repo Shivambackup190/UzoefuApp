@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import Cosmos
 
 class OverViewClassUiView: UIView {
     var BookingActionBtn : (()->()) = {}
 
+    @IBOutlet weak var ratingView: CosmosView!
     @IBOutlet weak var bokingActionButton: UIButton!
     
     @IBAction func bookAction(_ sender: UIButton) {

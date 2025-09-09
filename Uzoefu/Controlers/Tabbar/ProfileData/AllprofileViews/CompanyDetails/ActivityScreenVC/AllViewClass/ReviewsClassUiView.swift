@@ -8,7 +8,13 @@
 import UIKit
 
 class ReviewsClassUiView: UIView {
+    var writereviewbtnAction : (()->()) = {}
 
     @IBOutlet weak var ReviewsTableView: UITableView!
     
+    @IBOutlet weak var writeRevieButton: UIButton!
+    
+    @IBAction func writeRevieButton(_ sender: UIButton) {
+        writereviewbtnAction()
+    }
 }

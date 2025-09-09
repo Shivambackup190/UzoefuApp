@@ -18,4 +18,8 @@ class BookActivityStep5thVc: UIViewController {
         self.navigationController?.popViewController(animated: false)
         
     }
+    @IBAction func nextBtnAction(_ sender: Any) {
+        let nav = self.storyboard?.instantiateViewController(withIdentifier: "MainTabBarController") as! MainTabBarController
+        self.navigationController?.pushViewController(nav, animated: false)
+    }
 }

@@ -39,9 +39,9 @@ class AddActivityDescripTion: UIViewController, UITextViewDelegate {
         }
     }
 
-    deinit {
-        categoriesCollectionView.removeObserver(self, forKeyPath: "contentSize")
-    }
+//    deinit {
+//        categoriesCollectionView.removeObserver(self, forKeyPath: "contentSize")
+//    }
     
     func textViewDidChange(_ textView: UITextView) {
        

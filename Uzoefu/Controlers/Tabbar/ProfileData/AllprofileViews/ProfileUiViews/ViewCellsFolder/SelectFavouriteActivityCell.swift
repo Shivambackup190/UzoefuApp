@@ -12,7 +12,7 @@ class SelectFavouriteActivityCell: UICollectionViewCell {
     @IBOutlet weak var viewlayer: UIView!
     override func awakeFromNib() {
         super.awakeFromNib()
-        setupViewLayer()
+     //   setupViewLayer()
     }
     private func setupViewLayer() {
         viewlayer.layer.cornerRadius = 10

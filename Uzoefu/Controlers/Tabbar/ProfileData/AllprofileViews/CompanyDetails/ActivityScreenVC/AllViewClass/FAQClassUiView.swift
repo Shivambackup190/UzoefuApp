@@ -8,7 +8,11 @@
 import UIKit
 
 class FAQClassUiView: UIView {
+var BookingActionBtnfaq : (()->()) = {}
 
     @IBOutlet weak var faqTableView: UITableView!
     
+    @IBAction func faqActionBtn(_ sender: UIButton) {
+        BookingActionBtnfaq()
+    }
 }

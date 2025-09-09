@@ -1,0 +1,6 @@
+framework module Pods_UzoefuTests {
+  umbrella header "Pods-UzoefuTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

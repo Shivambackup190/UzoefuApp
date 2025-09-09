@@ -224,7 +224,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="i0e-B2-b4V">
-                                            <rect key="frame" x="10" y="165" width="373" height="715"/>
+                                            <rect key="frame" x="10" y="165" width="373" height="675"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         </tableView>
                                     </subviews>
@@ -240,7 +240,6 @@
                                         <constraint firstItem="12Y-7h-NBP" firstAttribute="leading" secondItem="QNg-lZ-mwj" secondAttribute="trailing" constant="102" id="r5m-8D-Rnl"/>
                                         <constraint firstItem="i0e-B2-b4V" firstAttribute="top" secondItem="QNg-lZ-mwj" secondAttribute="bottom" constant="5" id="ucz-8o-zm5"/>
                                         <constraint firstAttribute="height" constant="900" id="vsM-1i-4LR"/>
-                                        <constraint firstAttribute="bottom" secondItem="i0e-B2-b4V" secondAttribute="bottom" constant="20" id="z2Z-fi-t0V"/>
                                     </constraints>
                                 </view>
                             </subviews>
@@ -281,6 +280,9 @@
                             <real key="value" value="10"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="writeRevieButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="4R0-73-jh9"/>
+                    </connections>
                 </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
@@ -293,6 +295,7 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="iPk-Q0-8Km" secondAttribute="trailing" id="D4w-ux-zZF"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="RdQ-fe-8hB" secondAttribute="trailing" constant="10" id="Eu1-fc-04G"/>
                 <constraint firstItem="Fua-5M-UEM" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="FSk-OS-fqa"/>
+                <constraint firstItem="RdQ-fe-8hB" firstAttribute="top" secondItem="i0e-B2-b4V" secondAttribute="bottom" constant="10" id="Ndh-6h-eaI"/>
                 <constraint firstItem="iPk-Q0-8Km" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="To8-2o-JzT"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="H0F-9w-Ws1" secondAttribute="trailing" id="Xz6-fk-7sy"/>
                 <constraint firstItem="Fua-5M-UEM" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="YyS-ya-Tfe"/>
@@ -300,6 +303,7 @@
             </constraints>
             <connections>
                 <outlet property="ReviewsTableView" destination="i0e-B2-b4V" id="YeR-RC-nzO"/>
+                <outlet property="writeRevieButton" destination="RdQ-fe-8hB" id="HUM-gS-LJC"/>
             </connections>
             <point key="canvasLocation" x="130.53435114503816" y="-11.267605633802818"/>
         </view>

@@ -3,7 +3,7 @@ import UIKit
 class WelcomeScreenVc: UIViewController {
     
     @IBOutlet weak var homeCollectionView: UICollectionView!
-    @IBOutlet weak var pageControl: UIPageControl!   // 👈 storyboard me add karo
+    @IBOutlet weak var pageControl: UIPageControl!
     
     var explore = ["Explore","Discover","Experience","Wishlist"]
     var discription = [
@@ -17,6 +17,8 @@ class WelcomeScreenVc: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        homeCollectionView.contentInsetAdjustmentBehavior = .never
+      
         
         homeCollectionView.delegate = self
         homeCollectionView.dataSource = self
@@ -30,9 +32,8 @@ class WelcomeScreenVc: UIViewController {
         layout.scrollDirection = .horizontal
         homeCollectionView.collectionViewLayout = layout
         homeCollectionView.showsHorizontalScrollIndicator = false
-        homeCollectionView.isPagingEnabled = true   // 👈 slide ek-ek page me rukega
+        homeCollectionView.isPagingEnabled = true
         
-        // setup page control
         pageControl.numberOfPages = discription.count
         pageControl.currentPage = 0
     }
@@ -49,6 +50,13 @@ extension WelcomeScreenVc: UICollectionViewDelegate, UICollectionViewDataSource 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "welcomecell", for: indexPath) as! WelcomeScreenCollectionViewCell
         
         cell.exploreLable.text = explore[indexPath.row]
+
+        if cell.exploreLable.text == "Wishlist" {
+            cell.skipBtnTittle.setTitle("Enter", for: .normal)
+        } else {
+            cell.skipBtnTittle.setTitle("Skip", for: .normal) 
+        }
+
         
         
         let text = discription[indexPath.row]
@@ -74,29 +82,14 @@ extension WelcomeScreenVc: UICollectionViewDelegate, UICollectionViewDataSource 
         
         cell.videoName = videoNames[indexPath.item]
         
+    
+        
         
         cell.skipBtnClick = {
-            let nextPageIndex = indexPath.item + 1
-            
-            if indexPath.item == self.discription.count - 1 {
-                if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-                   let sceneDelegate = windowScene.delegate as? SceneDelegate {
-                    
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginVC")
-                    
-                    sceneDelegate.window?.rootViewController = loginVC
-                    sceneDelegate.window?.makeKeyAndVisible()
-                }
-            } else {
-            
-                let newIndexPath = IndexPath(item: nextPageIndex, section: 0)
-                self.homeCollectionView.scrollToItem(at: newIndexPath, at: .centeredHorizontally, animated: true)
-                
-
-                self.pageControl.currentPage = nextPageIndex
-            }
+            let nav = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
+            self.navigationController?.pushViewController(nav, animated: true)
         }
+
         
         return cell
     }

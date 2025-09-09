@@ -71,6 +71,7 @@ class WishListVC: UIViewController,UITextFieldDelegate {
     }
     override func viewWillAppear(_ animated: Bool) {
         blurView.isHidden = true
+        editButtonOutlet.isHidden = false
     }
     @IBAction func backActionBtn(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
@@ -93,8 +94,9 @@ class WishListVC: UIViewController,UITextFieldDelegate {
     @IBAction func editbuttonAction(_ sender: UIButton) {
         blurView.isHidden = false
         editButtonOutlet.isHidden = true
-        backHideShowBtn.isHidden = false
-        weidthBackConstraint.constant = 40
+        backHideShowBtn.isHidden = true
+        weidthBackConstraint.constant = 0
+        wishListTableView.reloadData()
     }
     
     @IBAction func selecttripPlannerAction(_ sender: UIButton) {
@@ -104,7 +106,8 @@ class WishListVC: UIViewController,UITextFieldDelegate {
     @IBAction func createNewTripActionBtn(_ sender: UIButton) {
         createTripPopUpUiview.isHidden = false
         selectTripPopUpUiview.isHidden = true
-        creteTripBtnOutlet.backgroundColor = .clear
+        creteTripBtnOutlet.backgroundColor = #colorLiteral(red: 0.9176, green: 0.9255, blue: 0.9294, alpha: 1.0)
+
         creteTripBtnOutlet.titleLabel?.textColor = .gray
     }
 }
@@ -142,6 +145,7 @@ extension WishListVC {
            creteTripBtnOutlet.backgroundColor = #colorLiteral(red: 0.4941176471, green: 0.8235294118, blue: 0, alpha: 1)
            creteTripBtnOutlet.titleLabel?.textColor = .white
        }
+    
     
    }
 

@@ -103,6 +103,9 @@
 		70A625792E5EEC5500021CB1 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A625782E5EEC5500021CB1 /* Settings.swift */; };
 		70A723102E6859EF0027B028 /* PhotosCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70A7230F2E6859EF0027B028 /* PhotosCollectionCell.xib */; };
 		70A723112E6859EF0027B028 /* PhotosCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A7230E2E6859EF0027B028 /* PhotosCollectionCell.swift */; };
+		70A88C4E2E6AF23C00351495 /* CustomDropdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A88C4D2E6AF23C00351495 /* CustomDropdown.swift */; };
+		70A88C512E6B027F00351495 /* ReviewVcClassTableviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70A88C502E6B027F00351495 /* ReviewVcClassTableviewCell.xib */; };
+		70A88C522E6B027F00351495 /* ReviewVcClassTableviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A88C4F2E6B027F00351495 /* ReviewVcClassTableviewCell.swift */; };
 		70AB86C02E694B10004CE913 /* FinishSetUVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AB86BF2E694B10004CE913 /* FinishSetUVc.swift */; };
 		70AB86C32E69524F004CE913 /* BusinessCompanyDetailsVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AB86C22E69524F004CE913 /* BusinessCompanyDetailsVc.swift */; };
 		70AB86C62E69581D004CE913 /* BussinessOverViewClass.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70AB86C52E69581D004CE913 /* BussinessOverViewClass.xib */; };
@@ -166,6 +169,11 @@
 		70DE3B882E4B02D8001D5313 /* DestinationExploreCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70DE3B872E4B02D8001D5313 /* DestinationExploreCollectionViewCell.xib */; };
 		70DE3B892E4B02D8001D5313 /* DestinationExploreCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70DE3B862E4B02D8001D5313 /* DestinationExploreCollectionViewCell.swift */; };
 		70DE3B8B2E4B1602001D5313 /* DestinationplacesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70DE3B8A2E4B1602001D5313 /* DestinationplacesCollectionViewCell.swift */; };
+		70E8746D2E6A9CEF00E5EDC4 /* ChooseregistrationVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E8746C2E6A9CEF00E5EDC4 /* ChooseregistrationVc.swift */; };
+		70E8746F2E6AE2C600E5EDC4 /* ReviewVcClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E8746E2E6AE2C600E5EDC4 /* ReviewVcClass.swift */; };
+		8711A0324AAB4488E9ECA950 /* Pods_UzoefuTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0B9568AB413FC9296727409 /* Pods_UzoefuTests.framework */; };
+		A6D1DEA3AA50039CAC6801E3 /* Pods_Uzoefu_UzoefuUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E77B7C1826F7F7584526A12 /* Pods_Uzoefu_UzoefuUITests.framework */; };
+		AC6D1C4AC4C1F6C04789D06F /* Pods_Uzoefu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 126A4232DFF4AB0DBC5C9212 /* Pods_Uzoefu.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -186,6 +194,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		05870DCB7832B65DDAF18D89 /* Pods-Uzoefu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Uzoefu.debug.xcconfig"; path = "Target Support Files/Pods-Uzoefu/Pods-Uzoefu.debug.xcconfig"; sourceTree = "<group>"; };
+		126A4232DFF4AB0DBC5C9212 /* Pods_Uzoefu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Uzoefu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		211623D2B153D70D90B47A1C /* Pods-Uzoefu-UzoefuUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Uzoefu-UzoefuUITests.release.xcconfig"; path = "Target Support Files/Pods-Uzoefu-UzoefuUITests/Pods-Uzoefu-UzoefuUITests.release.xcconfig"; sourceTree = "<group>"; };
+		23D244072B43F51B573C912A /* Pods-UzoefuTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UzoefuTests.debug.xcconfig"; path = "Target Support Files/Pods-UzoefuTests/Pods-UzoefuTests.debug.xcconfig"; sourceTree = "<group>"; };
+		31DF4C75ABC33677C38963BE /* Pods-Uzoefu-UzoefuUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Uzoefu-UzoefuUITests.debug.xcconfig"; path = "Target Support Files/Pods-Uzoefu-UzoefuUITests/Pods-Uzoefu-UzoefuUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		4E77B7C1826F7F7584526A12 /* Pods_Uzoefu_UzoefuUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Uzoefu_UzoefuUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7001E1052E65B6A10064C2DD /* PaymentDetailsVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentDetailsVc.swift; sourceTree = "<group>"; };
 		7001E1072E65BC5D0064C2DD /* SetupprofileVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupprofileVc.swift; sourceTree = "<group>"; };
 		7001E10A2E65C3FA0064C2DD /* CreateAddActivityVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAddActivityVc.swift; sourceTree = "<group>"; };
@@ -287,6 +301,9 @@
 		70A625782E5EEC5500021CB1 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		70A7230E2E6859EF0027B028 /* PhotosCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionCell.swift; sourceTree = "<group>"; };
 		70A7230F2E6859EF0027B028 /* PhotosCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotosCollectionCell.xib; sourceTree = "<group>"; };
+		70A88C4D2E6AF23C00351495 /* CustomDropdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDropdown.swift; sourceTree = "<group>"; };
+		70A88C4F2E6B027F00351495 /* ReviewVcClassTableviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewVcClassTableviewCell.swift; sourceTree = "<group>"; };
+		70A88C502E6B027F00351495 /* ReviewVcClassTableviewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReviewVcClassTableviewCell.xib; sourceTree = "<group>"; };
 		70AB86BF2E694B10004CE913 /* FinishSetUVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishSetUVc.swift; sourceTree = "<group>"; };
 		70AB86C22E69524F004CE913 /* BusinessCompanyDetailsVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessCompanyDetailsVc.swift; sourceTree = "<group>"; };
 		70AB86C52E69581D004CE913 /* BussinessOverViewClass.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BussinessOverViewClass.xib; sourceTree = "<group>"; };
@@ -359,6 +376,11 @@
 		70DE3B862E4B02D8001D5313 /* DestinationExploreCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationExploreCollectionViewCell.swift; sourceTree = "<group>"; };
 		70DE3B872E4B02D8001D5313 /* DestinationExploreCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DestinationExploreCollectionViewCell.xib; sourceTree = "<group>"; };
 		70DE3B8A2E4B1602001D5313 /* DestinationplacesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationplacesCollectionViewCell.swift; sourceTree = "<group>"; };
+		70E8746C2E6A9CEF00E5EDC4 /* ChooseregistrationVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseregistrationVc.swift; sourceTree = "<group>"; };
+		70E8746E2E6AE2C600E5EDC4 /* ReviewVcClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewVcClass.swift; sourceTree = "<group>"; };
+		C0B9568AB413FC9296727409 /* Pods_UzoefuTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UzoefuTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D39B231973D9CDBECD044E77 /* Pods-Uzoefu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Uzoefu.release.xcconfig"; path = "Target Support Files/Pods-Uzoefu/Pods-Uzoefu.release.xcconfig"; sourceTree = "<group>"; };
+		E57D2EC0028A7EE1432C8196 /* Pods-UzoefuTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UzoefuTests.release.xcconfig"; path = "Target Support Files/Pods-UzoefuTests/Pods-UzoefuTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -366,6 +388,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC6D1C4AC4C1F6C04789D06F /* Pods_Uzoefu.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -373,6 +396,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8711A0324AAB4488E9ECA950 /* Pods_UzoefuTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -380,6 +404,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6D1DEA3AA50039CAC6801E3 /* Pods_Uzoefu_UzoefuUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -414,6 +439,9 @@
 				70A7230E2E6859EF0027B028 /* PhotosCollectionCell.swift */,
 				70A7230F2E6859EF0027B028 /* PhotosCollectionCell.xib */,
 				70AB86BF2E694B10004CE913 /* FinishSetUVc.swift */,
+				70E8746E2E6AE2C600E5EDC4 /* ReviewVcClass.swift */,
+				70A88C4F2E6B027F00351495 /* ReviewVcClassTableviewCell.swift */,
+				70A88C502E6B027F00351495 /* ReviewVcClassTableviewCell.xib */,
 			);
 			path = AllCreateActivtyStepsFolder;
 			sourceTree = "<group>";
@@ -520,6 +548,8 @@
 				708D2C5F2E446C7D00012102 /* UzoefuTests */,
 				708D2C692E446C7D00012102 /* UzoefuUITests */,
 				708D2C472E446C7B00012102 /* Products */,
+				7532EAA56D452391AE947B53 /* Pods */,
+				D88B9154C909DC181046109C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -619,6 +649,7 @@
 				70B33BAB2E604FE600333AA7 /* SignatureView.xib */,
 				70B33BAD2E60500300333AA7 /* SignatureView.swift */,
 				70B33BAF2E60591800333AA7 /* FloatingView.swift */,
+				70A88C4D2E6AF23C00351495 /* CustomDropdown.swift */,
 			);
 			path = HelperClass;
 			sourceTree = "<group>";
@@ -682,6 +713,7 @@
 		708D2C9C2E44CEC900012102 /* Register */ = {
 			isa = PBXGroup;
 			children = (
+				70E8746C2E6A9CEF00E5EDC4 /* ChooseregistrationVc.swift */,
 				708D2C7F2E4470B300012102 /* Login */,
 				708D2C802E4470C300012102 /* Signup */,
 				708D2C9D2E44CEDC00012102 /* ForgotPassword */,
@@ -949,6 +981,29 @@
 			path = AllExploreVc;
 			sourceTree = "<group>";
 		};
+		7532EAA56D452391AE947B53 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				05870DCB7832B65DDAF18D89 /* Pods-Uzoefu.debug.xcconfig */,
+				D39B231973D9CDBECD044E77 /* Pods-Uzoefu.release.xcconfig */,
+				31DF4C75ABC33677C38963BE /* Pods-Uzoefu-UzoefuUITests.debug.xcconfig */,
+				211623D2B153D70D90B47A1C /* Pods-Uzoefu-UzoefuUITests.release.xcconfig */,
+				23D244072B43F51B573C912A /* Pods-UzoefuTests.debug.xcconfig */,
+				E57D2EC0028A7EE1432C8196 /* Pods-UzoefuTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		D88B9154C909DC181046109C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				126A4232DFF4AB0DBC5C9212 /* Pods_Uzoefu.framework */,
+				4E77B7C1826F7F7584526A12 /* Pods_Uzoefu_UzoefuUITests.framework */,
+				C0B9568AB413FC9296727409 /* Pods_UzoefuTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -956,9 +1011,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 708D2C702E446C7D00012102 /* Build configuration list for PBXNativeTarget "Uzoefu" */;
 			buildPhases = (
+				EB071ED8AA4AA031ADC67A1A /* [CP] Check Pods Manifest.lock */,
 				708D2C422E446C7B00012102 /* Sources */,
 				708D2C432E446C7B00012102 /* Frameworks */,
 				708D2C442E446C7B00012102 /* Resources */,
+				ACA306984899B76E46BF1791 /* [CP] Embed Pods Frameworks */,
+				90EA2DD8328767E3B48673DE /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -973,6 +1031,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 708D2C732E446C7D00012102 /* Build configuration list for PBXNativeTarget "UzoefuTests" */;
 			buildPhases = (
+				D1472C11E3E7C4FC6CBB4BCD /* [CP] Check Pods Manifest.lock */,
 				708D2C582E446C7D00012102 /* Sources */,
 				708D2C592E446C7D00012102 /* Frameworks */,
 				708D2C5A2E446C7D00012102 /* Resources */,
@@ -991,9 +1050,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 708D2C762E446C7D00012102 /* Build configuration list for PBXNativeTarget "UzoefuUITests" */;
 			buildPhases = (
+				AB2394125A6F3C660944C5B8 /* [CP] Check Pods Manifest.lock */,
 				708D2C622E446C7D00012102 /* Sources */,
 				708D2C632E446C7D00012102 /* Frameworks */,
 				708D2C642E446C7D00012102 /* Resources */,
+				F3522055939C1B909C824420 /* [CP] Embed Pods Frameworks */,
+				58DDEC0F3F11CA1460760428 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1060,6 +1122,7 @@
 				70A723102E6859EF0027B028 /* PhotosCollectionCell.xib in Resources */,
 				7019321E2E49FEC400351E6F /* ExperinceactivityCell.xib in Resources */,
 				704F296A2E6972D0003E4D46 /* BussnessBookinghistoryCell.xib in Resources */,
+				70A88C512E6B027F00351495 /* ReviewVcClassTableviewCell.xib in Resources */,
 				70D8B2E12E4A135300D2FC31 /* SearcResultExplorCell.xib in Resources */,
 				70AB86CA2E695857004CE913 /* BussniessActivitiesClass.xib in Resources */,
 				70A2B3812E60328B000715D1 /* ActivityDescriptionCell.xib in Resources */,
@@ -1123,6 +1186,159 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		58DDEC0F3F11CA1460760428 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Uzoefu-UzoefuUITests/Pods-Uzoefu-UzoefuUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Uzoefu-UzoefuUITests/Pods-Uzoefu-UzoefuUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Uzoefu-UzoefuUITests/Pods-Uzoefu-UzoefuUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		90EA2DD8328767E3B48673DE /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Uzoefu/Pods-Uzoefu-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Uzoefu/Pods-Uzoefu-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Uzoefu/Pods-Uzoefu-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AB2394125A6F3C660944C5B8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Uzoefu-UzoefuUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		ACA306984899B76E46BF1791 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Uzoefu/Pods-Uzoefu-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Uzoefu/Pods-Uzoefu-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Uzoefu/Pods-Uzoefu-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D1472C11E3E7C4FC6CBB4BCD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-UzoefuTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EB071ED8AA4AA031ADC67A1A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Uzoefu-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F3522055939C1B909C824420 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Uzoefu-UzoefuUITests/Pods-Uzoefu-UzoefuUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Uzoefu-UzoefuUITests/Pods-Uzoefu-UzoefuUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Uzoefu-UzoefuUITests/Pods-Uzoefu-UzoefuUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		708D2C422E446C7B00012102 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -1159,8 +1375,10 @@
 				70D8B2DE2E4A100500D2FC31 /* SearcResultExplorVc.swift in Sources */,
 				7001E1062E65B6A10064C2DD /* PaymentDetailsVc.swift in Sources */,
 				70377AA62E54740500F99D54 /* ReviewsClassUiView.swift in Sources */,
+				70A88C4E2E6AF23C00351495 /* CustomDropdown.swift in Sources */,
 				70818BC32E5598E0001FD1DA /* ReviewPhotoCollectionCell.swift in Sources */,
 				701932192E49FE9F00351E6F /* discoverdestinationCell.swift in Sources */,
+				70A88C522E6B027F00351495 /* ReviewVcClassTableviewCell.swift in Sources */,
 				70AB86C32E69524F004CE913 /* BusinessCompanyDetailsVc.swift in Sources */,
 				70C0307D2E5430BC002053E1 /* CompanyDetailsCell.swift in Sources */,
 				70D8B2E22E4A135300D2FC31 /* SearcResultExplorCell.swift in Sources */,
@@ -1170,6 +1388,7 @@
 				70AB86D62E695925004CE913 /* BussninessBookingClass.swift in Sources */,
 				70A5F60F2E5C385A00E47BF8 /* ExploreexpericeFilter.swift in Sources */,
 				70B049132E66A97C009B82A2 /* AddActivityDescripTion.swift in Sources */,
+				70E8746F2E6AE2C600E5EDC4 /* ReviewVcClass.swift in Sources */,
 				70BBD4892E683DC700A8D6AD /* FaqViewControler.swift in Sources */,
 				709C49712E65A08E00F09662 /* OperatingHoursVc.swift in Sources */,
 				70B80FED2E67F77E002732E9 /* AmenitiesVC.swift in Sources */,
@@ -1226,6 +1445,7 @@
 				70B9E3172E5EFE0200631C65 /* SettingTableCell.swift in Sources */,
 				70C50FE72E4C8B8A008A731C /* ProfileVc.swift in Sources */,
 				70DE3B852E4B0062001D5313 /* DestinationExploreVc.swift in Sources */,
+				70E8746D2E6A9CEF00E5EDC4 /* ChooseregistrationVc.swift in Sources */,
 				709A1F3C2E5D85BB00A61541 /* BookActivityStep4thVc.swift in Sources */,
 				708D2C9B2E44B7C100012102 /* SignUpVC.swift in Sources */,
 				70C030812E54416A002053E1 /* CompanyDetailsCellSecond.swift in Sources */,
@@ -1325,7 +1545,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1388,7 +1608,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1409,6 +1629,7 @@
 		};
 		708D2C712E446C7D00012102 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 05870DCB7832B65DDAF18D89 /* Pods-Uzoefu.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1417,26 +1638,33 @@
 				DEVELOPMENT_TEAM = F65D9CD6HQ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Uzoefu/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "This app requires location access to display your position accurately.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app needs access to your location to show it on the map.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Narendra.Uzoefu;
+				PRODUCT_BUNDLE_IDENTIFIER = com.uzoefu.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		708D2C722E446C7D00012102 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D39B231973D9CDBECD044E77 /* Pods-Uzoefu.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1445,96 +1673,122 @@
 				DEVELOPMENT_TEAM = F65D9CD6HQ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Uzoefu/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "This app requires location access to display your position accurately.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app needs access to your location to show it on the map.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Narendra.Uzoefu;
+				PRODUCT_BUNDLE_IDENTIFIER = com.uzoefu.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
 		708D2C742E446C7D00012102 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 23D244072B43F51B573C912A /* Pods-UzoefuTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2ZZHZY3YSX;
+				DEVELOPMENT_TEAM = F65D9CD6HQ;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Narendra.UzoefuTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.uzoefu.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Uzoefu.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Uzoefu";
 			};
 			name = Debug;
 		};
 		708D2C752E446C7D00012102 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E57D2EC0028A7EE1432C8196 /* Pods-UzoefuTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2ZZHZY3YSX;
+				DEVELOPMENT_TEAM = F65D9CD6HQ;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Narendra.UzoefuTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.uzoefu.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Uzoefu.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Uzoefu";
 			};
 			name = Release;
 		};
 		708D2C772E446C7D00012102 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 31DF4C75ABC33677C38963BE /* Pods-Uzoefu-UzoefuUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2ZZHZY3YSX;
+				DEVELOPMENT_TEAM = F65D9CD6HQ;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Narendra.UzoefuUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.uzoefu.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				TEST_TARGET_NAME = Uzoefu;
 			};
 			name = Debug;
 		};
 		708D2C782E446C7D00012102 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 211623D2B153D70D90B47A1C /* Pods-Uzoefu-UzoefuUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2ZZHZY3YSX;
+				DEVELOPMENT_TEAM = F65D9CD6HQ;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Narendra.UzoefuUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.uzoefu.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				TEST_TARGET_NAME = Uzoefu;
 			};
 			name = Release;

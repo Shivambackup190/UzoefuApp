@@ -9,6 +9,9 @@ import UIKit
 
 class CreateAddActivityVc: UIViewController {
 
+    @IBOutlet weak var headerLabel: UILabel!
+    @IBOutlet weak var heightconstraint: NSLayoutConstraint!
+    @IBOutlet weak var hideLable: UILabel!
     @IBOutlet weak var createActivityTableView: UITableView!
     let arrData = [
         "Activity details",
@@ -20,8 +23,20 @@ class CreateAddActivityVc: UIViewController {
         "Photos",
         "Finish Set Up"
     ]
+    @IBOutlet weak var activityText: UILabel!
+    var detailValue:String?
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(detailValue)
+        if detailValue == "detail" {
+            hideLable.isHidden = true
+            headerLabel.text = "Profile Details"
+            activityText.text = "Hot Air Balloon Flight along Magalies Valley"
+            heightconstraint.constant = 0
+            
+            activityText.textColor = #colorLiteral(red: 0.4512393475, green: 0.4832214117, blue: 0.4951165318, alpha: 1)
+            activityText.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        }
 
   
     }
@@ -34,8 +49,15 @@ class CreateAddActivityVc: UIViewController {
 }
 extension CreateAddActivityVc:UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arrData.count
+        if detailValue == "detail" {
+            var tempArr = arrData
+            tempArr.insert("Reviews", at: 3)
+            return tempArr.count - 2
+        } else {
+            return arrData.count
+        }
     }
+
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:  "cell") as! AllCreateActivtyTableViewCell
@@ -45,6 +67,7 @@ extension CreateAddActivityVc:UITableViewDelegate,UITableViewDataSource {
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+       
             switch indexPath.row {
             case 0:
                 let vc = storyboard?.instantiateViewController(withIdentifier: "AddActivityDetailVc") as! AddActivityDetailVc

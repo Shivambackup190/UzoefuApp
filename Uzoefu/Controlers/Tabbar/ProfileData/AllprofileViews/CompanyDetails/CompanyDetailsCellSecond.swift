@@ -6,9 +6,13 @@
 //
 
 import UIKit
+import Cosmos
 
 class CompanyDetailsCellSecond: UICollectionViewCell {
     @IBOutlet weak var viewlayer: UIView!
+    
+    @IBOutlet weak var ratingView: CosmosView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         setupViewLayer()

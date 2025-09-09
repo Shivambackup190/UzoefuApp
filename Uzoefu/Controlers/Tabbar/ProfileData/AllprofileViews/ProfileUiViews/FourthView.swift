@@ -6,6 +6,6 @@ class FourthView: UIView {
     @IBOutlet weak var addCompanyAction: UIButton!
     
     @IBAction func addmoreaction(_ sender: Any) {
-        addMoreCampanyActionBtn()
+      //  addMoreCampanyActionBtn()
     }
 }

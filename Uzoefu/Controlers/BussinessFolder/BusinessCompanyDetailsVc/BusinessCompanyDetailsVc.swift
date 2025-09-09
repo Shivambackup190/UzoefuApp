@@ -204,8 +204,16 @@ extension BusinessCompanyDetailsVc:UITableViewDelegate,UITableViewDataSource {
      
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //        let nav = self.storyboard?.instantiateViewController(identifier: "CompanyDetailsVC") as! CompanyDetailsVC
-        //        self.navigationController?.pushViewController(nav, animated: true)
+        if tableView ==   thirdView.BussnessActivityTableView {
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "CreateAddActivityVc") as! CreateAddActivityVc
+            vc.detailValue = "detail"
+            self.navigationController?.pushViewController(vc, animated: true)
+            
+        }
+        else  {
+            
+        }
+       
     }
     
     

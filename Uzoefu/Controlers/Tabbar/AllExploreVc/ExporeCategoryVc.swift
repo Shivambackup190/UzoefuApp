@@ -66,7 +66,7 @@ class ExporeCategoryVc: UIViewController {
 extension ExporeCategoryVc: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return categoryNames.count
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -111,7 +111,11 @@ extension ExporeCategoryVc: UICollectionViewDelegate, UICollectionViewDataSource
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let nav = self.storyboard?.instantiateViewController(withIdentifier: "SearcResultExplorVc") as! SearcResultExplorVc
+        nav.myvalue = "\(categoryNames[indexPath.row]) (\(countValues[indexPath.row]))"
+
         self.navigationController?.pushViewController(nav, animated: true)
+
+     
     }
 }
 

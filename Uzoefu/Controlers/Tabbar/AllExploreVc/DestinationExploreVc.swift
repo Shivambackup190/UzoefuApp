@@ -55,10 +55,13 @@ class DestinationExploreVc: UIViewController {
         if hidevalue == "ok" {
             backHideShowBtn.isHidden = false
             weidthBackConstraint.constant = 40
+            
+        
         }
         else {
             backHideShowBtn.isHidden = true
             weidthBackConstraint.constant = 0
+            
         }
         exploreDestinationColltionView.register(
             UINib(nibName: "DestinationExploreCollectionViewCell", bundle: nil),
@@ -71,6 +74,10 @@ class DestinationExploreVc: UIViewController {
         layout.scrollDirection = .vertical
         exploreDestinationColltionView.collectionViewLayout = layout
         
+        
+        let layout1 = UICollectionViewFlowLayout()
+        layout1.scrollDirection = .vertical
+        destinationplacesCollectionView.collectionViewLayout = layout1
         
     }
     
@@ -109,39 +116,61 @@ extension DestinationExploreVc: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if collectionView == destinationplacesCollectionView {
+            let itemsPerRow: CGFloat = 2
+            let spacing: CGFloat = 10
+            let sectionInsets = UIEdgeInsets(top: 10, left: 5, bottom: 10, right: 5)
+            
+            let totalSpacing = sectionInsets.left + sectionInsets.right + (spacing * (itemsPerRow - 1))
+            let availableWidth = collectionView.frame.width - totalSpacing
+            let widthPerItem = availableWidth / itemsPerRow
+            
+            return CGSize(width: widthPerItem, height: 60)
+        } else {
+            let itemsPerRow: CGFloat = 2
+            let spacing: CGFloat = 10
+            let sectionInsets = UIEdgeInsets(top: 10, left: 5, bottom: 10, right: 5)
+            
+            let totalSpacing = sectionInsets.left + sectionInsets.right + (spacing * (itemsPerRow - 1))
+            let availableWidth = collectionView.frame.width - totalSpacing
+            let widthPerItem = availableWidth / itemsPerRow
+            
+            return CGSize(width: widthPerItem, height: 120)
+        }
         
-        let itemsPerRow: CGFloat = 2
-        let spacing: CGFloat = 10
-        let sectionInsets = UIEdgeInsets(top: 10, left: 5, bottom: 10, right: 5)
         
-        let totalSpacing = sectionInsets.left + sectionInsets.right + (spacing * (itemsPerRow - 1))
-        let availableWidth = collectionView.frame.width - totalSpacing
-        let widthPerItem = availableWidth / itemsPerRow
-        
-        return CGSize(width: widthPerItem, height: 120)
     }
     
-    //    func collectionView(_ collectionView: UICollectionView,
-    //                        layout collectionViewLayout: UICollectionViewLayout,
-    //                        insetForSectionAt section: Int) -> UIEdgeInsets {
-    //        return UIEdgeInsets(top: 10, left: 5, bottom: 10, right: 5) // smaller side padding
-    //    }
+        func collectionView(_ collectionView: UICollectionView,
+                            layout collectionViewLayout: UICollectionViewLayout,
+                            insetForSectionAt section: Int) -> UIEdgeInsets {
+            return UIEdgeInsets(top: 10, left: 5, bottom: 10, right: 5) // smaller side padding
+        }
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 5
+        return 10
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 5
+        return 10
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView == exploreDestinationColltionView {
-            let nav = self.storyboard?.instantiateViewController(identifier: "SearcResultExplorVc") as! SearcResultExplorVc
+        if collectionView == destinationplacesCollectionView {
+            let nav = self.storyboard?.instantiateViewController(withIdentifier: "SearcResultExplorVc") as! SearcResultExplorVc
+            nav.myvalue = "\(categoryNames[indexPath.row]) (\(countValues[indexPath.row]))"
+
             self.navigationController?.pushViewController(nav, animated: true)
         }
+        else {
+            let nav = self.storyboard?.instantiateViewController(withIdentifier: "SearcResultExplorVc") as! SearcResultExplorVc
+          
+            self.navigationController?.pushViewController(nav, animated: true)
+            
+        }
+        
     }
 }

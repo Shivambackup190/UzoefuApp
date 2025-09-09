@@ -9,6 +9,7 @@ class WelcomeScreenCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var gradiantView: UIView!
     @IBOutlet weak var screenImage: UIImageView!
     
+    @IBOutlet weak var skipBtnTittle: UIButton!
     var skipBtnClick: (() -> ()) = {}
     var videoPlayer: AVPlayer?
     var avpController = AVPlayerViewController()

@@ -8,7 +8,7 @@ class DashboardVc: UIViewController {
     @IBOutlet weak var discovercollectionView: UICollectionView!
     @IBOutlet weak var exploreCollectionView: UICollectionView!
     @IBOutlet weak var experinceActiviyvollotionViewSecond: UICollectionView!
-    
+
     @IBOutlet weak var scroolView: UIScrollView!
     var categoryNames = [
         "Near Me",
@@ -59,18 +59,25 @@ class DashboardVc: UIViewController {
     }
     
     @IBAction func discoverDestinationBtnAction(_ sender: UIButton) {
-//        let nav = self.storyboard?.instantiateViewController(withIdentifier: "DestinationExploreVc") as! DestinationExploreVc
-//        
-//        nav.hidevalue = "ok"
-//        
-//        self.navigationController?.pushViewController(nav, animated: true)
-        tabBarController?.selectedIndex = 1
+        let nav = self.storyboard?.instantiateViewController(withIdentifier: "DestinationExploreVc") as! DestinationExploreVc
+        
+        nav.hidevalue = "ok"
+        nav.hidesBottomBarWhenPushed = true
+        
+        self.navigationController?.pushViewController(nav, animated: true)
+       // tabBarController?.selectedIndex = 1
         
     }
     
     @IBAction func AxerienceViewMoreAction(_ sender: UIButton) {
+        let nav = self.storyboard?.instantiateViewController(withIdentifier: "DestinationExploreVc") as! DestinationExploreVc
         
-        tabBarController?.selectedIndex = 1
+        nav.hidevalue = "ok"
+        nav.hidesBottomBarWhenPushed = true 
+        
+        self.navigationController?.pushViewController(nav, animated: true)
+//
+//        tabBarController?.selectedIndex = 1
     }
     
     @IBAction func exporeCatagoriesActionViewMore(_ sender: UIButton) {
@@ -181,13 +188,13 @@ extension DashboardVc: UICollectionViewDelegate, UICollectionViewDataSource, UIC
             return CGSize(width: size, height: size)
         } else if collectionView == experinceActiviyvollotionView {
             let size = (experinceActiviyvollotionView.frame.width - 2) / 2
-            return CGSize(width: size, height: collectionView.bounds.height)
+            return CGSize(width: size, height: 220)
         } else if collectionView == exploreCollectionView {
             let size = exploreCollectionView.frame.width - 2
-            return CGSize(width: size, height: size)
+            return CGSize(width: size, height: 220)
         } else if collectionView == experinceActiviyvollotionViewSecond {
             let size = (experinceActiviyvollotionViewSecond.frame.width - 2) / 2
-            return CGSize(width: size, height: collectionView.bounds.height)
+            return CGSize(width: size, height: 220)
         }
         let defaultSize = (collectionView.frame.width - 2) / 2
         return CGSize(width: defaultSize, height: defaultSize)

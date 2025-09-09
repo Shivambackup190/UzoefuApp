@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import Cosmos
 
 class SearcResultExplorCell: UICollectionViewCell {
     @IBOutlet weak var viewlayer: UIView!
     
+    @IBOutlet weak var ratingView: CosmosView!
     @IBOutlet weak var experinceImg: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -65,9 +65,11 @@ class ProfileVc: UIViewController {
         selectFavourteNib()
         
         bookingBtnAction()
+        logOutAction()
         
         wishlistBtnAction()
         plusCompannyActionBtn()
+        nearbyActionBtn()
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         tapGesture.cancelsTouchesInView = false
@@ -242,13 +244,39 @@ extension ProfileVc: UICollectionViewDelegate, UICollectionViewDataSource, UICol
         }
 
     }
+    func logOutAction() {
+        firstView.logOutActionAction = {
+            let alert = UIAlertController(
+                title: "Logout !",
+                message: "Are you sure you want to log out?",
+                preferredStyle: .alert
+            )
+            
+            // Cancel button (white tint)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            cancelAction.setValue(UIColor.systemGreen, forKey: "titleTextColor")
+            
+            // OK button (green tint)
+            let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+                let nav = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
+                self.navigationController?.pushViewController(nav, animated: false)
+            }
+            okAction.setValue(UIColor.systemGreen, forKey: "titleTextColor")
+            
+            alert.addAction(cancelAction)
+            alert.addAction(okAction)
+            
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+
     func wishlistBtnAction() {
         firstView.WishListAction = {
-//            let nav = self.storyboard?.instantiateViewController(withIdentifier: "WishListVC") as! WishListVC
-//            nav.hidevalue = "ok"
-//            self.navigationController?.pushViewController(nav, animated: true)
+            let nav = self.storyboard?.instantiateViewController(withIdentifier: "WishListVC") as! WishListVC
+            nav.hidevalue = "ok"
+            self.navigationController?.pushViewController(nav, animated: true)
             
-            self.tabBarController?.selectedIndex = 2
+//            self.tabBarController?.selectedIndex = 2
         }
     }
     func plusCompannyActionBtn() {
@@ -258,5 +286,44 @@ extension ProfileVc: UICollectionViewDelegate, UICollectionViewDataSource, UICol
             self.navigationController?.pushViewController(nav, animated: true)
         }
     }
+    func nearbyActionBtn() {
+        secondView.nearloactionBtn = { [weak self] in
+            guard let self = self else { return }
+            
+            let alert = UIAlertController(title: "Select Your Range", message: nil, preferredStyle: .actionSheet)
+            
+            let ranges = ["5 Km", "10 Km", "15 Km", "20 Km"]
+            
+            for range in ranges {
+                      let action = UIAlertAction(title: range, style: .default, handler: { _ in
+                          self.secondView.rangeTextField.text = range
+                      })
+                      // Gray color set karna
+                      action.setValue(UIColor.gray, forKey: "titleTextColor")
+                      alert.addAction(action)
+                  }
+            
+           
+            // Cancel button green
+                  let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                  cancelAction.setValue(UIColor.systemGreen, forKey: "titleTextColor")
+                  alert.addAction(cancelAction)
+            
+        
+            if let popover = alert.popoverPresentationController {
+                popover.sourceView = self.view
+                popover.sourceRect = CGRect(x: self.view.bounds.midX,
+                                            y: self.view.bounds.midY,
+                                            width: 0,
+                                            height: 0)
+                popover.permittedArrowDirections = []
+            }
+            
+            // Present karna
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+
+
 }
 

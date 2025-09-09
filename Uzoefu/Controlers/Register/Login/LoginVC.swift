@@ -13,6 +13,8 @@ class LoginVC: UIViewController {
     @IBOutlet weak var mainView: UIView!
     var videoPlayer: AVPlayer?
     var videoPlayerLayer: AVPlayerLayer?
+    
+    var regitervalue:String?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -34,17 +36,25 @@ class LoginVC: UIViewController {
     }
     
     @IBAction func loginAction(_ sender: UIButton) {
-        let tabBarVC = self.storyboard?.instantiateViewController(withIdentifier: "MainTabBarController") as! MainTabBarController
-            tabBarVC.modalPresentationStyle = .fullScreen
-            UIApplication.shared.windows.first?.rootViewController = tabBarVC
-            UIApplication.shared.windows.first?.makeKeyAndVisible()
+        if regitervalue == "1" {
+            let nav = self.storyboard?.instantiateViewController(withIdentifier: "MainTabBarController") as! MainTabBarController
+            self.navigationController?.pushViewController(nav, animated: true)
+        }
+        else if regitervalue == "2" {
+            let nav = self.storyboard?.instantiateViewController(withIdentifier: "CompleteSetUpVC") as! CompleteSetUpVC
+            self.navigationController?.pushViewController(nav, animated: true)
+        }
+        else {
+            let nav = self.storyboard?.instantiateViewController(withIdentifier: "MainTabBarController") as! MainTabBarController
+            self.navigationController?.pushViewController(nav, animated: true)
+            
+        }
     }
     
     @IBAction func signUpBtnAction(_ sender: UIButton) {
-        let signup = self.storyboard?.instantiateViewController(withIdentifier: "SignUpVC") as! SignUpVC
-        signup.modalPresentationStyle = .fullScreen
-            UIApplication.shared.windows.first?.rootViewController = signup
-            UIApplication.shared.windows.first?.makeKeyAndVisible()
+        let nav = self.storyboard?.instantiateViewController(identifier: "SignUpVC") as! SignUpVC
+        self.navigationController?.pushViewController(nav, animated: true)
+        
     }
     private func setupVideoPlayer() {
         guard let url = Bundle.main.url(forResource: "onboard", withExtension: "mp4") else {

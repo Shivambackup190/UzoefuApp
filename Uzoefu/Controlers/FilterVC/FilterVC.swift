@@ -16,4 +16,8 @@ class FilterVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    @IBAction func dissmissAction(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
+        
+    }
 }

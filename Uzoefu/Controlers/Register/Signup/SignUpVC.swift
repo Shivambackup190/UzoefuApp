@@ -31,16 +31,16 @@ class SignUpVC: UIViewController {
     }
     
     @IBAction func alreadyacccontBtnAction(_ sender: UIButton) {
-        if  let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-            let sceneDelegate = windowScene.delegate as? SceneDelegate {
-            
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let tabBarVC = storyboard.instantiateViewController(withIdentifier: "LoginVC")
-            
-            sceneDelegate.window?.rootViewController = tabBarVC
-            sceneDelegate.window?.makeKeyAndVisible()
+//        let nav = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
+//        nav.regitervalue = "1"
+//        self.navigationController?.pushViewController(nav, animated: false)
+        self.navigationController?.popViewController(animated: true)
         }
+    
+    @IBAction func dissmissAction(_ sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
     }
+    
     private func setupVideoPlayer() {
         guard let url = Bundle.main.url(forResource: "onboard", withExtension: "mp4") else {
             print("Video not found")

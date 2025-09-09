@@ -10,38 +10,49 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="SelectFavouriteActivityCell" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="SelectFavouriteActivityCell" id="gTV-IL-0wX" userLabel="SelectFavouriteActivityCell" customClass="SelectFavouriteActivityCell" customModule="Uzoefu" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="150" height="54"/>
+            <rect key="frame" x="0.0" y="0.0" width="227" height="37"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="150" height="54"/>
+                <rect key="frame" x="0.0" y="0.0" width="227" height="37"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="asY-Ym-qPB">
-                        <rect key="frame" x="0.0" y="0.0" width="150" height="54"/>
+                        <rect key="frame" x="0.0" y="0.0" width="227" height="37"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Adventure Sports" translatesAutoresizingMaskIntoConstraints="NO" id="spB-7Q-bpK">
-                                <rect key="frame" x="10" y="14.666666666666664" width="25" height="25"/>
+                                <rect key="frame" x="10" y="6" width="25" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="7hc-C3-rhR"/>
                                     <constraint firstAttribute="width" constant="25" id="sj5-OR-2e7"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Advaentures" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OrB-ze-21I">
-                                <rect key="frame" x="45" y="21" width="95" height="12"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Travel" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OrB-ze-21I">
+                                <rect key="frame" x="45" y="9.3333333333333339" width="172" height="18.333333333333329"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="0.37647058820000001" green="0.40784313729999999" blue="0.41960784309999999" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="OrB-ze-21I" secondAttribute="bottom" constant="21" id="S7X-eg-bo4"/>
-                            <constraint firstAttribute="trailing" secondItem="OrB-ze-21I" secondAttribute="trailing" constant="10" id="XJZ-vX-XQW"/>
+                            <constraint firstAttribute="trailing" secondItem="OrB-ze-21I" secondAttribute="trailing" constant="10" id="A4r-ya-SJg"/>
+                            <constraint firstAttribute="bottom" secondItem="OrB-ze-21I" secondAttribute="bottom" constant="9.3333333333333357" id="Y1A-Bm-Dxa"/>
                             <constraint firstItem="OrB-ze-21I" firstAttribute="leading" secondItem="spB-7Q-bpK" secondAttribute="trailing" constant="10" id="Zgo-Nh-n58"/>
                             <constraint firstItem="OrB-ze-21I" firstAttribute="centerY" secondItem="spB-7Q-bpK" secondAttribute="centerY" id="qHg-QH-lg1"/>
                             <constraint firstItem="spB-7Q-bpK" firstAttribute="leading" secondItem="asY-Ym-qPB" secondAttribute="leading" constant="10" id="rNj-7C-9Rb"/>
                             <constraint firstItem="spB-7Q-bpK" firstAttribute="centerY" secondItem="asY-Ym-qPB" secondAttribute="centerY" id="uh5-6Q-Odq"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="10"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                <real key="value" value="0.5"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </view>
                 </subviews>
             </view>
@@ -51,11 +62,11 @@
                 <constraint firstAttribute="top" secondItem="asY-Ym-qPB" secondAttribute="top" id="xXr-Xv-Zhi"/>
                 <constraint firstItem="asY-Ym-qPB" firstAttribute="trailing" secondItem="gTV-IL-0wX" secondAttribute="trailing" id="xk0-Yy-IL9"/>
             </constraints>
-            <size key="customSize" width="150" height="54"/>
+            <size key="customSize" width="227" height="37"/>
             <connections>
                 <outlet property="viewlayer" destination="asY-Ym-qPB" id="0uh-mC-L6U"/>
             </connections>
-            <point key="canvasLocation" x="29.007633587786259" y="-9.8591549295774659"/>
+            <point key="canvasLocation" x="87.786259541984734" y="-15.845070422535212"/>
         </collectionViewCell>
     </objects>
     <resources>

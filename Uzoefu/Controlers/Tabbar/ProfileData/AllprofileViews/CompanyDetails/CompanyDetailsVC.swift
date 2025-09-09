@@ -84,7 +84,7 @@ extension CompanyDetailsVC: UICollectionViewDelegate, UICollectionViewDataSource
             
         } else {
             
-            let width = self.companyDetailCollectionViewSecond.bounds.width-5
+            let width = self.companyDetailCollectionViewSecond.bounds.width-10 // story board se jitna left utna minus
             return CGSize(width: width/2, height: 190)
             
         }

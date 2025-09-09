@@ -7,10 +7,12 @@ struct Section {
 
 class ActivityScreenVC: UIViewController {
     
-    var arr = ["Phone","map","Trip Planner", "Trip Planner"]
+    var arr = ["Phone","Map","Trip Planner", "Trip Planner"]
     var imagename = ["Call","Map","Add to Trip","Share"]
     var currentIndex = 0
     
+    @IBOutlet weak var popoverView: UIView!
+    @IBOutlet weak var blurView: UIView!
     @IBOutlet weak var companyDetailCollectionViewSecond: UICollectionView!
     @IBOutlet weak var companyDetailCollectionView: UICollectionView!
     @IBOutlet weak var communicationCollection: UICollectionView!
@@ -89,11 +91,16 @@ class ActivityScreenVC: UIViewController {
         layout3.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         communicationCollection.collectionViewLayout = layout3
         communicationCollection.showsHorizontalScrollIndicator = false
+        self.blurView.isHidden = true
         
         loadInforamtionCell()
         loadFaqcells()
         loadReviewsCell()
         BookingActionBtn()
+        BookingActionBtninfo()
+        BookingActionBtnfaq()
+        writereviewAction()
+  
         
         expandedSection = Array(repeating: false, count: sections.count)
         expandedSection[0] = false
@@ -125,6 +132,8 @@ class ActivityScreenVC: UIViewController {
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
         swipeRight.direction = .right
         containerView.addGestureRecognizer(swipeRight)
+        popoverView.layer.cornerRadius = 20
+        popoverView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
     }
     
     @objc func handleSwipe(_ gesture: UISwipeGestureRecognizer) {
@@ -190,6 +199,9 @@ class ActivityScreenVC: UIViewController {
     @IBAction func sideMenuActionBtn(_ sender: UIButton) {
         let nav = self.storyboard?.instantiateViewController(withIdentifier: "SettingsVC") as! SettingsVC
         self.navigationController?.pushViewController(nav, animated: true)
+    }
+    @IBAction func dismissBlurAction(_ sender: UIButton) {
+        blurView.isHidden = true
     }
 }
 
@@ -324,6 +336,23 @@ extension ActivityScreenVC {
             self.navigationController?.pushViewController(nav, animated: true)
         }
     }
+    func BookingActionBtninfo() {
+        secondView.BookingActionBtnInformation = {
+            let nav = self.storyboard?.instantiateViewController(withIdentifier: "BookActivityStepIstVc") as! BookActivityStepIstVc
+            self.navigationController?.pushViewController(nav, animated: true)
+        }
+    }
+    func BookingActionBtnfaq() {
+        fourthView.BookingActionBtnfaq = {
+            let nav = self.storyboard?.instantiateViewController(withIdentifier: "BookActivityStepIstVc") as! BookActivityStepIstVc
+            self.navigationController?.pushViewController(nav, animated: true)
+        }
+    }
+    func writereviewAction() {
+        thirdView.writereviewbtnAction = {
+            self.blurView.isHidden = false
+        }
+    }
 }
 
 // MARK: - TableView
@@ -362,7 +391,7 @@ extension ActivityScreenVC: UITableViewDelegate, UITableViewDataSource {
         let titleLabel = UILabel()
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-        titleLabel.textColor = UIColor(hex: "#60686B")
+        titleLabel.textColor = UIColor(named: "#60686B")
         titleLabel.numberOfLines = 0
         titleLabel.lineBreakMode = .byWordWrapping
 

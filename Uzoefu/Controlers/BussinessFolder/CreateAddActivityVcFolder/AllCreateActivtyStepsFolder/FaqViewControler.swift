@@ -69,7 +69,7 @@ extension FaqViewControler: UITableViewDelegate, UITableViewDataSource {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.text = sections[section]
         titleLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-        titleLabel.textColor = UIColor(hex: "#60686B")
+        titleLabel.textColor = UIColor(named: "#60686B")
         headerView.addSubview(titleLabel)
         
         let button = UIButton(type: .system)
