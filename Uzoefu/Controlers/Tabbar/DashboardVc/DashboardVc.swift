@@ -8,7 +8,7 @@ class DashboardVc: UIViewController {
     @IBOutlet weak var discovercollectionView: UICollectionView!
     @IBOutlet weak var exploreCollectionView: UICollectionView!
     @IBOutlet weak var experinceActiviyvollotionViewSecond: UICollectionView!
-
+    var selectedIndexes: [IndexPath] = []
     @IBOutlet weak var scroolView: UIScrollView!
     var categoryNames = [
         "Near Me",
@@ -30,7 +30,7 @@ class DashboardVc: UIViewController {
     ]
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        exploreCollectionView.allowsMultipleSelection = true
         experinceActiviyvollotionViewSecond.delegate = self
         experinceActiviyvollotionViewSecond.dataSource = self
         experinceActiviyvollotionView.delegate = self
@@ -39,6 +39,7 @@ class DashboardVc: UIViewController {
         discovercollectionView.dataSource = self
         exploreCollectionView.delegate = self
         exploreCollectionView.dataSource = self
+        exploreCollectionView.allowsMultipleSelection = true
         
         myscrolleview.contentInsetAdjustmentBehavior = .never
         
@@ -90,29 +91,20 @@ class DashboardVc: UIViewController {
     @IBAction func filterBtnAction(_ sender: UIButton) {
         let vc = storyboard?.instantiateViewController(withIdentifier: "FilterVC") as! FilterVC
         vc.modalPresentationStyle = .pageSheet
-        
+
         if let sheet = vc.sheetPresentationController {
             if #available(iOS 16.0, *) {
-                sheet.detents = [
-                    .custom { _ in
-                        return 350
-                    }
-                ]
+                sheet.detents = [.custom { _ in 300 }, .large()] // starting height
             } else {
-                sheet.detents = [.large()]
+                sheet.detents = [.medium(), .large()]
             }
             sheet.prefersGrabberVisible = true
         }
-        
-        if let presentationController = vc.presentationController as? UISheetPresentationController {
-            
-            presentationController.prefersGrabberVisible = true
-        }
-        vc.view.layer.cornerRadius = 30
-        vc.view.clipsToBounds = true
-        
+
         present(vc, animated: true)
+
     }
+
     
     @IBAction func exploreSearchAction(_ sender: UIButton) {
         let vc = storyboard?.instantiateViewController(withIdentifier: "ExploreexpericeFilter") as! ExploreexpericeFilter
@@ -171,9 +163,8 @@ extension DashboardVc: UICollectionViewDelegate, UICollectionViewDataSource, UIC
         } else if collectionView == exploreCollectionView {
             let cell = exploreCollectionView.dequeueReusableCell(withReuseIdentifier: "explorecell", for: indexPath) as! ExplreCatagoriesCell
             cell.categoryLable.text = categoryNames[indexPath.row]
-            let isSelected = collectionView.indexPathsForSelectedItems?.contains(indexPath) ?? false
-            cell.setSelected(isSelected)
             
+            cell.setSelected(selectedIndexes.contains(indexPath))
             return cell
             
         } else if collectionView == experinceActiviyvollotionViewSecond {
@@ -199,10 +190,32 @@ extension DashboardVc: UICollectionViewDelegate, UICollectionViewDataSource, UIC
         let defaultSize = (collectionView.frame.width - 2) / 2
         return CGSize(width: defaultSize, height: defaultSize)
     }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let cell = collectionView.cellForItem(at: indexPath) as? ExplreCatagoriesCell {
-            cell.setSelected(true)
+        if collectionView == discovercollectionView {
+            print("Discover Collection tapped at \(indexPath.item)")
+        } else if collectionView == experinceActiviyvollotionView {
+            let nav = self.storyboard?.instantiateViewController(identifier: "CompanyDetailsVC") as! CompanyDetailsVC
+            self.navigationController?.pushViewController(nav, animated: true)
+        } else if collectionView == exploreCollectionView {
+            if let cell = collectionView.cellForItem(at: indexPath) as? ExplreCatagoriesCell {
+                if selectedIndexes.contains(indexPath) {
+            
+                    selectedIndexes.removeAll { $0 == indexPath }
+                    collectionView.deselectItem(at: indexPath, animated: false)
+                    cell.setSelected(false)
+                } else {
+                
+                    selectedIndexes.append(indexPath)
+                    
+                    cell.setSelected(true)
+                }
+            }
+        }
+    
+    else if collectionView == experinceActiviyvollotionViewSecond {
+                print("Second Activity Collection tapped at \(indexPath.item)")
+            }
         }
     }
-    
-}
+

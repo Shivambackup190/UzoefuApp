@@ -21,6 +21,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        
 //        window?.rootViewController = initialVC
 //        window?.makeKeyAndVisible()
+        
+        
+        window?.overrideUserInterfaceStyle = .light
+
+                guard let _ = (scene as? UIWindowScene) else { return }
+
+        UIApplication.shared.isIdleTimerDisabled = false
+         
     }
 
 

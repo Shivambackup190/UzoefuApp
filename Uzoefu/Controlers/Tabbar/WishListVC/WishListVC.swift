@@ -81,6 +81,12 @@ class WishListVC: UIViewController,UITextFieldDelegate {
         
     }
     
+    
+    @IBAction func notificationAction(_ sender: UIButton) {
+        let nav = self.storyboard?.instantiateViewController(withIdentifier: "NotificationVc") as! NotificationVc
+        self.navigationController?.pushViewController(nav, animated: true)
+    }
+    
     @IBAction func dissmissselctTripAction(_ sender: UIButton) {
         selectTripPopUpUiview.isHidden = true
     }
@@ -109,6 +115,10 @@ class WishListVC: UIViewController,UITextFieldDelegate {
         creteTripBtnOutlet.backgroundColor = #colorLiteral(red: 0.9176, green: 0.9255, blue: 0.9294, alpha: 1.0)
 
         creteTripBtnOutlet.titleLabel?.textColor = .gray
+    }
+    @IBAction func menuBtnAction(_ sender: UIButton) {
+        let nav = self.storyboard?.instantiateViewController(withIdentifier: "SettingsVC") as! SettingsVC
+        self.navigationController?.pushViewController(nav, animated: true)
     }
 }
 

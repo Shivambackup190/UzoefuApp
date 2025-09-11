@@ -22,4 +22,9 @@ class BookActivityStep5thVc: UIViewController {
         let nav = self.storyboard?.instantiateViewController(withIdentifier: "MainTabBarController") as! MainTabBarController
         self.navigationController?.pushViewController(nav, animated: false)
     }
+    
+    @IBAction func notificationAction(_ sender: Any) {
+        let nav = self.storyboard?.instantiateViewController(withIdentifier: "NotificationVc") as! NotificationVc
+              self.navigationController?.pushViewController(nav, animated: true)
+    }
 }

@@ -30,6 +30,8 @@ class ActivityScreenVC: UIViewController {
     
     @IBOutlet weak var picLanguagecontraint: NSLayoutConstraint!
     
+    @IBOutlet weak var reviewPhotoCellCollectionView: UICollectionView!
+    
     var firstView: OverViewClassUiView!
     var secondView: InformationClassUiView!
     var thirdView: ReviewsClassUiView!
@@ -76,6 +78,7 @@ class ActivityScreenVC: UIViewController {
         communicationCollection.delegate = self
         communicationCollection.dataSource = self
         
+        
         let layout1 = UICollectionViewFlowLayout()
         layout1.scrollDirection = .horizontal
         companyDetailCollectionView.collectionViewLayout = layout1
@@ -107,7 +110,7 @@ class ActivityScreenVC: UIViewController {
         
         
         expandedSectionFAQ = Array(repeating: false, count: faqsections.count)
-        expandedSectionFAQ[0] = false    // FAQ bhi first open
+        expandedSectionFAQ[0] = false 
         
         
         secondView.informationTbale.delegate = self
@@ -214,7 +217,7 @@ extension ActivityScreenVC: UICollectionViewDelegate, UICollectionViewDataSource
         } else if collectionView == companyDetailCollectionViewSecond {
             return experienceImg.count > 5 ? 5 : experienceImg.count
         } else {
-            return arr.count
+            return 5
         }
     }
     
@@ -235,11 +238,16 @@ extension ActivityScreenVC: UICollectionViewDelegate, UICollectionViewDataSource
                 cell.imageView.image = UIImage(named: experienceImg[indexPath.item])
             }
             return cell
-        } else {
+        }  else if collectionView == communicationCollection{
             let cell = communicationCollection.dequeueReusableCell(withReuseIdentifier: "communication", for: indexPath) as! communicationCell
             cell.communicationLabel.text = imagename[indexPath.row]
             cell.communicationImage.image = UIImage(named: arr[indexPath.row])
             return cell
+        }
+        else {
+            let cell = reviewPhotoCellCollectionView.dequeueReusableCell(withReuseIdentifier: "reviewPhotoCell", for: indexPath)
+            return cell
+            
         }
     }
     

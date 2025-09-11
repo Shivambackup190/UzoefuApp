@@ -75,7 +75,7 @@ extension AddActivityDescripTion: UITableViewDataSource, UITableViewDelegate {
         }
         
         cell.textField.text = highlights[indexPath.row]
-//        cell.textField.placeholder = "Highlight \(indexPath.row + 1)"
+
         
       
         cell.addRemoveAction = { [weak self] in
@@ -124,11 +124,11 @@ extension AddActivityDescripTion: UICollectionViewDelegate, UICollectionViewData
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let itemsPerRow: CGFloat = 3        // 3 columns
-        let spacing: CGFloat = 5            // space between cells
-        let sectionInsets: CGFloat = 10     // left + right padding
+        let itemsPerRow: CGFloat = 3
+        let spacing: CGFloat = 5
+        let sectionInsets: CGFloat = 10
         
-        // total horizontal spacing = (itemsPerRow - 1) * spacing + sectionInsets*2
+    
         let totalSpacing = (itemsPerRow - 1) * spacing + (sectionInsets * 2)
         
         let width = (collectionView.bounds.width - totalSpacing) / itemsPerRow

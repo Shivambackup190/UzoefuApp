@@ -47,6 +47,11 @@ class BookActivityStep3rdVc: UIViewController {
         let nav = self.storyboard?.instantiateViewController(withIdentifier: "BookActivityStep4thVc") as! BookActivityStep4thVc
         self.navigationController?.pushViewController(nav, animated: false)
     }
+    
+    @IBAction func notificationAction(_ sender: UIButton) {
+        let nav = self.storyboard?.instantiateViewController(withIdentifier: "NotificationVc") as! NotificationVc
+              self.navigationController?.pushViewController(nav, animated: true)
+    }
 }
 
 // MARK: - TableView

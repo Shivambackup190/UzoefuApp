@@ -22,4 +22,9 @@ class BookingDetailsVc: UIViewController {
 //        let nav = self.storyboard?.instantiateViewController(withIdentifier: "BookActivityStepIstVc") as! BookActivityStepIstVc
 //        self.navigationController?.pushViewController(nav, animated: true)
     }
+    
+    @IBAction func notificationAction(_ sender: UIButton) {
+        let nav = self.storyboard?.instantiateViewController(withIdentifier: "NotificationVc") as! NotificationVc
+              self.navigationController?.pushViewController(nav, animated: true)
+    }
 }

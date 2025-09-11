@@ -23,4 +23,8 @@ class BookActivityStep4thVc: UIViewController {
         self.navigationController?.pushViewController(nav, animated: false)
     }
     
+    @IBAction func notificationAction(_ sender: UIButton) {
+        let nav = self.storyboard?.instantiateViewController(withIdentifier: "NotificationVc") as! NotificationVc
+              self.navigationController?.pushViewController(nav, animated: true)
+    }
 }

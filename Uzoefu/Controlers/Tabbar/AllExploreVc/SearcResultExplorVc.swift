@@ -34,10 +34,14 @@ class SearcResultExplorVc: UIViewController {
         exploreCollectionView.dataSource = self
         
         
+        
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         exploreCollectionView.collectionViewLayout = layout
         
+        expolreTableview.delegate = self
+        expolreTableview.dataSource = self
+
         expolreTableview.showsVerticalScrollIndicator = false
         expolreTableview.showsVerticalScrollIndicator = false
     }
@@ -45,6 +49,22 @@ class SearcResultExplorVc: UIViewController {
     @IBAction func backActionBtn(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true
         )
+    }
+    
+    @IBAction func filterActionBtn(_ sender: UIButton) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "FilterVC") as! FilterVC
+        vc.modalPresentationStyle = .pageSheet
+
+        if let sheet = vc.sheetPresentationController {
+            if #available(iOS 16.0, *) {
+                sheet.detents = [.custom { _ in 300 }, .large()] // starting height
+            } else {
+                sheet.detents = [.medium(), .large()]
+            }
+            sheet.prefersGrabberVisible = true
+        }
+
+        present(vc, animated: true)
     }
 }
 
@@ -98,6 +118,10 @@ extension SearcResultExplorVc: UICollectionViewDelegate, UICollectionViewDataSou
                         minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 5
     }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let nav = self.storyboard?.instantiateViewController(identifier: "CompanyDetailsVC") as! CompanyDetailsVC
+        self.navigationController?.pushViewController(nav, animated: true)
+    }
 }
 extension SearcResultExplorVc : UITableViewDataSource,UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -106,11 +130,13 @@ extension SearcResultExplorVc : UITableViewDataSource,UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ExploreFilterTableCell
+        cell.selectionStyle = .none
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-         
+        let nav = self.storyboard?.instantiateViewController(identifier: "CompanyDetailsVC") as! CompanyDetailsVC
+        self.navigationController?.pushViewController(nav, animated: true)
     }
-    
-    
 }
+    
+

@@ -14,22 +14,26 @@ class DestinationExploreVc: UIViewController {
     @IBOutlet weak var destinationplacesCollectionView: UICollectionView!
     var hidevalue:String?
     var categoryNames = [
-         "Near Me",
-         "Adventure",
-         "Culture",
-         "Food",
-         "Entertainment",
-         "Family Fun",
-         "Services",
-         "Religion",
-         "Outdoors",
-         "Wildlife",
-         "Wellness",
-         "Historical",
-         "Sport",
-         "Urban",
-         "Nature",
-         "Tours"
+         "Pretotia",
+         "Drakensberg",
+         "Victoria Falls",
+         "Kimberly",
+         "Brits",
+         "Polokwane",
+         "Hout Bay",
+         "Njelele",
+         "New Castle",
+         "Sabie",
+         "Pretotia",
+         "Drakensberg",
+         "Victoria Falls",
+         "Kimberly",
+         "Brits",
+         "Polokwane",
+         "Hout Bay",
+         "Njelele",
+         "New Castle",
+         "Sabie"
          ]
     var countValues: [Int] = [
         400,
@@ -45,6 +49,9 @@ class DestinationExploreVc: UIViewController {
         50,
         67,
         47,
+        32,
+        200,
+        123,47,
         32,
         200,
         123
@@ -83,6 +90,15 @@ class DestinationExploreVc: UIViewController {
     
     @IBAction func bckActionBtn(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func notificationbtnAction(_ sender: UIButton) {
+        let nav = self.storyboard?.instantiateViewController(withIdentifier: "NotificationVc") as! NotificationVc
+        self.navigationController?.pushViewController(nav, animated: true)
+    }
+    @IBAction func menuActionBtn(_ sender: UIButton) {
+        let nav = self.storyboard?.instantiateViewController(withIdentifier: "SettingsVC") as! SettingsVC
+        self.navigationController?.pushViewController(nav, animated: true)
     }
 }
 extension DestinationExploreVc: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {

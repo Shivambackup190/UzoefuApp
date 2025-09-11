@@ -119,7 +119,7 @@ class ProfileVc: UIViewController {
         case 0: selectTab(colorView: overViewcolor, label: overViewLable)
         case 1: selectTab(colorView: profileColor, label: profileLabel)
         case 2: selectTab(colorView: rewardsColor, label: rewardsLabel)
-        case 3: selectTab(colorView: companiesColor, label: companiesLabel)
+       // case 3: selectTab(colorView: companiesColor, label: companiesLabel)
         default: break
         }
         
@@ -187,17 +187,17 @@ extension ProfileVc:UITableViewDelegate,UITableViewDataSource {
         overViewcolor.isHidden = true
         profileColor.isHidden = true
         rewardsColor.isHidden = true
-        companiesColor.isHidden = true
+       // companiesColor.isHidden = true
         
         overViewcolor.backgroundColor = defaultColor
         profileColor.backgroundColor = defaultColor
         rewardsColor.backgroundColor = defaultColor
-        companiesColor.backgroundColor = defaultColor
+      //  companiesColor.backgroundColor = defaultColor
         
         overViewLable.textColor = defaultText
         profileLabel.textColor = defaultText
         rewardsLabel.textColor = defaultText
-        companiesLabel.textColor = defaultText
+      //  companiesLabel.textColor = defaultText
     }
     func selectTab(colorView: UIView, label: UILabel) {
         let selectedColor = #colorLiteral(red: 0.1960784314, green: 0.8039215686, blue: 0.03807460484, alpha: 1)
@@ -242,7 +242,7 @@ extension ProfileVc: UICollectionViewDelegate, UICollectionViewDataSource, UICol
             
             self.navigationController?.pushViewController(nav, animated: true)
         }
-
+        
     }
     func logOutAction() {
         firstView.logOutActionAction = {
@@ -252,11 +252,10 @@ extension ProfileVc: UICollectionViewDelegate, UICollectionViewDataSource, UICol
                 preferredStyle: .alert
             )
             
-            // Cancel button (white tint)
+            
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
             cancelAction.setValue(UIColor.systemGreen, forKey: "titleTextColor")
             
-            // OK button (green tint)
             let okAction = UIAlertAction(title: "OK", style: .default) { _ in
                 let nav = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
                 self.navigationController?.pushViewController(nav, animated: false)
@@ -269,14 +268,14 @@ extension ProfileVc: UICollectionViewDelegate, UICollectionViewDataSource, UICol
             self.present(alert, animated: true, completion: nil)
         }
     }
-
+    
     func wishlistBtnAction() {
         firstView.WishListAction = {
             let nav = self.storyboard?.instantiateViewController(withIdentifier: "WishListVC") as! WishListVC
             nav.hidevalue = "ok"
             self.navigationController?.pushViewController(nav, animated: true)
             
-//            self.tabBarController?.selectedIndex = 2
+            //            self.tabBarController?.selectedIndex = 2
         }
     }
     func plusCompannyActionBtn() {
@@ -295,21 +294,17 @@ extension ProfileVc: UICollectionViewDelegate, UICollectionViewDataSource, UICol
             let ranges = ["5 Km", "10 Km", "15 Km", "20 Km"]
             
             for range in ranges {
-                      let action = UIAlertAction(title: range, style: .default, handler: { _ in
-                          self.secondView.rangeTextField.text = range
-                      })
-                      // Gray color set karna
-                      action.setValue(UIColor.gray, forKey: "titleTextColor")
-                      alert.addAction(action)
-                  }
+                let action = UIAlertAction(title: range, style: .default, handler: { _ in
+                    self.secondView.rangeTextField.text = range
+                })
+                action.setValue(UIColor.gray, forKey: "titleTextColor")
+                alert.addAction(action)
+            }
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            cancelAction.setValue(UIColor.systemGreen, forKey: "titleTextColor")
+            alert.addAction(cancelAction)
             
-           
-            // Cancel button green
-                  let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-                  cancelAction.setValue(UIColor.systemGreen, forKey: "titleTextColor")
-                  alert.addAction(cancelAction)
             
-        
             if let popover = alert.popoverPresentationController {
                 popover.sourceView = self.view
                 popover.sourceRect = CGRect(x: self.view.bounds.midX,
@@ -318,12 +313,10 @@ extension ProfileVc: UICollectionViewDelegate, UICollectionViewDataSource, UICol
                                             height: 0)
                 popover.permittedArrowDirections = []
             }
-            
-            // Present karna
             self.present(alert, animated: true, completion: nil)
         }
     }
-
-
+    
+    
 }
 

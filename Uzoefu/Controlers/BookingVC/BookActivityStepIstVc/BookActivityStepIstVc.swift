@@ -21,4 +21,8 @@ class BookActivityStepIstVc: UIViewController {
     @IBAction func backAction(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
+    @IBAction func notificationAction(_ sender: Any) {
+        let nav = self.storyboard?.instantiateViewController(withIdentifier: "NotificationVc") as! NotificationVc
+              self.navigationController?.pushViewController(nav, animated: true)
+    }
 }

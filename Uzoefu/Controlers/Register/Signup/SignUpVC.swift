@@ -77,3 +77,8 @@ class SignUpVC: UIViewController {
         videoPlayer?.play()
     }
 }
+extension SignUpVC {
+    func registerApi() {
+        
+    }
+}

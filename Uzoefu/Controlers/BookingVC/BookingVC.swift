@@ -3,14 +3,6 @@
 //  Uzoefu
 //
 //  Created by Narendra Kumar on 20/08/25.
-//
-
-//
-//  BookingVC.swift
-//  Uzoefu
-//
-//  Created by Narendra Kumar on 20/08/25.
-//
 
 import UIKit
 
@@ -53,6 +45,11 @@ class BookingVC: UIViewController {
         selectButton(cancelledButton)
     }
     
+    @IBAction func notificationAction(_ sender: UIButton) {
+        let nav = self.storyboard?.instantiateViewController(withIdentifier: "NotificationVc") as! NotificationVc
+              self.navigationController?.pushViewController(nav, animated: true)
+    }
+    
     
     // MARK: - Button Selection
     
@@ -61,10 +58,10 @@ class BookingVC: UIViewController {
         let allButtons = [activeButton, pastButton, cancelledButton]
         allButtons.forEach {
             removeBottomBorder(from: $0)
-            $0?.setTitleColor(.gray, for: .normal) // default color
+            $0?.setTitleColor(.gray, for: .normal)
         }
         addBottomBorder(to: selectedButton, color: .green, height: 2)
-        selectedButton.setTitleColor(.green, for: .normal) // highlight color
+        selectedButton.setTitleColor(.green, for: .normal)
     }
     
     func addBottomBorder(to view: UIView, color: UIColor, height: CGFloat) {
