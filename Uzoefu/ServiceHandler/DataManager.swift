@@ -383,7 +383,7 @@ class DataManager: NSObject {
                             multipartFormData.append(data, withName: imageName, fileName: "imageName" + ".pdf", mimeType: fileType)
                         }
                     }
-                }, to: urlmethod, method: .put, headers: headerParam()).responseJSON { responseObject in
+                }, to: urlmethod, method: .post, headers: headerParam()).responseJSON { responseObject in
                     switch(responseObject.result) {
                     case .success(let value):
                         let statusCode = responseObject.response?.statusCode

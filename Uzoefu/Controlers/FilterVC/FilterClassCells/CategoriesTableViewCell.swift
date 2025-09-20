@@ -11,16 +11,22 @@ class CategoriesTableViewCell: UITableViewCell {
     
     @IBOutlet weak var categoryColectionHeightOutlet: NSLayoutConstraint!
     @IBOutlet weak var categorycollectionView: UICollectionView!
+    var categoriesModelObj: ExploreCategoriesModel?
     var selectedIndexes: [IndexPath] = []
     override func awakeFromNib() {
         super.awakeFromNib()
-        categorycollectionView.allowsMultipleSelection = true
+        // categorycollectionView.allowsMultipleSelection = true
         
+        setupCategoryCollectionView()
         reloadCategoryCollection()
         
         let layout1 = UICollectionViewFlowLayout()
         layout1.scrollDirection = .vertical
         categorycollectionView.collectionViewLayout = layout1
+    }
+    func configure(with model: ExploreCategoriesModel?) {
+        self.categoriesModelObj = model
+        reloadCategoryCollection()
     }
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -32,7 +38,7 @@ class CategoriesTableViewCell: UITableViewCell {
         self.categoryColectionHeightOutlet.constant = self.categorycollectionView.contentSize.height
     }
     
-    func loadcategorycollectionView() {
+    func setupCategoryCollectionView() {
         let nib = UINib(nibName: "CategoryCollectionViewCell", bundle: nil)
         categorycollectionView.register(nib, forCellWithReuseIdentifier: "CategoryCollectionViewCell")
         categorycollectionView.delegate = self
@@ -45,7 +51,10 @@ class CategoriesTableViewCell: UITableViewCell {
         // Clear existing selection
         selectedIndexes.removeAll()
         
-        for i in 0..<15 { // total items
+        // Get actual item count
+        let totalItems = categoriesModelObj?.data?.count ?? 0
+        
+        for i in 0..<totalItems {
             let indexPath = IndexPath(item: i, section: 0)
             selectedIndexes.append(indexPath)
             categorycollectionView.selectItem(at: indexPath, animated: false, scrollPosition: [])
@@ -58,16 +67,35 @@ class CategoriesTableViewCell: UITableViewCell {
 }
 extension CategoriesTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 15
+        return categoriesModelObj?.data?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = categorycollectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCollectionViewCell", for: indexPath) as! CategoryCollectionViewCell
-        // ✅ Set UI state based on selectedIndexes
-           cell.setSelected(selectedIndexes.contains(indexPath))
-           return cell
+                
+                if let category = categoriesModelObj?.data?[indexPath.row] {
+                    cell.categoryLable.text = category.name
+                    // image load
+                    if let icon = categoriesModelObj?.data?[indexPath.row].icon {
+                        // Remove unwanted slashes if needed
+                        let cleanedIcon = icon.replacingOccurrences(of: "\\/", with: "/")
+                        
+                        // Append baseURL
+                        let fullURLString = image_Url + cleanedIcon
+                        
+                        if let url = URL(string: fullURLString) {
+                            cell.iconImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholder"))
+                        } else {
+                            cell.iconImageView.image = UIImage(named: "placeholder")
+                        }
+                    }
+                }
+                
+                cell.setSelected(selectedIndexes.contains(indexPath))
+                return cell
+            }
       
-    }
+    
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
@@ -97,26 +125,19 @@ extension CategoriesTableViewCell: UICollectionViewDelegate, UICollectionViewDat
         return UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView == categorycollectionView {
-                if let cell = collectionView.cellForItem(at: indexPath) as? CategoryCollectionViewCell {
-                    if selectedIndexes.contains(indexPath) {
-                        // Already selected → unselect
-                        selectedIndexes.removeAll { $0 == indexPath }
-                        collectionView.deselectItem(at: indexPath, animated: false)
-                        cell.setSelected(false)
-                    } else {
-                        // Not selected → select
-                        selectedIndexes.append(indexPath)
-                        cell.setSelected(true)
-                    }
-                }
-            }
+        if selectedIndexes.contains(indexPath) {
+            selectedIndexes.removeAll { $0 == indexPath }
+            (collectionView.cellForItem(at: indexPath) as? CategoryCollectionViewCell)?.setSelected(false)
+        } else {
+            selectedIndexes.append(indexPath)
+            (collectionView.cellForItem(at: indexPath) as? CategoryCollectionViewCell)?.setSelected(true)
         }
-    
+        
+    }
 
     func reloadCategoryCollection() {
         categorycollectionView.reloadData()
-        loadcategorycollectionView()
+        setupCategoryCollectionView()
         DispatchQueue.main.async {
             self.categorycollectionView.layoutIfNeeded()
             self.updateCollectionViewHeight()

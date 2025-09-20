@@ -9,9 +9,11 @@ class FilterVC: UIViewController, DistanceTableViewCellDelegate {
     var  sections =  ["Distance","Category","Rating","Price"]
     
     var expandedSection: [Bool] = []
+    var categoriesModelObj: ExploreCategoriesModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchCategories()
         filterTable.separatorStyle = .none
           //  filterTable.sectionHeaderTopPadding = 0
         
@@ -30,6 +32,16 @@ class FilterVC: UIViewController, DistanceTableViewCellDelegate {
             let footerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 30))
             footerView.backgroundColor = .clear
             filterTable.tableFooterView = footerView
+    }
+    func fetchCategories() {
+        let param = [String: Any]()
+        
+        ExploreCategoriesViewModel.exploreCategoriesApi(viewController: self, parameters: param as NSDictionary) { response in
+            self.categoriesModelObj = response
+            DispatchQueue.main.async {
+                self.filterTable.reloadData()
+            }
+        }
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -177,6 +189,7 @@ extension FilterVC: UITableViewDelegate, UITableViewDataSource {
                 
             case 1:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "CategoriesTableViewCell", for: indexPath) as! CategoriesTableViewCell
+                cell.configure(with: categoriesModelObj)
                 cell.selectionStyle = .none
                 return cell
                 

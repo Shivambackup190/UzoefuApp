@@ -10,7 +10,14 @@ import Cosmos
 
 class WishListTableViewCell: UITableViewCell {
     @IBOutlet weak var viewlayer: UIView!
+    var likeBtn: (() -> ()) = {}
+    @IBOutlet weak var priceable: UILabel!
+    @IBOutlet weak var wishlistName: UILabel!
+    @IBOutlet weak var wishlistImg: UIImageView!
     
+    @IBOutlet weak var rating_count: UILabel!
+    
+    @IBOutlet weak var editImageOutlet: UIImageView!
     @IBOutlet weak var ratingView: CosmosView!
     override func awakeFromNib() {
         super.awakeFromNib()

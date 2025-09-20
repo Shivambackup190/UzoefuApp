@@ -7,7 +7,7 @@
 
 import UIKit
 
-class OTPVCEngineer: UIViewController,UITextFieldDelegate {
+class OTPVC: UIViewController,UITextFieldDelegate {
 
     @IBOutlet weak var view6: UIView!
     @IBOutlet weak var view5: UIView!
@@ -23,7 +23,8 @@ class OTPVCEngineer: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var otpTxt3: UITextField!
     @IBOutlet weak var otpTxt2: UITextField!
     @IBOutlet weak var verifyBtn: UIButton!
-    
+    var VerificationModelobj:VerificationModel?
+    var loginId:Int?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -42,10 +43,14 @@ class OTPVCEngineer: UIViewController,UITextFieldDelegate {
     }
     
 
-
-    @IBAction func backBtn(_ sender: UIButton) {
+    @IBAction func backAction(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
+    
+    @IBAction func verifyActionBtn(_ sender: UIButton) {
+        verficationApi()
+    }
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
             
             if((textField.text?.count)!<1) && (string.count>0)
@@ -110,14 +115,18 @@ class OTPVCEngineer: UIViewController,UITextFieldDelegate {
             
         }
     
-    @IBAction func verifyBtn(_ sender: Any) {
-        let nav = self.storyboard?.instantiateViewController(withIdentifier: "ConfirmpwdVC") as! ConfirmpwdVC
-        self.navigationController?.pushViewController(nav, animated: true)
-        
+}
+extension OTPVC {
+    func verficationApi() {
+        var param = [String:Any]()
+        param = ["otp": otpTxt1.text ?? "" ]
+        ForgetPasswordViewModel.verificationApi(viewController: self, parameters: param as NSDictionary) {response in
+            self.VerificationModelobj = response
+            CommonMethods.showAlertMessageWithHandler(title: "", message: response?.message ?? "", view: self) {
+                let nav = self.storyboard?.instantiateViewController(withIdentifier: "ConfirmpwdVC") as! ConfirmpwdVC
+                nav.loginId = self.loginId
+                self.navigationController?.pushViewController(nav, animated: true)
+            }
+        }
     }
-    
-    @IBAction func backBtnc(_ sender: UIButton) {
-        self.navigationController?.popViewController(animated: true)
-    }
-    
 }

@@ -7,8 +7,20 @@ class SignUpVC: UIViewController {
     
     
     @IBOutlet weak var mainView: UIView!
+    
+    
+    @IBOutlet weak var fisrtNameTf: UITextField!
+    
+    @IBOutlet weak var lastNameTf: UITextField!
+    
+    
+    @IBOutlet weak var emailTf: UITextField!
+    
+    @IBOutlet weak var passwordTf: UITextField!
+    
     var videoPlayer: AVPlayer?
     var videoPlayerLayer: AVPlayerLayer?
+    var registerModel: SignUpModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,9 +88,23 @@ class SignUpVC: UIViewController {
         videoPlayer?.seek(to: .zero)
         videoPlayer?.play()
     }
+    
+    @IBAction func createBtnAction(_ sender: UIButton) {
+        registerApi()
+    }
 }
 extension SignUpVC {
     func registerApi() {
+        var param = [String:Any]()
+        param = ["contact_name":fisrtNameTf.text ?? "","last_name":lastNameTf.text ?? "" ,"email":emailTf.text ?? "","password":passwordTf.text ?? ""]
+        print(param)
         
+        SignUpViewModel.registerApi(viewController: self, parameters: param as NSDictionary) {(response) in
+            self.registerModel = response
+            print("jai hind")
+            self.navigationController?.popViewController(animated: true)
+        }
     }
 }
+
+  

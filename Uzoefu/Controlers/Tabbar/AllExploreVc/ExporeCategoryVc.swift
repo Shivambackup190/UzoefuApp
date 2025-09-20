@@ -10,43 +10,8 @@ import UIKit
 class ExporeCategoryVc: UIViewController {
     
     @IBOutlet weak var exporeCatagoriesCollection: UICollectionView!
-    
-    var categoryNames = [
-        "Near Me",
-        "Adventure",
-        "Culture",
-        "Food",
-        "Entertainment",
-        "Family Fun",
-        "Services",
-        "Religion",
-        "Outdoors",
-        "Wildlife",
-        "Wellness",
-        "Historical",
-        "Sport",
-        "Urban",
-        "Nature",
-        "Tours"
-    ]
-    var countValues: [Int] = [
-        400,
-        600,
-        450,
-        1700,
-        350,
-        18,
-        250,
-        66,
-        131,
-        65,
-        50,
-        67,
-        47,
-        32,
-        200,
-        123
-    ]
+    var categoriesModelObj:ExploreCategoriesModel?
+    var didselctletCategoryId :Int?
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -58,24 +23,43 @@ class ExporeCategoryVc: UIViewController {
         exporeCatagoriesCollection.collectionViewLayout = layout
         
     }
+    override func viewWillAppear(_ animated: Bool) {
+        exploreCategoriesApi()
+    }
     @IBAction func backActionBtn(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
     
+    @IBAction func menuBtnAction(_ sender: UIButton) {
+        let nav = self.storyboard?.instantiateViewController(withIdentifier: "SettingsVC") as! SettingsVC
+        self.navigationController?.pushViewController(nav, animated: true)
+    }
 }
 extension ExporeCategoryVc: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return categoryNames.count
+        return categoriesModelObj?.data?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell =  collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ExporeCategoryCollectionViewCell
-        cell.categoryLable.text = categoryNames[indexPath.row]
-        cell.countLable.text = "(\(countValues[indexPath.row]))"
+        cell.categoryLable.text = categoriesModelObj?.data?[indexPath.row].name
+        cell.countLable.text = "(\(categoriesModelObj?.data?[indexPath.row].activitiesCount ?? 0))"
         
         
+        
+        if let icon = categoriesModelObj?.data?[indexPath.row].icon {
+           
+            let cleanedIcon = icon.replacingOccurrences(of: "\\/", with: "/")
+            let fullURLString = image_Url + cleanedIcon
+            
+            if let url = URL(string: fullURLString) {
+                cell.iconImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholder"))
+            } else {
+                cell.iconImageView.image = UIImage(named: "placeholder")
+            }
+        }
         return cell
     }
     func collectionView(_ collectionView: UICollectionView,
@@ -110,12 +94,28 @@ extension ExporeCategoryVc: UICollectionViewDelegate, UICollectionViewDataSource
         return 2
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+     let  didselctletCategoryIds = categoriesModelObj?.data?[indexPath.row].id
         let nav = self.storyboard?.instantiateViewController(withIdentifier: "SearcResultExplorVc") as! SearcResultExplorVc
-        nav.myvalue = "\(categoryNames[indexPath.row]) (\(countValues[indexPath.row]))"
-
+        
+        nav.myvalue = "\(String(describing: categoriesModelObj?.data?[indexPath.row].name ?? "")) (\(String(describing: categoriesModelObj?.data?[indexPath.row].activitiesCount ?? 0)))"
+        nav.didselctletCategoryId = didselctletCategoryIds
+        nav.myvalueapicall = "apicall"
         self.navigationController?.pushViewController(nav, animated: true)
 
      
     }
 }
-
+extension ExporeCategoryVc {
+   func exploreCategoriesApi() {
+       let param = [String:Any]()
+          
+           print(param)
+           
+           ExploreCategoriesViewModel.exploreCategoriesApi(viewController: self, parameters: param as NSDictionary) {(response) in
+               self.categoriesModelObj = response
+               print("jai hind")
+               self.exporeCatagoriesCollection.reloadData()
+           }
+       }
+   }

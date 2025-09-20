@@ -1,6 +1,6 @@
 import UIKit
 
-class ProfileVc: UIViewController {
+class ProfileVc: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     
     // MARK: - Outlets
     @IBOutlet weak var stackView: UIStackView!
@@ -37,6 +37,15 @@ class ProfileVc: UIViewController {
     var fourthView:FourthView!
     var loadNib = [UIView]()
     
+    var logoutObj:LogOutModel?
+    var getProfileModelObj:ProfileModel?
+    var updateProfileModelObj:UpdateProfileModel?
+    var updateProfileImageModelObj:UpdateProfileImageModel?
+    var categoriesModelObj:ExploreCategoriesModel?
+    var didselctletCategoryId:Int?
+    var profieImg:UIImage?
+    var selectedIndexes: [IndexPath] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -60,16 +69,20 @@ class ProfileVc: UIViewController {
         containerView.bringSubviewToFront(loadNib[0])
         
         
-        loadfouthViewCell()
+        loadthirdViewCell()
         
         selectFavourteNib()
         
         bookingBtnAction()
         logOutAction()
+        getprofileApi()
+        exploreCategoriesApi()
         
         wishlistBtnAction()
         plusCompannyActionBtn()
         nearbyActionBtn()
+        saveProfileAction()
+        profilechangeBtnAction()
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         tapGesture.cancelsTouchesInView = false
@@ -150,13 +163,13 @@ class ProfileVc: UIViewController {
         changeTab(index: 3)
     }
     
-    func loadfouthViewCell() {
+    func loadthirdViewCell() {
         let nib = UINib(nibName: "CompanyTableCell", bundle: nil)
-        fourthView.comapnyTable.register(nib, forCellReuseIdentifier: "CompanyTableCell")
+        thirdView.rewardTableView.register(nib, forCellReuseIdentifier: "CompanyTableCell")
         
-        fourthView.comapnyTable.delegate = self
-        fourthView.comapnyTable.dataSource = self
-        fourthView.comapnyTable.allowsSelection = true
+        thirdView.rewardTableView.delegate = self
+        thirdView.rewardTableView.dataSource = self
+        thirdView.rewardTableView.allowsSelection = true
     }
     func selectFavourteNib() {
         let nibb = UINib(nibName: "SelectFavouriteActivityCell", bundle: nil)
@@ -173,13 +186,13 @@ extension ProfileVc:UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = fourthView.comapnyTable.dequeueReusableCell(withIdentifier: "CompanyTableCell", for: indexPath) as! CompanyTableCell
+        let cell = thirdView.rewardTableView.dequeueReusableCell(withIdentifier: "CompanyTableCell", for: indexPath) as! CompanyTableCell
         cell.selectionStyle = .none
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let nav = self.storyboard?.instantiateViewController(identifier: "CompanyDetailsVC") as! CompanyDetailsVC
-        self.navigationController?.pushViewController(nav, animated: true)
+     //   let nav = self.storyboard?.instantiateViewController(identifier: "CompanyDetailsVC") as! CompanyDetailsVC
+       // self.navigationController?.pushViewController(nav, animated: true)
     }
     func resetAllTabs() {
         let defaultColor = #colorLiteral(red: 0.4512393475, green: 0.4832214117, blue: 0.4951165318, alpha: 1)
@@ -187,17 +200,16 @@ extension ProfileVc:UITableViewDelegate,UITableViewDataSource {
         overViewcolor.isHidden = true
         profileColor.isHidden = true
         rewardsColor.isHidden = true
-       // companiesColor.isHidden = true
+     
         
         overViewcolor.backgroundColor = defaultColor
         profileColor.backgroundColor = defaultColor
         rewardsColor.backgroundColor = defaultColor
-      //  companiesColor.backgroundColor = defaultColor
-        
+    
         overViewLable.textColor = defaultText
         profileLabel.textColor = defaultText
         rewardsLabel.textColor = defaultText
-      //  companiesLabel.textColor = defaultText
+   
     }
     func selectTab(colorView: UIView, label: UILabel) {
         let selectedColor = #colorLiteral(red: 0.1960784314, green: 0.8039215686, blue: 0.03807460484, alpha: 1)
@@ -211,15 +223,50 @@ extension ProfileVc:UITableViewDelegate,UITableViewDataSource {
 extension ProfileVc: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return categoriesModelObj?.data?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SelectFavouriteActivityCell", for: indexPath) as! SelectFavouriteActivityCell
+        cell.activityLable.text = categoriesModelObj?.data?[indexPath.row].name
         
+        if let icon = categoriesModelObj?.data?[indexPath.row].icon {
+          
+            let cleanedIcon = icon.replacingOccurrences(of: "\\/", with: "/")
+            
+            let fullURLString = image_Url + cleanedIcon
+            
+            if let url = URL(string: fullURLString) {
+                cell.activityImage.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholder"))
+            } else {
+                cell.activityImage.image = UIImage(named: "placeholder")
+            }
+        }
+        didselctletCategoryId = categoriesModelObj?.data?[indexPath.row].id
+        cell.setSelected(selectedIndexes.contains(indexPath))
+       
         return cell
     }
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = secondView.selectFoavariteCollection.dequeueReusableCell(withReuseIdentifier: "SelectFavouriteActivityCell", for: indexPath) as! SelectFavouriteActivityCell
+        if selectedIndexes.contains(indexPath) {
+            selectedIndexes.removeAll { $0 == indexPath }
+            secondView.selectFoavariteCollection.deselectItem(at: indexPath, animated: false)
+            cell.setSelected(false)
+        } else {
+           
+            selectedIndexes.removeAll()
+            for visibleIndex in secondView.selectFoavariteCollection.indexPathsForVisibleItems {
+                if let visibleCell = secondView.selectFoavariteCollection.cellForItem(at: visibleIndex) as? ExplreCatagoriesCell {
+                    visibleCell.setSelected(false)
+                }
+            }
+            selectedIndexes.append(indexPath)
+            cell.setSelected(true)
+            
+            
+        }
+    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -257,8 +304,9 @@ extension ProfileVc: UICollectionViewDelegate, UICollectionViewDataSource, UICol
             cancelAction.setValue(UIColor.systemGreen, forKey: "titleTextColor")
             
             let okAction = UIAlertAction(title: "OK", style: .default) { _ in
-                let nav = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
-                self.navigationController?.pushViewController(nav, animated: false)
+                self.logOutApi()
+                
+                
             }
             okAction.setValue(UIColor.systemGreen, forKey: "titleTextColor")
             
@@ -268,6 +316,47 @@ extension ProfileVc: UICollectionViewDelegate, UICollectionViewDataSource, UICol
             self.present(alert, animated: true, completion: nil)
         }
     }
+    func profilechangeBtnAction() {
+        firstView.profileimageChangeActionAction = {
+            let alert = UIAlertController(title: "Select Photo", message: "Select From", preferredStyle: .actionSheet)
+            
+            alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
+                self.showImagePicker(selectedSource: .camera)
+                
+            }))
+            
+            alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { _ in
+                self.showImagePicker(selectedSource: .photoLibrary)
+            }))
+            
+            // Cancel Button - Dismisses the alert
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    //MARK: - Select  Photo from Gallery
+    func showImagePicker(selectedSource: UIImagePickerController.SourceType){
+        guard UIImagePickerController.isSourceTypeAvailable(selectedSource) else {
+            print("Selected source not Available")
+            return
+        }
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.sourceType = selectedSource
+        picker.allowsEditing = false
+        self.present(picker, animated: true, completion: nil)
+    }
+      
+        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+            if let img = info[.originalImage]as? UIImage{
+                self.firstView.profileImageOutLet.image = img
+                profileImageUpdateApi()
+                //self.selectedProfile = img
+            }
+            self.dismiss(animated: true, completion: nil)
+        }
+    
     
     func wishlistBtnAction() {
         firstView.WishListAction = {
@@ -316,7 +405,105 @@ extension ProfileVc: UICollectionViewDelegate, UICollectionViewDataSource, UICol
             self.present(alert, animated: true, completion: nil)
         }
     }
+    func saveProfileAction() {
+        secondView.profileSaveBtnAction = {
+            self.UpdateProfileApi()
+        }
+    }
     
     
 }
-
+extension ProfileVc {
+    func logOutApi() {
+        let param = [String:Any]()
+        
+        print(param)
+        
+        LogoutViewModel.logoutApi(viewController: self, parameters: param as NSDictionary) {(response) in
+            
+            self.logoutObj = response
+            
+            print("jai hind")
+            
+            CommonMethods.showAlertMessageWithHandler(title: "", message: self.logoutObj?.message ?? "", view: self)
+            {
+                
+                let nav = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
+                self.navigationController?.pushViewController(nav, animated: false)
+            }
+        }
+    }
+    
+    func getprofileApi() {
+        let param = [String:Any]()
+        
+        print(param)
+        
+        ProfileViewModel.getProfileApi(viewController: self, parameters: param as NSDictionary) {(response) in
+            self.getProfileModelObj = response
+            self.firstView.userNameLabel.text = "\(self.getProfileModelObj?.data?.name ?? "") \(self.getProfileModelObj?.data?.lastname ?? "")"
+            
+            self.secondView.firstNameLable.text = self.getProfileModelObj?.data?.name ?? ""
+            self.secondView.lastNameLable.text = self.getProfileModelObj?.data?.lastname ?? ""
+            self.secondView.fullnameTxt.text = "\(self.getProfileModelObj?.data?.name ?? "") \(self.getProfileModelObj?.data?.lastname ?? "")"
+            self.secondView.emailTf.text = self.getProfileModelObj?.data?.email ?? ""
+            self.secondView.mobiletf.text = self.getProfileModelObj?.data?.mobile ?? ""
+            self.secondView.addressTf.text = self.getProfileModelObj?.data?.city ?? ""
+            self.secondView.dobTf.text = self.getProfileModelObj?.data?.dateofbirth ?? ""
+            self.secondView.rangeTextField.text = "\(self.getProfileModelObj?.data?.distance ?? "") Km"
+            
+            
+        }
+    }
+    
+    func UpdateProfileApi() {
+        var param = [String: Any]()
+        
+        param = [
+            "first_name": secondView.firstNameLable.text ?? "",
+            "surname": secondView.lastNameLable.text ?? "",
+            "username": secondView.fullnameTxt.text ?? "",
+            "mobile": secondView.mobiletf.text ?? "",
+            "city": secondView.addressTf.text ?? "",
+            "dateofbirth": secondView.dobTf.text ?? "",
+            "distance": secondView.rangeTextField.text?.replacingOccurrences(of: " Km", with: "") ?? "","category_id": [1,2]
+        ]
+        
+        print("Update Profile Params:", param)
+        
+        
+        ProfileViewModel.updateProfileApi(viewController: self, parameters: param as NSDictionary) {(response) in
+            self.updateProfileModelObj = response
+            CommonMethods.showAlertMessage(title: "", message: response?.message ?? "", view: self)
+            print( "Succes Updated")
+        }
+    }
+    
+    func profileImageUpdateApi() {
+        var param = [String: Any]()
+        param = ["image":firstView.profileImageOutLet.image ?? ""]
+        
+        print(param)
+        self.profieImg = firstView.profileImageOutLet.image
+        let imgData = (self.profieImg?.jpegData(compressionQuality: 0.4)!)!
+        ProfileViewModel.updateProfileImageApi(viewController: self, parameters: param as NSDictionary,image: imgData, imageName: "image") { response in
+            self.updateProfileImageModelObj = response
+            print("API success!")
+            CommonMethods.showAlertMessageWithHandler(title: "", message: self.updateProfileImageModelObj?.message ?? "", view: self) {
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
+    }
+    
+    func exploreCategoriesApi() {
+        let param = [String:Any]()
+        
+        print(param)
+        
+        ExploreCategoriesViewModel.exploreCategoriesApi(viewController: self, parameters: param as NSDictionary) {(response) in
+            self.categoriesModelObj = response
+            print("jai hind")
+            self.secondView.selectFoavariteCollection.reloadData()
+        }
+    }
+}

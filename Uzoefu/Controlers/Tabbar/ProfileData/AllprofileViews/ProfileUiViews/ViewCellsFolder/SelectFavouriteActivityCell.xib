@@ -64,6 +64,8 @@
             </constraints>
             <size key="customSize" width="227" height="37"/>
             <connections>
+                <outlet property="activityImage" destination="spB-7Q-bpK" id="qvm-ex-JNw"/>
+                <outlet property="activityLable" destination="OrB-ze-21I" id="jmU-AN-cmB"/>
                 <outlet property="viewlayer" destination="asY-Ym-qPB" id="0uh-mC-L6U"/>
             </connections>
             <point key="canvasLocation" x="87.786259541984734" y="-15.845070422535212"/>

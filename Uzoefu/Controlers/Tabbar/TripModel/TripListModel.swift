@@ -6,7 +6,7 @@
 //
 
 import Foundation
-struct TripLsiModel: Codable {
+struct TripListModel: Codable {
     let success: Bool?
     let message: String?
     let data: [TripData]?
@@ -19,4 +19,19 @@ struct TripData: Codable {
     let destination: String?
     let created_at: String?
     let updated_at: String?
+}
+struct AddTripModel: Codable {
+    let success: Bool?
+    let message: String?
+    let data: TripDataContainer?
+}
+
+struct TripDataContainer: Codable {
+    let trip: TripDetails?
+}
+
+struct TripDetails: Codable {
+    let id: Int?
+    let title: String?
+    let destination: String?
 }

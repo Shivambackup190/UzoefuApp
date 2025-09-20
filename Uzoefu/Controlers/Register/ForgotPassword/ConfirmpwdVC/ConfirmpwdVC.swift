@@ -8,22 +8,37 @@
 import UIKit
 
 class ConfirmpwdVC: UIViewController {
-
+   
+    @IBOutlet weak var newPasswordTf: UITextField!
+    
+    
+    @IBOutlet weak var confirmPasswordTf: UITextField!
+    var loginId:Int?
+    var confirmModelObj:confirmModel?
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+       
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func backAction(_ sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
     }
-    */
-
+    
+    @IBAction func resetBtn(_ sender: UIButton) {
+        confirmApi()
+    }    
+}
+extension ConfirmpwdVC {
+    func confirmApi() {
+        var param = [String:Any]()
+        param = ["password":newPasswordTf.text ?? "","password_confirmation":confirmPasswordTf.text ?? "","id":loginId ?? 0]
+        ForgetPasswordViewModel.confirmApi(viewController: self, parameters: param as NSDictionary) {response in
+            self.confirmModelObj = response
+            CommonMethods.showAlertMessageWithHandler(title: "", message: response?.message ?? "", view: self) {
+                let nav = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
+                self.navigationController?.pushViewController(nav, animated: false)
+            }
+        }
+    }
 }

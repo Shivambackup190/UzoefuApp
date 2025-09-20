@@ -13,6 +13,16 @@ class ExploreActivitySecondCell: UICollectionViewCell {
     @IBOutlet weak var viewlayer: UIView!
     @IBOutlet weak var ratingView: CosmosView!
     
+    @IBOutlet weak var todayHours: UILabel!
+    @IBOutlet weak var activityName: UILabel!
+    
+    @IBOutlet weak var heartBackView: UIView!
+    @IBOutlet weak var rating: UILabel!
+    @IBOutlet weak var activity_price: UILabel!
+
+    @IBOutlet weak var wishListImg: UIImageView!
+    var likeBtn: (() -> ()) = {}
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         setupViewLayer()
@@ -31,5 +41,9 @@ class ExploreActivitySecondCell: UICollectionViewCell {
         
         
     }
+    @IBAction func wishListAction(_ sender: Any) {
+        likeBtn()
+    }
+    
     
 }

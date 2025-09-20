@@ -10,9 +10,24 @@ import Cosmos
 
 class ExperinceactivityCell: UICollectionViewCell {
     
+    @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var ratingView: CosmosView!
     @IBOutlet weak var viewlayer: UIView!
     @IBOutlet weak var experinceImg: UIImageView!
+    
+    
+    @IBOutlet weak var todayHours: UILabel!
+    @IBOutlet weak var activityName: UILabel!
+    
+    @IBOutlet weak var rating: UILabel!
+    @IBOutlet weak var activity_price: UILabel!
+    
+    @IBOutlet weak var wishListImg: UIImageView!
+    var likeBtn: (() -> ()) = {}
+
+   
+    
+    @IBOutlet weak var heatBackView: UIView!
     override func awakeFromNib() {
         super.awakeFromNib()
         setupViewLayer()
@@ -32,5 +47,8 @@ class ExperinceactivityCell: UICollectionViewCell {
         viewlayer.layer.masksToBounds = true
         
         
+    }
+    @IBAction func likeBtnAction(_ sender: UIButton) {
+        likeBtn()
     }
 }

@@ -39,13 +39,25 @@
                                                     <constraint firstAttribute="width" constant="30" id="tH8-Tr-OSF"/>
                                                 </constraints>
                                             </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rGv-AH-PAS">
+                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain"/>
+                                                <connections>
+                                                    <action selector="likeBtnAction:" destination="gTV-IL-0wX" eventType="touchUpInside" id="U5q-or-fbl"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="rGv-AH-PAS" secondAttribute="trailing" id="IYP-GX-iyv"/>
                                             <constraint firstItem="QjY-om-5EM" firstAttribute="centerX" secondItem="GTc-2F-Vxg" secondAttribute="centerX" id="Jf2-rY-lcd"/>
                                             <constraint firstAttribute="width" constant="40" id="Nig-ne-WH1"/>
                                             <constraint firstItem="QjY-om-5EM" firstAttribute="top" secondItem="GTc-2F-Vxg" secondAttribute="top" constant="5" id="TFg-qG-eCA"/>
+                                            <constraint firstItem="rGv-AH-PAS" firstAttribute="leading" secondItem="GTc-2F-Vxg" secondAttribute="leading" id="Vrl-Gs-c3H"/>
                                             <constraint firstAttribute="height" constant="40" id="cYX-3o-Wc7"/>
+                                            <constraint firstItem="rGv-AH-PAS" firstAttribute="top" secondItem="GTc-2F-Vxg" secondAttribute="top" id="cgq-9n-qR1"/>
+                                            <constraint firstAttribute="bottom" secondItem="rGv-AH-PAS" secondAttribute="bottom" id="sek-ZA-FTQ"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -175,9 +187,14 @@
             </constraints>
             <size key="customSize" width="387" height="217"/>
             <connections>
+                <outlet property="activityName" destination="6Ix-ib-cnH" id="OP5-bl-biI"/>
+                <outlet property="activity_price" destination="abF-cG-fWE" id="rPq-yX-TLt"/>
                 <outlet property="experinceImg" destination="ljW-uL-IOS" id="yka-84-Ocb"/>
+                <outlet property="rating" destination="AhC-cf-i62" id="gLW-Ep-geH"/>
                 <outlet property="ratingView" destination="RUB-HD-b8P" id="8yK-C9-Lip"/>
+                <outlet property="todayHours" destination="src-iB-Fdx" id="Y0j-G8-n0x"/>
                 <outlet property="viewlayer" destination="pjR-1Y-IYg" id="evK-k5-55C"/>
+                <outlet property="wishListImg" destination="QjY-om-5EM" id="OOu-oQ-Mtl"/>
             </connections>
             <point key="canvasLocation" x="-58.778625954198468" y="15.140845070422536"/>
         </collectionViewCell>

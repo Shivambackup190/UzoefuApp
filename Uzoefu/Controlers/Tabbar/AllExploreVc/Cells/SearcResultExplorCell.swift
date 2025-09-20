@@ -13,6 +13,14 @@ class SearcResultExplorCell: UICollectionViewCell {
     
     @IBOutlet weak var ratingView: CosmosView!
     @IBOutlet weak var experinceImg: UIImageView!
+    @IBOutlet weak var todayHours: UILabel!
+    @IBOutlet weak var activityName: UILabel!
+    
+    @IBOutlet weak var rating: UILabel!
+    @IBOutlet weak var activity_price: UILabel!
+    
+    @IBOutlet weak var wishListImg: UIImageView!
+    var likeBtn : (()->()) = {}
     override func awakeFromNib() {
         super.awakeFromNib()
         setupViewLayer()
@@ -32,5 +40,9 @@ class SearcResultExplorCell: UICollectionViewCell {
         
         
     }
+    @IBAction func likeBtnAction(_ sender: UIButton) {
+        likeBtn()
+    }
+    
     
 }

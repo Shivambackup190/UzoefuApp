@@ -118,8 +118,18 @@
 		70AB86D22E6958D7004CE913 /* BussniessProfileClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AB86D12E6958D7004CE913 /* BussniessProfileClass.swift */; };
 		70AB86D42E6958E9004CE913 /* BussniessActivitiesClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AB86D32E6958E9004CE913 /* BussniessActivitiesClass.swift */; };
 		70AB86D62E695925004CE913 /* BussninessBookingClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AB86D52E695925004CE913 /* BussninessBookingClass.swift */; };
+		70AD50AB2E77DDB700E0BE76 /* LogOutModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AD50AA2E77DDB700E0BE76 /* LogOutModel.swift */; };
+		70AD50AD2E77DDC600E0BE76 /* LogOutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AD50AC2E77DDC600E0BE76 /* LogOutViewModel.swift */; };
 		70AE3CC42E49A5CB000B5AED /* CompleteSetUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AE3CC32E49A5CB000B5AED /* CompleteSetUpVC.swift */; };
 		70AE3CC72E49C31D000B5AED /* DashboardVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AE3CC62E49C31D000B5AED /* DashboardVc.swift */; };
+		70AF95F62E73DB350044EDD5 /* reviewPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AF95F42E73DB350044EDD5 /* reviewPhotoCell.swift */; };
+		70AF95F72E73DB350044EDD5 /* reviewPhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70AF95F52E73DB350044EDD5 /* reviewPhotoCell.xib */; };
+		70AF95FA2E73F3280044EDD5 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AF95F92E73F3280044EDD5 /* LoginModel.swift */; };
+		70AF95FC2E73F3380044EDD5 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AF95FB2E73F3380044EDD5 /* LoginViewModel.swift */; };
+		70AF96002E7404DC0044EDD5 /* ExploreCategoriesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AF95FF2E7404DC0044EDD5 /* ExploreCategoriesModel.swift */; };
+		70AF96032E7404F70044EDD5 /* ExploreCategoriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AF96022E7404F70044EDD5 /* ExploreCategoriesViewModel.swift */; };
+		70AF96062E741F580044EDD5 /* ActivityListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AF96052E741F580044EDD5 /* ActivityListModel.swift */; };
+		70AF96082E741F6C0044EDD5 /* ActivityListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AF96072E741F6C0044EDD5 /* ActivityListViewModel.swift */; };
 		70B049112E66A630009B82A2 /* AddActivityDetailVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B049102E66A630009B82A2 /* AddActivityDetailVc.swift */; };
 		70B049132E66A97C009B82A2 /* AddActivityDescripTion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B049122E66A97C009B82A2 /* AddActivityDescripTion.swift */; };
 		70B049152E66B640009B82A2 /* HighlightCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B049142E66B640009B82A2 /* HighlightCell.swift */; };
@@ -134,6 +144,8 @@
 		70B33BAE2E60500300333AA7 /* SignatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B33BAD2E60500300333AA7 /* SignatureView.swift */; };
 		70B33BB02E60591800333AA7 /* FloatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B33BAF2E60591800333AA7 /* FloatingView.swift */; };
 		70B3B53E2E45BF61000FA42A /* onboard.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 70B3B53D2E45BC4D000FA42A /* onboard.mp4 */; };
+		70B528C42E7A8E220096A048 /* WishListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B528C32E7A8E220096A048 /* WishListViewModel.swift */; };
+		70B528C62E7A8E300096A048 /* WishListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B528C52E7A8E300096A048 /* WishListModel.swift */; };
 		70B585892E656CD4000B9764 /* SiguUpBussnessVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B585882E656CD4000B9764 /* SiguUpBussnessVc.swift */; };
 		70B5858C2E6573AA000B9764 /* BussinessProfileSetupVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B5858B2E6573AA000B9764 /* BussinessProfileSetupVc.swift */; };
 		70B5858E2E6579AD000B9764 /* ProfileSetupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B5858D2E6579AD000B9764 /* ProfileSetupCell.swift */; };
@@ -148,6 +160,9 @@
 		70C0307D2E5430BC002053E1 /* CompanyDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C0307A2E5430BC002053E1 /* CompanyDetailsCell.swift */; };
 		70C0307F2E5430D7002053E1 /* CompanyDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C0307E2E5430D7002053E1 /* CompanyDetailsVC.swift */; };
 		70C030812E54416A002053E1 /* CompanyDetailsCellSecond.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C030802E54416A002053E1 /* CompanyDetailsCellSecond.swift */; };
+		70C26D222E7D288F00D72854 /* ForgetPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C26D212E7D288F00D72854 /* ForgetPasswordVC.swift */; };
+		70C26D252E7D345C00D72854 /* OTPVCEngineer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C26D242E7D345C00D72854 /* OTPVCEngineer.swift */; };
+		70C26D282E7D397E00D72854 /* ConfirmpwdVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C26D272E7D397E00D72854 /* ConfirmpwdVC.swift */; };
 		70C50FE72E4C8B8A008A731C /* ProfileVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C50FE62E4C8B8A008A731C /* ProfileVc.swift */; };
 		70C50FFA2E4C942A008A731C /* FirstView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C50FEB2E4C942A008A731C /* FirstView.swift */; };
 		70C50FFB2E4C942A008A731C /* FirstView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70C50FEC2E4C942A008A731C /* FirstView.xib */; };
@@ -157,6 +172,8 @@
 		70C510042E4C942A008A731C /* ThirdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70C50FF52E4C942A008A731C /* ThirdView.xib */; };
 		70C510062E4C9ECC008A731C /* FourthView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70C510052E4C9ECC008A731C /* FourthView.xib */; };
 		70C510082E4C9EE0008A731C /* FourthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C510072E4C9EE0008A731C /* FourthView.swift */; };
+		70C5526C2E795C60000BEC2C /* ActivityDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C5526B2E795C60000BEC2C /* ActivityDetailViewModel.swift */; };
+		70C5526E2E795C75000BEC2C /* ActivityDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C5526D2E795C75000BEC2C /* ActivityDetailModel.swift */; };
 		70C766642E713719000477B5 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C766612E713719000477B5 /* DataManager.swift */; };
 		70C766652E713719000477B5 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C766622E713719000477B5 /* SessionManager.swift */; };
 		70C766692E713836000477B5 /* Singlton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C766682E713836000477B5 /* Singlton.swift */; };
@@ -171,6 +188,10 @@
 		70C7667D2E717E53000477B5 /* RatingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70C7667B2E717E53000477B5 /* RatingTableViewCell.xib */; };
 		70C766802E717E6C000477B5 /* PriceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C7667E2E717E6C000477B5 /* PriceTableViewCell.swift */; };
 		70C766812E717E6C000477B5 /* PriceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70C7667F2E717E6C000477B5 /* PriceTableViewCell.xib */; };
+		70C76EF52E7E67D7005295FF /* ForgetPasswordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C76EF42E7E67D7005295FF /* ForgetPasswordModel.swift */; };
+		70C76EF72E7E67F8005295FF /* ForgetPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C76EF62E7E67F8005295FF /* ForgetPasswordViewModel.swift */; };
+		70C76EFB2E7E7922005295FF /* TripviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C76EFA2E7E7922005295FF /* TripviewModel.swift */; };
+		70C76EFD2E7E7931005295FF /* TripListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C76EFC2E7E7931005295FF /* TripListModel.swift */; };
 		70CE82542E728AB400BBD64A /* PriceSearchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70CE82532E728AB300BBD64A /* PriceSearchCell.xib */; };
 		70CE82552E728AB400BBD64A /* PriceSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CE82522E728AB300BBD64A /* PriceSearchCell.swift */; };
 		70D14AAD2E617B790056AD1B /* AmenitiesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70D14AAC2E617B790056AD1B /* AmenitiesCell.xib */; };
@@ -191,6 +212,8 @@
 		70DE3B882E4B02D8001D5313 /* DestinationExploreCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70DE3B872E4B02D8001D5313 /* DestinationExploreCollectionViewCell.xib */; };
 		70DE3B892E4B02D8001D5313 /* DestinationExploreCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70DE3B862E4B02D8001D5313 /* DestinationExploreCollectionViewCell.swift */; };
 		70DE3B8B2E4B1602001D5313 /* DestinationplacesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70DE3B8A2E4B1602001D5313 /* DestinationplacesCollectionViewCell.swift */; };
+		70E0FD852E7BC09500A89831 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E0FD842E7BC09500A89831 /* ProfileModel.swift */; };
+		70E0FD882E7BC0C700A89831 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E0FD872E7BC0C700A89831 /* ProfileViewModel.swift */; };
 		70E8746D2E6A9CEF00E5EDC4 /* ChooseregistrationVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E8746C2E6A9CEF00E5EDC4 /* ChooseregistrationVc.swift */; };
 		70E8746F2E6AE2C600E5EDC4 /* ReviewVcClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E8746E2E6AE2C600E5EDC4 /* ReviewVcClass.swift */; };
 		8711A0324AAB4488E9ECA950 /* Pods_UzoefuTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0B9568AB413FC9296727409 /* Pods_UzoefuTests.framework */; };
@@ -338,8 +361,18 @@
 		70AB86D12E6958D7004CE913 /* BussniessProfileClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BussniessProfileClass.swift; sourceTree = "<group>"; };
 		70AB86D32E6958E9004CE913 /* BussniessActivitiesClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BussniessActivitiesClass.swift; sourceTree = "<group>"; };
 		70AB86D52E695925004CE913 /* BussninessBookingClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BussninessBookingClass.swift; sourceTree = "<group>"; };
+		70AD50AA2E77DDB700E0BE76 /* LogOutModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutModel.swift; sourceTree = "<group>"; };
+		70AD50AC2E77DDC600E0BE76 /* LogOutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutViewModel.swift; sourceTree = "<group>"; };
 		70AE3CC32E49A5CB000B5AED /* CompleteSetUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteSetUpVC.swift; sourceTree = "<group>"; };
 		70AE3CC62E49C31D000B5AED /* DashboardVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardVc.swift; sourceTree = "<group>"; };
+		70AF95F42E73DB350044EDD5 /* reviewPhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = reviewPhotoCell.swift; sourceTree = "<group>"; };
+		70AF95F52E73DB350044EDD5 /* reviewPhotoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = reviewPhotoCell.xib; sourceTree = "<group>"; };
+		70AF95F92E73F3280044EDD5 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
+		70AF95FB2E73F3380044EDD5 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		70AF95FF2E7404DC0044EDD5 /* ExploreCategoriesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreCategoriesModel.swift; sourceTree = "<group>"; };
+		70AF96022E7404F70044EDD5 /* ExploreCategoriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreCategoriesViewModel.swift; sourceTree = "<group>"; };
+		70AF96052E741F580044EDD5 /* ActivityListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityListModel.swift; sourceTree = "<group>"; };
+		70AF96072E741F6C0044EDD5 /* ActivityListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityListViewModel.swift; sourceTree = "<group>"; };
 		70B049102E66A630009B82A2 /* AddActivityDetailVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddActivityDetailVc.swift; sourceTree = "<group>"; };
 		70B049122E66A97C009B82A2 /* AddActivityDescripTion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddActivityDescripTion.swift; sourceTree = "<group>"; };
 		70B049142E66B640009B82A2 /* HighlightCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightCell.swift; sourceTree = "<group>"; };
@@ -363,6 +396,8 @@
 		70B3B5582E45CD6F000FA42A /* SFPRODISPLAYTHINITALIC.OTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = SFPRODISPLAYTHINITALIC.OTF; sourceTree = "<group>"; };
 		70B3B5592E45CD6F000FA42A /* SFPRODISPLAYULTRALIGHTITALIC.OTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = SFPRODISPLAYULTRALIGHTITALIC.OTF; sourceTree = "<group>"; };
 		70B3B55A2E45CD6F000FA42A /* SFPRODISPLAYSEMIBOLDITALIC.OTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = SFPRODISPLAYSEMIBOLDITALIC.OTF; sourceTree = "<group>"; };
+		70B528C32E7A8E220096A048 /* WishListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListViewModel.swift; sourceTree = "<group>"; };
+		70B528C52E7A8E300096A048 /* WishListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListModel.swift; sourceTree = "<group>"; };
 		70B585882E656CD4000B9764 /* SiguUpBussnessVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiguUpBussnessVc.swift; sourceTree = "<group>"; };
 		70B5858B2E6573AA000B9764 /* BussinessProfileSetupVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BussinessProfileSetupVc.swift; sourceTree = "<group>"; };
 		70B5858D2E6579AD000B9764 /* ProfileSetupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSetupCell.swift; sourceTree = "<group>"; };
@@ -377,6 +412,9 @@
 		70C0307B2E5430BC002053E1 /* CompanyDetailsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CompanyDetailsCell.xib; sourceTree = "<group>"; };
 		70C0307E2E5430D7002053E1 /* CompanyDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyDetailsVC.swift; sourceTree = "<group>"; };
 		70C030802E54416A002053E1 /* CompanyDetailsCellSecond.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyDetailsCellSecond.swift; sourceTree = "<group>"; };
+		70C26D212E7D288F00D72854 /* ForgetPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordVC.swift; sourceTree = "<group>"; };
+		70C26D242E7D345C00D72854 /* OTPVCEngineer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTPVCEngineer.swift; sourceTree = "<group>"; };
+		70C26D272E7D397E00D72854 /* ConfirmpwdVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmpwdVC.swift; sourceTree = "<group>"; };
 		70C50FE62E4C8B8A008A731C /* ProfileVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVc.swift; sourceTree = "<group>"; };
 		70C50FEB2E4C942A008A731C /* FirstView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstView.swift; sourceTree = "<group>"; };
 		70C50FEC2E4C942A008A731C /* FirstView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FirstView.xib; sourceTree = "<group>"; };
@@ -386,6 +424,8 @@
 		70C50FF52E4C942A008A731C /* ThirdView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ThirdView.xib; sourceTree = "<group>"; };
 		70C510052E4C9ECC008A731C /* FourthView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FourthView.xib; sourceTree = "<group>"; };
 		70C510072E4C9EE0008A731C /* FourthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourthView.swift; sourceTree = "<group>"; };
+		70C5526B2E795C60000BEC2C /* ActivityDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetailViewModel.swift; sourceTree = "<group>"; };
+		70C5526D2E795C75000BEC2C /* ActivityDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetailModel.swift; sourceTree = "<group>"; };
 		70C766612E713719000477B5 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		70C766622E713719000477B5 /* SessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
 		70C766682E713836000477B5 /* Singlton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Singlton.swift; sourceTree = "<group>"; };
@@ -400,6 +440,10 @@
 		70C7667B2E717E53000477B5 /* RatingTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RatingTableViewCell.xib; sourceTree = "<group>"; };
 		70C7667E2E717E6C000477B5 /* PriceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceTableViewCell.swift; sourceTree = "<group>"; };
 		70C7667F2E717E6C000477B5 /* PriceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PriceTableViewCell.xib; sourceTree = "<group>"; };
+		70C76EF42E7E67D7005295FF /* ForgetPasswordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordModel.swift; sourceTree = "<group>"; };
+		70C76EF62E7E67F8005295FF /* ForgetPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordViewModel.swift; sourceTree = "<group>"; };
+		70C76EFA2E7E7922005295FF /* TripviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripviewModel.swift; sourceTree = "<group>"; };
+		70C76EFC2E7E7931005295FF /* TripListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripListModel.swift; sourceTree = "<group>"; };
 		70CE82522E728AB300BBD64A /* PriceSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceSearchCell.swift; sourceTree = "<group>"; };
 		70CE82532E728AB300BBD64A /* PriceSearchCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PriceSearchCell.xib; sourceTree = "<group>"; };
 		70D14AAB2E617B790056AD1B /* AmenitiesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmenitiesCell.swift; sourceTree = "<group>"; };
@@ -420,6 +464,8 @@
 		70DE3B862E4B02D8001D5313 /* DestinationExploreCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationExploreCollectionViewCell.swift; sourceTree = "<group>"; };
 		70DE3B872E4B02D8001D5313 /* DestinationExploreCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DestinationExploreCollectionViewCell.xib; sourceTree = "<group>"; };
 		70DE3B8A2E4B1602001D5313 /* DestinationplacesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationplacesCollectionViewCell.swift; sourceTree = "<group>"; };
+		70E0FD842E7BC09500A89831 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
+		70E0FD872E7BC0C700A89831 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		70E8746C2E6A9CEF00E5EDC4 /* ChooseregistrationVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseregistrationVc.swift; sourceTree = "<group>"; };
 		70E8746E2E6AE2C600E5EDC4 /* ReviewVcClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewVcClass.swift; sourceTree = "<group>"; };
 		C0B9568AB413FC9296727409 /* Pods_UzoefuTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UzoefuTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -519,6 +565,8 @@
 				70369F642E72E30C0094700A /* NotificationVc.swift */,
 				70369F662E72E3390094700A /* NotificationtableviewCell.swift */,
 				70369F672E72E3390094700A /* NotificationtableviewCell.xib */,
+				70AF95F42E73DB350044EDD5 /* reviewPhotoCell.swift */,
+				70AF95F52E73DB350044EDD5 /* reviewPhotoCell.xib */,
 			);
 			path = NotificationVc;
 			sourceTree = "<group>";
@@ -560,6 +608,8 @@
 				7070D6492E4B647600F8BD0D /* WishListTableViewCell.xib */,
 				7070D6482E4B647600F8BD0D /* WishListTableViewCell.swift */,
 				7019206E2E5DD5EF00EDAA42 /* selectTripCell.swift */,
+				70B528C22E7A8DFE0096A048 /* WishListViewModel */,
+				70B528C12E7A8DE20096A048 /* WishListModel */,
 			);
 			path = WishListVC;
 			sourceTree = "<group>";
@@ -683,10 +733,14 @@
 		708D2C7C2E44700000012102 /* Controlers */ = {
 			isa = PBXGroup;
 			children = (
+				70AD50A92E77DD9300E0BE76 /* LogOut */,
+				70AF96042E741F120044EDD5 /* ActivityList */,
+				70AF95FD2E7404940044EDD5 /* ExploreCategories */,
 				70B585862E655B3D000B9764 /* BussinessFolder */,
 				70A5F60B2E5C23CF00E47BF8 /* FilterVC */,
 				708D2C912E447EF400012102 /* WelcomeScreen */,
 				708D2C9C2E44CEC900012102 /* Register */,
+				70C26D232E7D343100D72854 /* VerifyOtpVc */,
 				708D2C822E44713300012102 /* Tabbar */,
 				70A3DCEF2E55CDD3002950B3 /* BookingVC */,
 			);
@@ -725,6 +779,7 @@
 				70375BB02E45EDA4009A084A /* DemoClass.swift */,
 				706024772E4611170012DB74 /* LoginVC.swift */,
 				70AE3CC32E49A5CB000B5AED /* CompleteSetUpVC.swift */,
+				70AF95F82E73F2F40044EDD5 /* LoginModel */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -746,6 +801,8 @@
 				70D8B2DC2E4A0FCC00D2FC31 /* AllExploreVc */,
 				70AE3CC52E49C305000B5AED /* DashboardVc */,
 				7070D6432E4B630900F8BD0D /* WishListVC */,
+				70C76EF92E7E78FD005295FF /* TripviewModel */,
+				70C76EF82E7E78E1005295FF /* TripModel */,
 			);
 			path = Tabbar;
 			sourceTree = "<group>";
@@ -772,6 +829,8 @@
 			isa = PBXGroup;
 			children = (
 				70E8746C2E6A9CEF00E5EDC4 /* ChooseregistrationVc.swift */,
+				70E0FD862E7BC0AA00A89831 /* ProfileViewModel */,
+				70E0FD832E7BC06000A89831 /* ProfileModel */,
 				708D2C7F2E4470B300012102 /* Login */,
 				708D2C802E4470C300012102 /* Signup */,
 				708D2C9D2E44CEDC00012102 /* ForgotPassword */,
@@ -782,6 +841,9 @@
 		708D2C9D2E44CEDC00012102 /* ForgotPassword */ = {
 			isa = PBXGroup;
 			children = (
+				70C26D212E7D288F00D72854 /* ForgetPasswordVC.swift */,
+				70C26D262E7D396500D72854 /* ConfirmpwdVC */,
+				70C76EF22E7E674F005295FF /* ForgetPaswordModel */,
 			);
 			path = ForgotPassword;
 			sourceTree = "<group>";
@@ -912,6 +974,15 @@
 			path = UiviewCellFolder;
 			sourceTree = "<group>";
 		};
+		70AD50A92E77DD9300E0BE76 /* LogOut */ = {
+			isa = PBXGroup;
+			children = (
+				70AD50AA2E77DDB700E0BE76 /* LogOutModel.swift */,
+				70AD50AC2E77DDC600E0BE76 /* LogOutViewModel.swift */,
+			);
+			path = LogOut;
+			sourceTree = "<group>";
+		};
 		70AE3CC52E49C305000B5AED /* DashboardVc */ = {
 			isa = PBXGroup;
 			children = (
@@ -919,6 +990,49 @@
 				701932162E49FE6400351E6F /* DashboardAllCells */,
 			);
 			path = DashboardVc;
+			sourceTree = "<group>";
+		};
+		70AF95F82E73F2F40044EDD5 /* LoginModel */ = {
+			isa = PBXGroup;
+			children = (
+				70AF95F92E73F3280044EDD5 /* LoginModel.swift */,
+				70AF95FB2E73F3380044EDD5 /* LoginViewModel.swift */,
+			);
+			path = LoginModel;
+			sourceTree = "<group>";
+		};
+		70AF95FD2E7404940044EDD5 /* ExploreCategories */ = {
+			isa = PBXGroup;
+			children = (
+				70AF96012E7404E40044EDD5 /* ExploreCategoriesViewModel */,
+				70AF95FE2E7404BB0044EDD5 /* ExploreCategoriesModel */,
+			);
+			path = ExploreCategories;
+			sourceTree = "<group>";
+		};
+		70AF95FE2E7404BB0044EDD5 /* ExploreCategoriesModel */ = {
+			isa = PBXGroup;
+			children = (
+				70AF95FF2E7404DC0044EDD5 /* ExploreCategoriesModel.swift */,
+			);
+			path = ExploreCategoriesModel;
+			sourceTree = "<group>";
+		};
+		70AF96012E7404E40044EDD5 /* ExploreCategoriesViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				70AF96022E7404F70044EDD5 /* ExploreCategoriesViewModel.swift */,
+			);
+			path = ExploreCategoriesViewModel;
+			sourceTree = "<group>";
+		};
+		70AF96042E741F120044EDD5 /* ActivityList */ = {
+			isa = PBXGroup;
+			children = (
+				70AF96052E741F580044EDD5 /* ActivityListModel.swift */,
+				70AF96072E741F6C0044EDD5 /* ActivityListViewModel.swift */,
+			);
+			path = ActivityList;
 			sourceTree = "<group>";
 		};
 		70B0F5432E61A25E008A208F /* FaqsCellsXibs */ = {
@@ -939,6 +1053,22 @@
 				7060247C2E4619F40012DB74 /* onboard4.mp4 */,
 			);
 			path = SplashVideo;
+			sourceTree = "<group>";
+		};
+		70B528C12E7A8DE20096A048 /* WishListModel */ = {
+			isa = PBXGroup;
+			children = (
+				70B528C52E7A8E300096A048 /* WishListModel.swift */,
+			);
+			path = WishListModel;
+			sourceTree = "<group>";
+		};
+		70B528C22E7A8DFE0096A048 /* WishListViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				70B528C32E7A8E220096A048 /* WishListViewModel.swift */,
+			);
+			path = WishListViewModel;
 			sourceTree = "<group>";
 		};
 		70B585862E655B3D000B9764 /* BussinessFolder */ = {
@@ -992,8 +1122,26 @@
 				709A1F412E5D935700A61541 /* CompanyDetailsCellSecondImages.swift */,
 				705EB8E12E5DB2E500E0EB17 /* communicationCell.swift */,
 				70377A952E545A1E00F99D54 /* ActivityScreenVC */,
+				70C5526A2E795C06000BEC2C /* ActivityDetailViewModel */,
+				70C552692E795BCF000BEC2C /* ActivityDetailModel */,
 			);
 			path = CompanyDetails;
+			sourceTree = "<group>";
+		};
+		70C26D232E7D343100D72854 /* VerifyOtpVc */ = {
+			isa = PBXGroup;
+			children = (
+				70C26D242E7D345C00D72854 /* OTPVCEngineer.swift */,
+			);
+			path = VerifyOtpVc;
+			sourceTree = "<group>";
+		};
+		70C26D262E7D396500D72854 /* ConfirmpwdVC */ = {
+			isa = PBXGroup;
+			children = (
+				70C26D272E7D397E00D72854 /* ConfirmpwdVC.swift */,
+			);
+			path = ConfirmpwdVC;
 			sourceTree = "<group>";
 		};
 		70C50FE52E4C8B22008A731C /* ProfileData */ = {
@@ -1012,6 +1160,22 @@
 				70C030792E543083002053E1 /* CompanyDetails */,
 			);
 			path = AllprofileViews;
+			sourceTree = "<group>";
+		};
+		70C552692E795BCF000BEC2C /* ActivityDetailModel */ = {
+			isa = PBXGroup;
+			children = (
+				70C5526D2E795C75000BEC2C /* ActivityDetailModel.swift */,
+			);
+			path = ActivityDetailModel;
+			sourceTree = "<group>";
+		};
+		70C5526A2E795C06000BEC2C /* ActivityDetailViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				70C5526B2E795C60000BEC2C /* ActivityDetailViewModel.swift */,
+			);
+			path = ActivityDetailViewModel;
 			sourceTree = "<group>";
 		};
 		70C766632E713719000477B5 /* ServiceHandler */ = {
@@ -1054,6 +1218,39 @@
 			path = FilterClassCells;
 			sourceTree = "<group>";
 		};
+		70C76EF22E7E674F005295FF /* ForgetPaswordModel */ = {
+			isa = PBXGroup;
+			children = (
+				70C76EF42E7E67D7005295FF /* ForgetPasswordModel.swift */,
+				70C76EF32E7E6774005295FF /* ForgetPasswordviewModel */,
+			);
+			path = ForgetPaswordModel;
+			sourceTree = "<group>";
+		};
+		70C76EF32E7E6774005295FF /* ForgetPasswordviewModel */ = {
+			isa = PBXGroup;
+			children = (
+				70C76EF62E7E67F8005295FF /* ForgetPasswordViewModel.swift */,
+			);
+			path = ForgetPasswordviewModel;
+			sourceTree = "<group>";
+		};
+		70C76EF82E7E78E1005295FF /* TripModel */ = {
+			isa = PBXGroup;
+			children = (
+				70C76EFC2E7E7931005295FF /* TripListModel.swift */,
+			);
+			path = TripModel;
+			sourceTree = "<group>";
+		};
+		70C76EF92E7E78FD005295FF /* TripviewModel */ = {
+			isa = PBXGroup;
+			children = (
+				70C76EFA2E7E7922005295FF /* TripviewModel.swift */,
+			);
+			path = TripviewModel;
+			sourceTree = "<group>";
+		};
 		70D14AAA2E617AEF0056AD1B /* InformationTabblecellXibs */ = {
 			isa = PBXGroup;
 			children = (
@@ -1078,6 +1275,22 @@
 				7070D6462E4B63B400F8BD0D /* Cells */,
 			);
 			path = AllExploreVc;
+			sourceTree = "<group>";
+		};
+		70E0FD832E7BC06000A89831 /* ProfileModel */ = {
+			isa = PBXGroup;
+			children = (
+				70E0FD842E7BC09500A89831 /* ProfileModel.swift */,
+			);
+			path = ProfileModel;
+			sourceTree = "<group>";
+		};
+		70E0FD862E7BC0AA00A89831 /* ProfileViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				70E0FD872E7BC0C700A89831 /* ProfileViewModel.swift */,
+			);
+			path = ProfileViewModel;
 			sourceTree = "<group>";
 		};
 		7532EAA56D452391AE947B53 /* Pods */ = {
@@ -1225,6 +1438,7 @@
 				70369F682E72E3390094700A /* NotificationtableviewCell.xib in Resources */,
 				70D8B2E12E4A135300D2FC31 /* SearcResultExplorCell.xib in Resources */,
 				70AB86CA2E695857004CE913 /* BussniessActivitiesClass.xib in Resources */,
+				70AF95F72E73DB350044EDD5 /* reviewPhotoCell.xib in Resources */,
 				70A2B3812E60328B000715D1 /* ActivityDescriptionCell.xib in Resources */,
 				70818BC22E5598E0001FD1DA /* ReviewPhotoCollectionCell.xib in Resources */,
 				7060247F2E461E4F0012DB74 /* onboard4.mp4 in Resources */,
@@ -1454,8 +1668,10 @@
 				70A3DCF12E55CE0F002950B3 /* BookingVC.swift in Sources */,
 				70AB86D22E6958D7004CE913 /* BussniessProfileClass.swift in Sources */,
 				70A723112E6859EF0027B028 /* PhotosCollectionCell.swift in Sources */,
+				70C76EFD2E7E7931005295FF /* TripListModel.swift in Sources */,
 				70A0AE232E4B3DB5009EBA38 /* MainTabBarControllerClassVC.swift in Sources */,
 				7001E1102E65C6840064C2DD /* AllCreateActivtyTableViewCell.swift in Sources */,
+				70AF96082E741F6C0044EDD5 /* ActivityListViewModel.swift in Sources */,
 				701932252E49FF1600351E6F /* ExploreActivitySecondCell.swift in Sources */,
 				7001E10B2E65C3FA0064C2DD /* CreateAddActivityVc.swift in Sources */,
 				704F29672E69669E003E4D46 /* ActivityTableCell.swift in Sources */,
@@ -1463,6 +1679,7 @@
 				701932212E49FEE800351E6F /* ExplreCatagoriesCell.swift in Sources */,
 				70AB86D42E6958E9004CE913 /* BussniessActivitiesClass.swift in Sources */,
 				70369F652E72E30C0094700A /* NotificationVc.swift in Sources */,
+				70C76EF52E7E67D7005295FF /* ForgetPasswordModel.swift in Sources */,
 				70C7667C2E717E53000477B5 /* RatingTableViewCell.swift in Sources */,
 				7070D64B2E4B647600F8BD0D /* WishListTableViewCell.swift in Sources */,
 				70AE3CC72E49C31D000B5AED /* DashboardVc.swift in Sources */,
@@ -1481,6 +1698,7 @@
 				70DE3B892E4B02D8001D5313 /* DestinationExploreCollectionViewCell.swift in Sources */,
 				70A615A72E5C8A450092468E /* BookActivityStepIstVc.swift in Sources */,
 				708D2C4E2E446C7B00012102 /* ViewController.swift in Sources */,
+				70C26D252E7D345C00D72854 /* OTPVCEngineer.swift in Sources */,
 				70C766692E713836000477B5 /* Singlton.swift in Sources */,
 				70D8B2DE2E4A100500D2FC31 /* SearcResultExplorVc.swift in Sources */,
 				7001E1062E65B6A10064C2DD /* PaymentDetailsVc.swift in Sources */,
@@ -1492,10 +1710,13 @@
 				70A88C522E6B027F00351495 /* ReviewVcClassTableviewCell.swift in Sources */,
 				70AB86C32E69524F004CE913 /* BusinessCompanyDetailsVc.swift in Sources */,
 				70C766782E717E37000477B5 /* CategoriesTableViewCell.swift in Sources */,
+				70AD50AD2E77DDC600E0BE76 /* LogOutViewModel.swift in Sources */,
 				70C0307D2E5430BC002053E1 /* CompanyDetailsCell.swift in Sources */,
 				70D8B2E22E4A135300D2FC31 /* SearcResultExplorCell.swift in Sources */,
+				70E0FD852E7BC09500A89831 /* ProfileModel.swift in Sources */,
 				709C496F2E659ADC00F09662 /* CompanyContactsDetailsVc.swift in Sources */,
 				70A2B3882E603303000715D1 /* WaiverandIndemnityCell.swift in Sources */,
+				70C26D282E7D397E00D72854 /* ConfirmpwdVC.swift in Sources */,
 				709E73712E6802A500155CEC /* AmenitiesCollectoinCell.swift in Sources */,
 				70C766642E713719000477B5 /* DataManager.swift in Sources */,
 				70AB86D62E695925004CE913 /* BussninessBookingClass.swift in Sources */,
@@ -1506,42 +1727,53 @@
 				709C49712E65A08E00F09662 /* OperatingHoursVc.swift in Sources */,
 				70B80FED2E67F77E002732E9 /* AmenitiesVC.swift in Sources */,
 				70DE3B832E4AFFB9001D5313 /* ExploreFilterTableCell.swift in Sources */,
+				70C5526E2E795C75000BEC2C /* ActivityDetailModel.swift in Sources */,
 				709EE69A2E53519300B9312F /* SelectFavouriteActivityCell.swift in Sources */,
 				70B1C8932E718874001F1F84 /* CategoryCollectionViewCell.swift in Sources */,
 				70D14AB22E617BC80056AD1B /* TermsConditionsCell.swift in Sources */,
 				70B0F5472E61A282008A208F /* FAQCell.swift in Sources */,
 				70BBD48B2E68542100A8D6AD /* AddPhotosVC.swift in Sources */,
 				70DCE5B52E66FD470034F789 /* AddActivityHoursVC.swift in Sources */,
+				70AF96062E741F580044EDD5 /* ActivityListModel.swift in Sources */,
 				70B049152E66B640009B82A2 /* HighlightCell.swift in Sources */,
+				70AF95FC2E73F3380044EDD5 /* LoginViewModel.swift in Sources */,
 				7019321D2E49FEC400351E6F /* ExperinceactivityCell.swift in Sources */,
 				70DE3B8B2E4B1602001D5313 /* DestinationplacesCollectionViewCell.swift in Sources */,
 				70377AA22E5473E700F99D54 /* OverViewClassUiView.swift in Sources */,
 				70B049112E66A630009B82A2 /* AddActivityDetailVc.swift in Sources */,
 				701198062E55E93B00CA850C /* BookingDetailsVc.swift in Sources */,
 				70C766742E717DEE000477B5 /* DistanceTableViewCell.swift in Sources */,
+				70AF95F62E73DB350044EDD5 /* reviewPhotoCell.swift in Sources */,
 				70AE3CC42E49A5CB000B5AED /* CompleteSetUpVC.swift in Sources */,
+				70B528C42E7A8E220096A048 /* WishListViewModel.swift in Sources */,
 				70818BBF2E559224001FD1DA /* ReviewCellClass.swift in Sources */,
 				705EB8E22E5DB2E500E0EB17 /* communicationCell.swift in Sources */,
+				70C5526C2E795C60000BEC2C /* ActivityDetailViewModel.swift in Sources */,
 				708D2C932E447F3900012102 /* WelcomeScreenVc.swift in Sources */,
 				70A0AE1F2E4B1F68009EBA38 /* ExporeCategoryVc.swift in Sources */,
 				7001E1082E65BC5D0064C2DD /* SetupprofileVc.swift in Sources */,
 				70CE82552E728AB400BBD64A /* PriceSearchCell.swift in Sources */,
+				70E0FD882E7BC0C700A89831 /* ProfileViewModel.swift in Sources */,
 				701BDD762E549498009E92E2 /* InformationTabelCell.swift in Sources */,
 				7070D6452E4B633D00F8BD0D /* WishListVC.swift in Sources */,
 				704F296B2E6972D0003E4D46 /* BussnessBookinghistoryCell.swift in Sources */,
 				708D2C4A2E446C7B00012102 /* AppDelegate.swift in Sources */,
 				708D2C4C2E446C7B00012102 /* SceneDelegate.swift in Sources */,
+				70C76EF72E7E67F8005295FF /* ForgetPasswordViewModel.swift in Sources */,
 				70377AA42E5473F800F99D54 /* InformationClassUiView.swift in Sources */,
+				70AF96002E7404DC0044EDD5 /* ExploreCategoriesModel.swift in Sources */,
 				708D2C8C2E44723400012102 /* Designable.swift in Sources */,
 				70C7666B2E713A65000477B5 /* CommonMethods.swift in Sources */,
 				70A2B3842E6032C4000715D1 /* AgreementCell.swift in Sources */,
 				70AB86C02E694B10004CE913 /* FinishSetUVc.swift in Sources */,
+				70AF96032E7404F70044EDD5 /* ExploreCategoriesViewModel.swift in Sources */,
 				7019206F2E5DD5EF00EDAA42 /* selectTripCell.swift in Sources */,
 				70B2AD882E5309BF008B8F19 /* FloatingTextField.swift in Sources */,
 				709A1F3E2E5D88F800A61541 /* BookActivityStep5thVc.swift in Sources */,
 				70AB86D02E6958AD004CE913 /* BussinessOverViewClass.swift in Sources */,
 				70C766802E717E6C000477B5 /* PriceTableViewCell.swift in Sources */,
 				70377A972E545A5A00F99D54 /* ActivityScreenVC.swift in Sources */,
+				70AD50AB2E77DDB700E0BE76 /* LogOutModel.swift in Sources */,
 				709B2B5B2E4DEB1C007BC475 /* ValidationLabel.swift in Sources */,
 				70B33BB02E60591800333AA7 /* FloatingView.swift in Sources */,
 				70A0AE212E4B212A009EBA38 /* ExporeCategoryCollectionViewCell.swift in Sources */,
@@ -1555,11 +1787,13 @@
 				70A5F60D2E5C242500E47BF8 /* FilterVC.swift in Sources */,
 				70375BB12E45EDA4009A084A /* DemoClass.swift in Sources */,
 				70A2B3902E603356000715D1 /* Acknowledgement.swift in Sources */,
+				70C26D222E7D288F00D72854 /* ForgetPasswordVC.swift in Sources */,
 				70C7666E2E713DAE000477B5 /* SignUpModel.swift in Sources */,
 				70D14AAE2E617B790056AD1B /* AmenitiesCell.swift in Sources */,
 				70C50FFF2E4C942A008A731C /* SecondView.swift in Sources */,
 				709E73732E68127700155CEC /* TermsandConditionVc.swift in Sources */,
 				70C766702E713DC1000477B5 /* SignUpViewModel.swift in Sources */,
+				70AF95FA2E73F3280044EDD5 /* LoginModel.swift in Sources */,
 				70C766652E713719000477B5 /* SessionManager.swift in Sources */,
 				70B585912E657E1B000B9764 /* ComapanyDetailVC.swift in Sources */,
 				70B9E3172E5EFE0200631C65 /* SettingTableCell.swift in Sources */,
@@ -1569,10 +1803,12 @@
 				70E8746D2E6A9CEF00E5EDC4 /* ChooseregistrationVc.swift in Sources */,
 				709A1F3C2E5D85BB00A61541 /* BookActivityStep4thVc.swift in Sources */,
 				708D2C9B2E44B7C100012102 /* SignUpVC.swift in Sources */,
+				70C76EFB2E7E7922005295FF /* TripviewModel.swift in Sources */,
 				70C030812E54416A002053E1 /* CompanyDetailsCellSecond.swift in Sources */,
 				70A625792E5EEC5500021CB1 /* Settings.swift in Sources */,
 				70C50FFA2E4C942A008A731C /* FirstView.swift in Sources */,
 				708D2C982E44912A00012102 /* WelcomeScreenCollectionViewCell.swift in Sources */,
+				70B528C62E7A8E300096A048 /* WishListModel.swift in Sources */,
 				70A2B38C2E603332000715D1 /* DeclarationCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

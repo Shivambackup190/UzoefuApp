@@ -4,6 +4,7 @@ class ExporeCategoryCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var viewlayer: UIView!
     
+    @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var countLable: UILabel!
     @IBOutlet weak var categoryLable: UILabel!
     override func awakeFromNib() {

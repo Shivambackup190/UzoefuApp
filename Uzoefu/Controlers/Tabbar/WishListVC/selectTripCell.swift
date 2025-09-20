@@ -9,6 +9,9 @@ import UIKit
 
 class selectTripCell: UITableViewCell {
 
+    @IBOutlet weak var triptittle: UILabel!
+    
+    @IBOutlet weak var tripDestination: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         

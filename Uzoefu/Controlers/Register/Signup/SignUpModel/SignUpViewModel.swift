@@ -18,6 +18,7 @@ class SignUpViewModel{
                 let userData = try! JSONDecoder().decode(SignUpModel.self, from: userResponse)
                 if userData.success == true {
                     completion(userData)
+                    CommonMethods.showAlertMessage(title:"", message: userData.message ?? "", view: viewController)
                 }
                 
                 else{

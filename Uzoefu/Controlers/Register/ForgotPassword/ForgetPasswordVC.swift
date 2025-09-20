@@ -9,21 +9,35 @@ import UIKit
 
 class ForgetPasswordVC: UIViewController {
 
+    @IBOutlet weak var emailTf: UITextField!
+    var forgetModelobJ:ForgetPasswordModel?
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func backActionBtn(_ sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
     }
-    */
+    
 
+    @IBAction func sedOtpActionBtn(_ sender: Any) {
+        forgetPasswordApi()
+    }
+}
+extension ForgetPasswordVC {
+    func forgetPasswordApi() {
+        var param = [String:Any]()
+        param = ["email":emailTf.text ?? "" ]
+        ForgetPasswordViewModel.forgetApi(viewController: self, parameters: param as NSDictionary) {response in
+            self.forgetModelobJ = response
+            CommonMethods.showAlertMessageWithHandler(title: "", message: response?.message ?? "", view: self) {
+                let nav = self.storyboard?.instantiateViewController(withIdentifier: "OTPVC") as! OTPVC
+                nav.loginId = response?.data
+                self.navigationController?.pushViewController(nav, animated: true)
+            }
+        }
+    }
 }

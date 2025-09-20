@@ -13,6 +13,16 @@ class ExploreFilterTableCell: UITableViewCell {
     @IBOutlet weak var ratingView: CosmosView!
     @IBOutlet weak var searchimg: UIImageView!
     @IBOutlet weak var viewlayer: UIView!
+    
+    @IBOutlet weak var todayHours: UILabel!
+    
+    @IBOutlet weak var activityName: UILabel!
+    
+    @IBOutlet weak var rating: UILabel!
+    @IBOutlet weak var activity_price: UILabel!
+    
+    @IBOutlet weak var wishListImg: UIImageView!
+    var likeBtn :(()->()) = {}
     override func awakeFromNib() {
         super.awakeFromNib()
         setupViewLayer()
@@ -32,6 +42,10 @@ class ExploreFilterTableCell: UITableViewCell {
         viewlayer.layer.shadowOpacity = 0.3
         viewlayer.layer.masksToBounds = false
         
+    }
+    
+    @IBAction func likeBtnaction(_ sender: UIButton) {
+        likeBtn()
     }
 }
     
