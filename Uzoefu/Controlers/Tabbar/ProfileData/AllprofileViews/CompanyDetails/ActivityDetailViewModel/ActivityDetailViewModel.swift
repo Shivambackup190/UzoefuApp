@@ -18,15 +18,62 @@ class ActivityDetailViewModel{
                 let userData = try! JSONDecoder().decode(ActivityDetailModel.self, from: userResponse)
                 if userData.success == true {
                     completion(userData)
-                   // CommonMethods.showAlertMessage(title:"", message: userData.message ?? "", view: viewController)
+                    // CommonMethods.showAlertMessage(title:"", message: userData.message ?? "", view: viewController)
                 }
-
+                
                 else{
                     CommonMethods.showAlertMessage(title:"", message: userData.message ?? "", view: viewController)
                 }
             }
         }
     }
+    //  <<<<<<< ==========================RatingFunction=============================>>>
+    
+
+    class func ratingApi(
+        viewController: UIViewController,
+        parameters: NSDictionary,
+        images: [UIImage],
+        completion: @escaping (RatingModel?) -> Void
+    ) {
+        DataManager.multiImagespostwithHadderRequest(
+            url: ratingUrl,
+            viewcontroller: viewController,
+            parameters: parameters as? [String: AnyObject],
+            images: images
+        ) { (response, error) in
+            
+            if let error = error {
+                CommonMethods.showAlertMessage(title: "", message: "" , view: viewController)
+                completion(nil)
+                return
+            }
+            
+            guard let data = response else {
+                CommonMethods.showAlertMessage(title: "", message: "Something went wrong.", view: viewController)
+                completion(nil)
+                return
+            }
+            
+            do {
+                let result = try JSONDecoder().decode(RatingModel.self, from: data)
+                if result.success == true {
+                    completion(result)
+                } else {
+                    CommonMethods.showAlertMessage(title: "", message: result.message ?? "Error", view: viewController)
+                    completion(nil)
+                }
+            } catch {
+                print("Decoding Error: \(error)")
+                CommonMethods.showAlertMessage(title: "", message: "Parsing error occurred.", view: viewController)
+                completion(nil)
+            }
+        }
+    }
+
 }
+    
+    
+
 
 

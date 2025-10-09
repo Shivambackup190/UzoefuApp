@@ -478,7 +478,70 @@ class DataManager: NSObject {
             CommonMethods.showAlertMessage(title: Constant.BLANK, message: Constant.MESSAGE_NETWORK, view: viewcontroller)
         }
     }
+    //=========ApiforarrayimagesMutipleShivam
     
+    class func multiImagespostwithHadderRequest(
+        url: String,
+        viewcontroller: UIViewController!,
+        parameters: [String: AnyObject]?,
+        images: [UIImage],
+        completionHandler: @escaping completion
+    ) {
+        print(parameters as Any)
+        
+        KRProgressHUD.show(withMessage: Constant.PROGRESS_TITLE)
+        
+        AF.upload(multipartFormData: { multipartFormData in
+            // Append parameters
+            if let params = parameters {
+                for (key, value) in params {
+                    if let temp = value as? String {
+                        multipartFormData.append(temp.data(using: .utf8)!, withName: key)
+                    } else if let temp = value as? Int {
+                        multipartFormData.append("\(temp)".data(using: .utf8)!, withName: key)
+                    } else if let temp = value as? Double {
+                        multipartFormData.append("\(temp)".data(using: .utf8)!, withName: key)
+                    }
+                }
+            }
+            
+            // Append images
+            for (index, image) in images.enumerated() {
+                if let imageData = image.jpegData(compressionQuality: 0.7) {
+                    multipartFormData.append(
+                        imageData,
+                        withName: "images[]",  // 👈 matches your API key
+                        fileName: "image\(index).jpg",
+                        mimeType: "image/jpeg"
+                    )
+                }
+            }
+            
+        }, to: url, method: .post, headers: DataManager.headerParam())
+        .responseData { response in
+            KRProgressHUD.dismiss()
+            switch response.result {
+            case .success:
+                print(response)
+                if let data = response.data {
+                    print("JSON: \(data)")
+                    let jsonObject = JSON(data)
+                    print("JSON: \(jsonObject)")
+                    completionHandler(data, nil)
+                }
+            case .failure(let error):
+                print("❌ Upload failed: \(error.localizedDescription)")
+                completionHandler(nil, error as? NSDictionary)
+            }
+        }
+    }
+
+    //================here==========
+    
+    
+    /*
+     
+     */
     
     class func alamofireNewPutwithHadderRequest(url:String,viewcontroller : UIViewController!, parameters:[String:AnyObject]?, completionHandler: @escaping completion) {
         print(parameters as Any)
@@ -505,20 +568,6 @@ class DataManager: NSObject {
     
     //==============================================================
     
-//    class func headerParam() -> HTTPHeaders {
-//        var headerParam = HTTPHeaders()
-//      //  headerParam["Authorization"] = "Bearer \(String(SessionManager.sharedInstance.objLoginData?.token ?? Constant.BLANK))"
-//        //3677|ONgBa1LbRMfCVBY2cetaI7JSYIpkX7F4RUHQTvLn
-//        //headerParam["Authorization"] = "Bearer 3666|scfyCtufvA4aAL3Pnj3wW8aslQ3VF8E5CIkzSz2n"
-//        headerParam["Authorization"] = "Bearer \(Singlton.shared.bariertoken ?? "")"
-//        headerParam["Accept-Language"] = "en"
-//        headerParam["Accept"] = "application/json"
-//
-//      //headerParam = ["Authorization": "Bearer 3584|UiG32dYSyHhi0SqDFCVDVUYwGAKnebpdzV88XOSR","Accept-Language": "en", "Content-Type": "application/json"]
-//     //["Authorization": "Bearer 3584|UiG32dYSyHhi0SqDFCVDVUYwGAKnebpdzV88XOSR","Accept-Language": "en", "Content-Type": "application/json"]
-//
-//        return headerParam
-//    }
     class func headerParam() -> HTTPHeaders {
         var headerParam = HTTPHeaders()
         headerParam["Authorization"] = "Bearer \(UserDefaults.standard.value(forKey: "token") ?? "")" //"\(UserDefaults.standard.value(forKey: "token") ?? "")"
@@ -526,6 +575,69 @@ class DataManager: NSObject {
         headerParam["Accept"] = "application/json"
        return headerParam
     }
-}
+    //ShivamUzeofoPaymentApi//
+    class func uploadPayment(
+        url: String,
+        parameters: [String: Any],
+        images: [UIImage],
+        completion: @escaping (Data?, Error?) -> Void
+    ) {
+
+        let boundary = "Boundary-\(UUID().uuidString)"
+        var request = URLRequest(url: URL(string: url)!)
+        request.httpMethod = "POST"
+        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+        
+        // ✅ Add headers here
+        request.setValue("Bearer \(UserDefaults.standard.string(forKey: "token") ?? "")", forHTTPHeaderField: "Authorization")
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("en", forHTTPHeaderField: "Accept-Language")
+
+        let httpBody = NSMutableData()
+
+        // Add parameters
+        for (key, value) in parameters {
+            if let array = value as? [String] {
+                for item in array {
+                    httpBody.appendString("--\(boundary)\r\n")
+                    httpBody.appendString("Content-Disposition: form-data; name=\"\(key)[]\"\r\n\r\n")
+                    httpBody.appendString("\(item)\r\n")
+                }
+            } else {
+                httpBody.appendString("--\(boundary)\r\n")
+                httpBody.appendString("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n")
+                httpBody.appendString("\(value)\r\n")
+            }
+        }
+
+        // Add images
+        for (index, image) in images.enumerated() {
+            if let imageData = image.jpegData(compressionQuality: 0.8) {
+                httpBody.appendString("--\(boundary)\r\n")
+                httpBody.appendString("Content-Disposition: form-data; name=\"signature[]\"; filename=\"signature\(index).jpg\"\r\n")
+                httpBody.appendString("Content-Type: image/jpeg\r\n\r\n")
+                httpBody.append(imageData)
+                httpBody.appendString("\r\n")
+            }
+        }
+
+        httpBody.appendString("--\(boundary)--\r\n")
+        request.httpBody = httpBody as Data
+
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            completion(data, error)
+        }
+        task.resume()
+    }
+
+    }
+
+    extension NSMutableData {
+        func appendString(_ string: String) {
+            if let data = string.data(using: .utf8) {
+                self.append(data)
+            }
+        }
+    }
 
 

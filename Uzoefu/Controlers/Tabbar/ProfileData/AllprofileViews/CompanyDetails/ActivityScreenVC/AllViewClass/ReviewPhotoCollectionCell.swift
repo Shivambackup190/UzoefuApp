@@ -9,6 +9,7 @@ import UIKit
 
 class ReviewPhotoCollectionCell: UICollectionViewCell {
 
+    @IBOutlet weak var reviewPic: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

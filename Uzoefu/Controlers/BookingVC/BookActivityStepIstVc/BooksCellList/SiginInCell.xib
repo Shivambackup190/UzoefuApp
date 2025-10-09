@@ -27,6 +27,9 @@
                         <buttonConfiguration key="configuration" style="plain" title="Add Particpant">
                             <fontDescription key="titleFontDescription" type="system" weight="medium" pointSize="14"/>
                         </buttonConfiguration>
+                        <connections>
+                            <action selector="addParticipantTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="pUn-Bc-IMF"/>
+                        </connections>
                     </button>
                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="F0u-7B-cJw">
                         <rect key="frame" x="20" y="50" width="600" height="45"/>
@@ -217,6 +220,11 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="IdNumber" destination="Ozv-Hd-7OI" id="Ezp-4p-FxP"/>
+                <outlet property="addParticipantBtn" destination="FkD-2v-ih4" id="qHy-hJ-FKa"/>
+                <outlet property="clientNameTf" destination="vYZ-LW-uqa" id="uRa-it-XZB"/>
+                <outlet property="contactNymberTf" destination="wzW-5f-oyf" id="xPa-rB-oCc"/>
+                <outlet property="dateSigndTf" destination="9dn-oY-21X" id="AUm-Xf-Qbd"/>
                 <outlet property="signatureContainerView" destination="Gpl-AV-XZJ" id="4r7-gy-T5p"/>
             </connections>
             <point key="canvasLocation" x="383.20610687022901" y="88.028169014084511"/>

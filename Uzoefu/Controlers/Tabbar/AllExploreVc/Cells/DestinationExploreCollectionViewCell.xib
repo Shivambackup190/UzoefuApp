@@ -57,16 +57,13 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cape town" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NkY-M1-Kcj">
-                                <rect key="frame" x="10" y="64" width="130" height="20.333333333333329"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="130" id="yc9-Ay-a04"/>
-                                </constraints>
+                                <rect key="frame" x="10" y="64" width="280" height="20.333333333333329"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="228 Experience" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7XH-QW-Sb0">
-                                <rect key="frame" x="10" y="89.333333333333329" width="130" height="18"/>
+                                <rect key="frame" x="10" y="89.333333333333329" width="280" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -76,12 +73,14 @@
                         <constraints>
                             <constraint firstItem="KKu-NL-aoz" firstAttribute="top" secondItem="PII-EA-vqK" secondAttribute="bottom" constant="-50" id="3wT-Ny-wHz"/>
                             <constraint firstItem="NkY-M1-Kcj" firstAttribute="leading" secondItem="KKu-NL-aoz" secondAttribute="leading" constant="10" id="8hs-j7-FfN"/>
+                            <constraint firstAttribute="trailing" secondItem="NkY-M1-Kcj" secondAttribute="trailing" constant="10" id="9IG-QT-U7v"/>
                             <constraint firstItem="NkY-M1-Kcj" firstAttribute="top" secondItem="KKu-NL-aoz" secondAttribute="bottom" constant="-55" id="9R6-Dp-rOj"/>
                             <constraint firstAttribute="trailing" secondItem="KKu-NL-aoz" secondAttribute="trailing" id="Ecq-f3-iWq"/>
                             <constraint firstAttribute="bottom" secondItem="KKu-NL-aoz" secondAttribute="bottom" id="Q1R-pH-SVW"/>
                             <constraint firstItem="7XH-QW-Sb0" firstAttribute="leading" secondItem="NkY-M1-Kcj" secondAttribute="leading" id="ToF-RA-yA0"/>
                             <constraint firstItem="KKu-NL-aoz" firstAttribute="leading" secondItem="u34-IA-ndc" secondAttribute="leading" id="cJz-R6-Ub8"/>
                             <constraint firstItem="KKu-NL-aoz" firstAttribute="top" secondItem="u34-IA-ndc" secondAttribute="top" id="g9W-K7-GvB"/>
+                            <constraint firstAttribute="bottom" secondItem="7XH-QW-Sb0" secondAttribute="bottom" constant="11.666666666666671" id="gGs-7w-5jV"/>
                             <constraint firstItem="7XH-QW-Sb0" firstAttribute="trailing" secondItem="NkY-M1-Kcj" secondAttribute="trailing" id="hUL-ZR-USj"/>
                             <constraint firstItem="7XH-QW-Sb0" firstAttribute="top" secondItem="NkY-M1-Kcj" secondAttribute="bottom" constant="5" id="ubC-xb-oc1"/>
                             <constraint firstItem="PII-EA-vqK" firstAttribute="trailing" secondItem="KKu-NL-aoz" secondAttribute="trailing" constant="-10" id="zDH-to-Hve"/>
@@ -105,6 +104,11 @@
                 <constraint firstItem="u34-IA-ndc" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="wdV-o8-CFY"/>
             </constraints>
             <size key="customSize" width="300" height="119"/>
+            <connections>
+                <outlet property="branchCount" destination="7XH-QW-Sb0" id="5Xa-BY-dnh"/>
+                <outlet property="branchName" destination="NkY-M1-Kcj" id="mxN-pH-qwq"/>
+                <outlet property="discoverImge" destination="KKu-NL-aoz" id="aNC-UW-sKD"/>
+            </connections>
             <point key="canvasLocation" x="198.47328244274809" y="0.35211267605633806"/>
         </collectionViewCell>
     </objects>

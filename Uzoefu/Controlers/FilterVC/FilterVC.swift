@@ -1,3 +1,11 @@
+
+
+
+protocol filterDelegate: AnyObject {
+    func filtervalues()
+}
+
+
 import UIKit
 
 class FilterVC: UIViewController, DistanceTableViewCellDelegate {
@@ -5,17 +13,19 @@ class FilterVC: UIViewController, DistanceTableViewCellDelegate {
     // MARK: - Outlets
     @IBOutlet weak var filterTable: UITableView!
     
-
+    weak var delegate: filterDelegate?
     var  sections =  ["Distance","Category","Rating","Price"]
     
     var expandedSection: [Bool] = []
     var categoriesModelObj: ExploreCategoriesModel?
+    var provinceModelObj:ProviceModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchprovinceListApi()
         fetchCategories()
         filterTable.separatorStyle = .none
-          //  filterTable.sectionHeaderTopPadding = 0
+        //  filterTable.sectionHeaderTopPadding = 0
         
         filterTable.separatorStyle = .none
         filterTable.register(UINib(nibName: "DistanceTableViewCell", bundle: nil), forCellReuseIdentifier: "DistanceTableViewCell")
@@ -28,16 +38,25 @@ class FilterVC: UIViewController, DistanceTableViewCellDelegate {
         filterTable.dataSource = self
         filterTable.rowHeight = UITableView.automaticDimension
         filterTable.estimatedRowHeight = 50
-        // 🔑 Footer space add karo
-            let footerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 30))
-            footerView.backgroundColor = .clear
-            filterTable.tableFooterView = footerView
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 30))
+        footerView.backgroundColor = .clear
+        filterTable.tableFooterView = footerView
     }
     func fetchCategories() {
         let param = [String: Any]()
         
         ExploreCategoriesViewModel.exploreCategoriesApi(viewController: self, parameters: param as NSDictionary) { response in
             self.categoriesModelObj = response
+            DispatchQueue.main.async {
+                self.filterTable.reloadData()
+            }
+        }
+    }
+    func fetchprovinceListApi() {
+        let param = [String: Any]()
+        
+        ProvinceViewModel.provinceListApi(viewController: self, parameters: param as NSDictionary) { response in
+            self.provinceModelObj = response
             DispatchQueue.main.async {
                 self.filterTable.reloadData()
             }
@@ -57,21 +76,24 @@ class FilterVC: UIViewController, DistanceTableViewCellDelegate {
             }
         }
     }
-
+    
     
     @IBAction func dissmissAction(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
-    
-    /// ⚡️ Table ke content ke hisaab se height calculate karega
     func preferredHeight() -> CGFloat {
         filterTable.layoutIfNeeded()
         let height = filterTable.contentSize.height
         let maxHeight = UIScreen.main.bounds.height * 0.9 // max 90% of screen
         return min(height, maxHeight)
     }
-
+    
     @IBAction func applyActionBtn(_ sender: UIButton) {
+//        print("jnfdjn")
+//        let nav = self.storyboard?.instantiateViewController(withIdentifier: "SearcResultExplorVc") as! SearcResultExplorVc
+//        self.navigationController?.pushViewController(nav, animated: true)
+        delegate?.filtervalues()
+        dismiss(animated: true)
     }
 }
 
@@ -106,7 +128,6 @@ extension FilterVC: UITableViewDelegate, UITableViewDataSource {
         button.addTarget(self, action: #selector(toggleSection(_:)), for: .touchUpInside)
         headerView.addSubview(button)
         
-        // 🔑 Gesture recognizer add karo header par
         headerView.tag = section
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(headerTapped(_:)))
         headerView.addGestureRecognizer(tapGesture)
@@ -122,7 +143,7 @@ extension FilterVC: UITableViewDelegate, UITableViewDataSource {
     @objc func toggleSection(_ sender: UIButton) {
         toggleSectionAction(sender.tag)
     }
-
+    
     private func toggleSectionAction(_ section: Int) {
         expandedSection[section].toggle()
         filterTable.reloadSections(IndexSet(integer: section), with: .automatic)
@@ -138,99 +159,66 @@ extension FilterVC: UITableViewDelegate, UITableViewDataSource {
             }
         }
     }
-
+    
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 44
     }
-
+    
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.1 // footer ke gap ko almost remove karne ke liye
     }
-    
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        switch indexPath.section {
-//        case 0:
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "DistanceTableViewCell", for: indexPath) as! DistanceTableViewCell
-//            cell.selectionStyle = .none
-//            cell.delegate = self
-//            return cell
-//            
-//        case 1:
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "CategoriesTableViewCell", for: indexPath) as! CategoriesTableViewCell
-//            cell.selectionStyle = .none
-//            return cell
-//        case 2:
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "RatingTableViewCell", for: indexPath) as! RatingTableViewCell
-//            cell.selectionStyle = .none
-//            return cell
-//        case 3:
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "PriceTableViewCell", for: indexPath) as! PriceTableViewCell
-//            cell.selectionStyle = .none
-//            return cell
-//        default:
-//            let cell = UITableViewCell()
-//            cell.textLabel?.text = "Default Cell"
-//            cell.selectionStyle = .none
-//            return cell
-//        }
-//    }
-//    
-//
-//
-//}
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            switch indexPath.section {
-            case 0:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "DistanceTableViewCell", for: indexPath) as! DistanceTableViewCell
-                cell.selectionStyle = .none
-                cell.delegate = self   // ✅ Delegate assigned
-                return cell
-                
-            case 1:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "CategoriesTableViewCell", for: indexPath) as! CategoriesTableViewCell
-                cell.configure(with: categoriesModelObj)
-                cell.selectionStyle = .none
-                return cell
-                
-            case 2:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "RatingTableViewCell", for: indexPath) as! RatingTableViewCell
-                cell.selectionStyle = .none
-                return cell
-                
-            case 3:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "PriceTableViewCell", for: indexPath) as! PriceTableViewCell
-                cell.selectionStyle = .none
-                return cell
-                
-            default:
-                let cell = UITableViewCell()
-                cell.textLabel?.text = "Default Cell"
-                cell.selectionStyle = .none
-                return cell
-            }
+        switch indexPath.section {
+        case 0:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "DistanceTableViewCell", for: indexPath) as! DistanceTableViewCell
+            cell.selectionStyle = .none
+            cell.delegate = self
+               let cityNames = provinceModelObj?.data?.compactMap { $0.name } ?? []
+               cell.cities = cityNames
+            return cell
+            
+        case 1:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "CategoriesTableViewCell", for: indexPath) as! CategoriesTableViewCell
+            cell.configure(with: categoriesModelObj)
+            cell.selectionStyle = .none
+            return cell
+            
+        case 2:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "RatingTableViewCell", for: indexPath) as! RatingTableViewCell
+            cell.selectionStyle = .none
+            return cell
+            
+        case 3:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "PriceTableViewCell", for: indexPath) as! PriceTableViewCell
+            cell.selectionStyle = .none
+            return cell
+            
+        default:
+            let cell = UITableViewCell()
+            cell.textLabel?.text = "Default Cell"
+            cell.selectionStyle = .none
+            return cell
         }
-        
-        // Correct place for delegate method
+    }
+    
+    
     func showOptions(title: String, options: [String], onSelect: @escaping (String) -> Void) {
         let alert = UIAlertController(title: title, message: nil, preferredStyle: .actionSheet)
         
-        // Options (e.g., 5 Km, 10 Km, etc.)
         options.forEach { option in
             let action = UIAlertAction(title: option, style: .default) { _ in
                 onSelect(option)
             }
-            // Set option text color (black or gray)
+            
             action.setValue(UIColor.gray, forKey: "titleTextColor")
             alert.addAction(action)
         }
-        
-        // Cancel button
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        cancel.setValue(UIColor.systemGreen, forKey: "titleTextColor")  // ✅ Green cancel
+        cancel.setValue(UIColor.systemGreen, forKey: "titleTextColor")  
         alert.addAction(cancel)
         
         present(alert, animated: true)
     }
-
-    }
+    
+}

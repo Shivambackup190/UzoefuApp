@@ -18,7 +18,6 @@ class ExploreCategoriesViewModel{
                 let userData = try! JSONDecoder().decode(ExploreCategoriesModel.self, from: userResponse)
                 if userData.success == true {
                     completion(userData)
-                   // CommonMethods.showAlertMessage(title:"", message: userData.message ?? "", view: viewController)
                 }
                 
                 else{

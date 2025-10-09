@@ -11,6 +11,15 @@ class BookingCell: UITableViewCell {
     
     @IBOutlet weak var bookingImg: UIImageView!
     @IBOutlet weak var viewlayer: UIView!
+    
+    @IBOutlet weak var dateLbl: UILabel!
+    @IBOutlet weak var activityName: UILabel!
+    
+    @IBOutlet weak var reebookBtn: UILabel!
+    @IBOutlet weak var activeLabel: UILabel!
+    @IBOutlet weak var priceLbl: UILabel!
+    
+    var reebookBtnAction:(()->()) = {}
     override func awakeFromNib() {
         super.awakeFromNib()
         setupViewLayer()
@@ -27,5 +36,9 @@ class BookingCell: UITableViewCell {
         viewlayer.layer.masksToBounds = false
         
         
+    }
+    
+    @IBAction func reebookButtonAction(_ sender: UIButton) {
+        reebookBtnAction()
     }
 }

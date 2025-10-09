@@ -1,4 +1,6 @@
 import UIKit
+import Cosmos
+import PhotosUI
 
 
 struct Section {
@@ -7,47 +9,51 @@ struct Section {
     var isExpanded: Bool
 }
 
-class ActivityScreenVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
+class ActivityScreenVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate,UITextViewDelegate {
+    var selectedImageIndex: Int = 0
     // MARK: - Data
-    var arr = ["Phone", "Map", "Add to Trip", "Trip Planner","Share"]
-    var imagename = ["phone-call", "map", "Trip Planner","honeymoon", "shareimg"]
+    var arr = ["Call", "Map" ,"Share"]
+    var imagename = ["phone-call", "map", "shareimg"]
     var currentIndex = 0
 
     let imagePicker = UIImagePickerController()
     var selectedImages: [UIImage] = []
     var activityListdetailModelObj:ActivityDetailModel?
+    var ratingModelObj:RatingModel?
     var didselctletCategoryId :Int?
-
+    var openTime:String?
+    var selectedReviewImages: [String] = []
+    
     // MARK: - IBOutlets
+    @IBOutlet weak var texviewF: UITextView!
     @IBOutlet weak var popoverView: UIView!
     @IBOutlet weak var blurView: UIView!
     @IBOutlet weak var companyDetailCollectionViewSecond: UICollectionView!
     @IBOutlet weak var companyDetailCollectionView: UICollectionView!
     @IBOutlet weak var communicationCollection: UICollectionView!
     @IBOutlet weak var containerView: UIView!
-
     @IBOutlet weak var overViewcolor: UIView!
     @IBOutlet weak var informationView: UIView!
     @IBOutlet weak var reviewsView: UIView!
     @IBOutlet weak var faqViews: UIView!
-
     @IBOutlet weak var overViewLable: UILabel!
     @IBOutlet weak var informationLable: UILabel!
     @IBOutlet weak var faqLable: UILabel!
     @IBOutlet weak var reviewsLable: UILabel!
-
     @IBOutlet weak var picLanguagecontraint: NSLayoutConstraint!
     @IBOutlet weak var reviewPhotoCellCollectionView: UICollectionView!
-    
+    @IBOutlet weak var textViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var postButton: UIButton!
     @IBOutlet weak var reviewPhotoCellCollectionViewHeight: NSLayoutConstraint!
-    
     @IBOutlet weak var categoryNameLabel: UILabel!
-    
     @IBOutlet weak var activity_nameLable: UILabel!
-    
     @IBOutlet weak var priceLable: UILabel!
+    @IBOutlet weak var starRatingView: CosmosView!
+    
+    @IBOutlet weak var activinameLabel: UILabel!
+    
+    @IBOutlet weak var mypagecontroler: UIPageControl!
+    var ratings:Double?
     // MARK: - Nib loaded views
     var firstView: OverViewClassUiView!
     var secondView: InformationClassUiView!
@@ -60,16 +66,34 @@ class ActivityScreenVC: UIViewController, UIImagePickerControllerDelegate, UINav
     var faqsections = ["What is the cancellation policy?", "Are there any medical conditions that would prevent me from participating?", "What happens in case of bad weather?", "What equipment is provided, and what should I bring?"]
     var expandedSection: [Bool] = []
     var expandedSectionFAQ: [Bool] = []
+    
+    var adultprice:String?
+    var childreenprice:String?
 
-   // let experienceImg = Array(repeating: "experienceImg", count: 12)
-
+    var wishListmodelObj:WishListModel?
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        selectedImageIndex = Int(self.activityListdetailModelObj?.data?.images?[selectedImageIndex].image ?? "") ?? 0
       
-     print(didselctletCategoryId)
+        if selectedImages.count == 0
+        {
+            reviewPhotoCellCollectionViewHeight.constant = 145
+            reviewPhotoCellCollectionView.isHidden = false
+        }
+        else
+        {
+            reviewPhotoCellCollectionViewHeight.constant = 145
+            reviewPhotoCellCollectionView.isHidden = false
+        }
         
+        self.starRatingView.rating = 0.0
+        texviewF.delegate = self
         
+        postButton.backgroundColor = #colorLiteral(red: 0.9176470588, green: 0.9254901961, blue: 0.9294117647, alpha: 1)
+        postButton.tintAdjustmentMode = .normal
+        rating()
+    
         imagePicker.delegate = self
         companyDetailCollectionView.contentInsetAdjustmentBehavior = .never
 
@@ -165,6 +189,38 @@ class ActivityScreenVC: UIViewController, UIImagePickerControllerDelegate, UINav
         resetAllTabs()
         selectTab(colorView: overViewcolor, label: overViewLable)
     }
+    
+    func rating() {
+        starRatingView.didTouchCosmos = { rating in
+            self.ratings = rating
+            self.starRatingView.rating = rating
+            print(" Selected rating: \(rating)")
+        }
+    }
+    func textViewDidChange(_ textView: UITextView) {
+        
+        let size = CGSize(width: textView.frame.width, height: .infinity)
+           let estimatedSize = textView.sizeThatFits(size)
+   
+           // Update the height constraint
+//           textViewHeightConstraint.constant = estimatedSize.height
+        textViewHeightConstraint.constant = max(100, estimatedSize.height) // Minimum 100
+           
+           // Optional: animate height change
+           UIView.animate(withDuration: 0.2) {
+               self.view.layoutIfNeeded()
+           }
+        
+        
+        if let text = textView.text, !text.isEmpty {
+            
+              postButton.backgroundColor = #colorLiteral(red: 0.4941176471, green: 0.8235294118, blue: 0, alpha: 1)  
+              postButton.titleLabel?.textColor =  #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+          } else {
+              postButton.backgroundColor = #colorLiteral(red: 0.9176470588, green: 0.9254901961, blue: 0.9294117647, alpha: 1)
+              postButton.titleLabel?.textColor =  #colorLiteral(red: 0.4941176471, green: 0.8235294118, blue: 0, alpha: 1)
+          }
+      }
     override func viewWillAppear(_ animated: Bool) {
        // reviewPhotoCellCollectionViewHeight.constant = 0
         activityListdetailApi(category_id: didselctletCategoryId ?? 0)
@@ -213,10 +269,18 @@ class ActivityScreenVC: UIViewController, UIImagePickerControllerDelegate, UINav
     }
 
     // MARK: - Tab IBActions
-    @IBAction func overviewActionBtn(_ sender: UIButton) { changeTab(index: 0) }
-    @IBAction func informationActionBtn(_ sender: UIButton) { changeTab(index: 1) }
-    @IBAction func reviewsActionBtn(_ sender: Any) { changeTab(index: 2) }
-    @IBAction func faqActionbtn(_ sender: UIButton) { changeTab(index: 3) }
+    @IBAction func overviewActionBtn(_ sender: UIButton) {
+        changeTab(index: 0)
+    }
+    @IBAction func informationActionBtn(_ sender: UIButton) {
+        changeTab(index: 1)
+    }
+    @IBAction func reviewsActionBtn(_ sender: Any) {
+        changeTab(index: 2)
+    }
+    @IBAction func faqActionbtn(_ sender: UIButton) {
+        changeTab(index: 3)
+    }
 
     @IBAction func BackBtnAction(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
@@ -232,15 +296,17 @@ class ActivityScreenVC: UIViewController, UIImagePickerControllerDelegate, UINav
     }
 
     @IBAction func uploadPhotoAction(_ sender: UIButton) {
-        let alert = UIAlertController(title: Constant.CHOOSE_IMAGE, message: nil, preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: Constant.GALLERY, style: .default, handler: { _ in
-            self.openGallary()
-            
-        }))
-        alert.addAction(UIAlertAction.init(title: Constant.CANCEL, style: .cancel, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+        let alert = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)
+           alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { _ in
+               self.openGalleryMultiple()
+           }))
+           alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+           self.present(alert, animated: true, completion: nil)
     }
 
+    @IBAction func postBtnAction(_ sender: UIButton) {
+    ratingApi()
+    }
     // MARK: - Helper UI functions
     func resetAllTabs() {
         let defaultColor = UIColor(red: 0.451, green: 0.483, blue: 0.495, alpha: 1)
@@ -298,6 +364,8 @@ class ActivityScreenVC: UIViewController, UIImagePickerControllerDelegate, UINav
         firstView.BookingActionBtn = { [weak self] in
             guard let self = self else { return }
             let nav = self.storyboard?.instantiateViewController(withIdentifier: "BookActivityStepIstVc") as! BookActivityStepIstVc
+            nav.childPrice = childreenprice
+            nav.adultPrice = adultprice
             self.navigationController?.pushViewController(nav, animated: true)
         }
     }
@@ -305,6 +373,8 @@ class ActivityScreenVC: UIViewController, UIImagePickerControllerDelegate, UINav
         secondView.BookingActionBtnInformation = { [weak self] in
             guard let self = self else { return }
             let nav = self.storyboard?.instantiateViewController(withIdentifier: "BookActivityStepIstVc") as! BookActivityStepIstVc
+            nav.childPrice = childreenprice
+            nav.adultPrice = adultprice
             self.navigationController?.pushViewController(nav, animated: true)
         }
     }
@@ -312,6 +382,8 @@ class ActivityScreenVC: UIViewController, UIImagePickerControllerDelegate, UINav
         fourthView.BookingActionBtnfaq = { [weak self] in
             guard let self = self else { return }
             let nav = self.storyboard?.instantiateViewController(withIdentifier: "BookActivityStepIstVc") as! BookActivityStepIstVc
+            nav.childPrice = childreenprice
+            nav.adultPrice = adultprice
             self.navigationController?.pushViewController(nav, animated: true)
         }
     }
@@ -335,56 +407,90 @@ class ActivityScreenVC: UIViewController, UIImagePickerControllerDelegate, UINav
         }
     }
 
-    func openGallary() {
-  
-        imagePicker.sourceType = .photoLibrary
-        imagePicker.allowsEditing = true
-        self.present(imagePicker, animated: true, completion: nil)
+    func openGalleryMultiple() {
+        var configuration = PHPickerConfiguration()
+        configuration.selectionLimit = 0 // 0 means unlimited selection
+        configuration.filter = .images // only images
+
+        let picker = PHPickerViewController(configuration: configuration)
+        picker.delegate = self
+        self.present(picker, animated: true, completion: nil)
     }
 
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-        let img = (info[.originalImage] as? UIImage) ?? (info[.editedImage] as? UIImage)
-        if let img = img {
-            selectedImages.append(img)
-            reviewPhotoCellCollectionViewHeight.constant = 145
-            reviewPhotoCellCollectionView.reloadData()
-        }
-        self.dismiss(animated: true, completion: nil)
-    }
+
 }
 
 // MARK: - UICollectionView
 extension ActivityScreenVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == companyDetailCollectionView {
-            return 3
+            return min( self.activityListdetailModelObj?.data?.images?.count ?? 0, 5)
         } else if collectionView == companyDetailCollectionViewSecond {
-            return min( self.activityListdetailModelObj?.data?.images.count ?? 0, 5)
+            return min( self.activityListdetailModelObj?.data?.images?.count ?? 0, 5)
         } else if collectionView == communicationCollection {
             return min(arr.count, imagename.count)
         } else if collectionView == reviewPhotoCellCollectionView {
+            
             return selectedImages.count
         }
         return 0
     }
-//ijgbioj
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
+        
         if collectionView == companyDetailCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CompanyDetailsCell", for: indexPath) as! CompanyDetailsCell
+            
+            //kmjm
+            if let imageList = self.activityListdetailModelObj?.data?.images,
+               selectedImageIndex < imageList.count,
+               let imageString = imageList[selectedImageIndex].image,
+               !imageString.isEmpty {
+                
+                let cleanedIcon = imageString.replacingOccurrences(of: "\\/", with: "/")
+                let fullURLString = (imagePathUrl ?? "") + "/" + cleanedIcon
+                
+                if let url = URL(string: fullURLString) {
+                    cell.imageViewPic.sd_setImage(
+                        with: url,
+                        placeholderImage: UIImage(named: ""),
+                        options: .refreshCached
+                    )
+                } else {
+                    cell.imageViewPic.image = UIImage(named: "")
+                }
+            } else {
+                cell.imageViewPic.image = UIImage(named: "")
+            }
+            
+            //  Wishlist logic (yeh part same rahega)
+            if let isWish = self.activityListdetailModelObj?.data?.iswish {
+                cell.wishListImg.image = isWish
+                ? UIImage(named: "greenheart")
+                : UIImage(named: "hearttt")
+            }
+            
+            cell.likeBtn = { [weak self] in
+                guard let self = self else { return }
+                if let id = self.activityListdetailModelObj?.data?.activity?.id {
+                    self.wishListApi(activity_id: id)
+                }
+                self.activityListdetailModelObj?.data?.iswish?.toggle()
+                self.companyDetailCollectionView.reloadData()
+            }
+            
             return cell
-
-        } else if collectionView == companyDetailCollectionViewSecond {
+        }
+        else if collectionView == companyDetailCollectionViewSecond {
             let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: "CompanyDetailsCellSecondImages",
                 for: indexPath
             ) as! CompanyDetailsCellSecondImages
-
+            
             if let images = self.activityListdetailModelObj?.data?.images, indexPath.row < images.count {
                 let totalImages = images.count
                 let basePath = self.activityListdetailModelObj?.image_path ?? "https://mobappssolutions.in/uzoefu/public/images/activity_images"
-
+                
                 if indexPath.item == 4 && totalImages > 5 {
                     let remaining = totalImages - 5
                     cell.countLabel.isHidden = false
@@ -392,22 +498,22 @@ extension ActivityScreenVC: UICollectionViewDelegate, UICollectionViewDataSource
                 } else {
                     cell.countLabel.isHidden = true
                 }
-
+                
                 if let imgName = images[indexPath.item].image {
                     let fullURL = "\(basePath)/\(imgName)"
-                    print("Loading image: \(fullURL)") // 🔎 Debug
-                    cell.imageView.sd_setImage(with: URL(string: fullURL), placeholderImage: UIImage(named: "placeholder"))
+                    print("Loading image: \(fullURL)")
+                    cell.imageView.sd_setImage(with: URL(string: fullURL), placeholderImage: UIImage(named: "wishListImg"))
                 }
             }
-
+            
             return cell
         } else if collectionView == communicationCollection {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "communication", for: indexPath) as! communicationCell
-       
+            
             cell.communicationLabel.text = arr[indexPath.row]
             cell.communicationImage.image = UIImage(named: imagename[indexPath.row])
             return cell
-
+            
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "reviewPhotoCell", for: indexPath) as! reviewPhotoCell
             cell.uploardimages.image = selectedImages[indexPath.row]
@@ -417,12 +523,19 @@ extension ActivityScreenVC: UICollectionViewDelegate, UICollectionViewDataSource
                 if indexPath.row < self.selectedImages.count {
                     self.selectedImages.remove(at: indexPath.row)
                     self.reviewPhotoCellCollectionView.reloadData()
+                    if self.selectedImages.isEmpty {
+                        self.reviewPhotoCellCollectionViewHeight.constant = 0
+                        self.reviewPhotoCellCollectionView.isHidden = true
+                    } else {
+                        self.reviewPhotoCellCollectionViewHeight.constant = 145
+                        self.reviewPhotoCellCollectionView.isHidden = false
+                    }
                 }
             }
-            return cell
+            return cell       
         }
     }
-
+    
     // Layout delegates
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == companyDetailCollectionView {
@@ -437,15 +550,15 @@ extension ActivityScreenVC: UICollectionViewDelegate, UICollectionViewDataSource
             return CGSize(width: 80, height: 80)
         }
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return collectionView == companyDetailCollectionViewSecond ? 5 : 2
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 5
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         if collectionView == companyDetailCollectionView {
             return .zero
@@ -464,8 +577,7 @@ extension ActivityScreenVC: UITableViewDelegate, UITableViewDataSource {
         } else if tableView == thirdView.ReviewsTableView {
             return 1
         } else if tableView == fourthView.faqTableView {
-            return faqsections.count
-        }
+            return activityListdetailModelObj?.data?.faqs?.count ?? 0        }
         return 0
     }
 
@@ -473,9 +585,10 @@ extension ActivityScreenVC: UITableViewDelegate, UITableViewDataSource {
         if tableView == secondView.informationTbale {
             return expandedSection[section] ? 1 : 0
         } else if tableView == fourthView.faqTableView {
-            return expandedSectionFAQ[section] ? 1 : 0
+            return (expandedSectionFAQ.count > section && expandedSectionFAQ[section]) ? 1 : 0
         } else if tableView == thirdView.ReviewsTableView {
-            return 5
+            return activityListdetailModelObj?.data?.activity_rating?.count ?? 0
+            
         }
         return 0
     }
@@ -509,10 +622,15 @@ extension ActivityScreenVC: UITableViewDelegate, UITableViewDataSource {
             iconView.image = UIImage(named: imageName)
             headerView.accessibilityIdentifier = "info"
         } else if tableView == fourthView.faqTableView {
-            titleLabel.text = faqsections[section]
-            let imageName = expandedSectionFAQ[section] ? "minus_icon" : "plus_icon"
-            iconView.image = UIImage(named: imageName)
-            headerView.accessibilityIdentifier = "faq"
+            if let faq = activityListdetailModelObj?.data?.faqs?[section] {
+                   titleLabel.text = faq.question ?? "No question"
+               } else {
+                   titleLabel.text = "No question"
+               }
+
+               let imageName = (expandedSectionFAQ.count > section && expandedSectionFAQ[section]) ? "minus_icon" : "plus_icon"
+               iconView.image = UIImage(named: imageName)
+               headerView.accessibilityIdentifier = "faq"
         } else {
             titleLabel.text = ""
         }
@@ -537,7 +655,7 @@ extension ActivityScreenVC: UITableViewDelegate, UITableViewDataSource {
         return headerView
     }
 
-    // Header tap handler (uses accessibilityIdentifier to decide which table)
+   
     @objc func handleHeaderTap(_ gesture: UITapGestureRecognizer) {
         guard let headerView = gesture.view else { return }
         let section = headerView.tag
@@ -585,17 +703,67 @@ extension ActivityScreenVC: UITableViewDelegate, UITableViewDataSource {
             case 0:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "InformationTabelCell", for: indexPath) as! InformationTabelCell
                 cell.selectionStyle = .none
+                
+                let data = activityListdetailModelObj?.data?.hours
+                
+                cell.mondayLbl.text = "\(data?.mon_from ?? "") - \(data?.mon_to ?? "")"
+                cell.tuesdayLbl.text = "\(data?.tue_from ?? "") - \(data?.tue_to ?? "")"
+                cell.wednesdayLbl.text = "\(data?.wed_from ?? "") - \(data?.wed_to ?? "")"
+                cell.thrusdayLbl.text = "\(data?.thu_from ?? "") - \(data?.thu_to ?? "")"
+                
+                cell.fidayLbl.text = "\(data?.fri_from ?? "") - \(data?.fri_to ?? "")"
+                cell.saturdayLbl.text = "\(data?.sat_from ?? "") - \(data?.sat_to ?? "")"
+                cell.sundayLbl.text = "\(data?.sun_from ?? "") - \(data?.sun_to ?? "")"
+                cell.publicLbl.text = "\(data?.public_mon_from ?? "") - \(data?.public_mon_to ?? "")"
+                
                 return cell
             case 1:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "AmenitiesCell", for: indexPath) as! AmenitiesCell
+
+                if let amenities = activityListdetailModelObj?.data?.amenities {
+                    let names = amenities.compactMap { $0.amenity?.name }
+                    cell.amethiLable.text = names.joined(separator: "\n\n")
+                } else {
+                    cell.amethiLable.text = "No amenities found"
+                }
+
                 cell.selectionStyle = .none
                 return cell
+
             case 2:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "TermsConditionsCell", for: indexPath) as! TermsConditionsCell
+                let data = activityListdetailModelObj?.data?.terms?.terms_and_conditions
+                cell.termsLable.text = data
+                
                 cell.selectionStyle = .none
                 return cell
             case 3:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "IndemnityCell", for: indexPath) as! IndemnityCell
+                let data = activityListdetailModelObj?.data?.indemnity
+                if let indemnity = activityListdetailModelObj?.data?.indemnity {
+                    var textArray: [String] = []
+                    
+                    if let signing = indemnity.signing_detail {
+                        textArray.append("Signing Detail: \(signing)")
+                    }
+                    if let agreement = indemnity.agreement {
+                        textArray.append("Agreement: \(agreement)")
+                    }
+                    if let waiver = indemnity.waiver_and_indemnity {
+                        textArray.append("Waiver & Indemnity: \(waiver)")
+                    }
+                    if let declaration = indemnity.declaration {
+                        textArray.append("Declaration: \(declaration)")
+                    }
+                    if let acknowledgement = indemnity.acknowledgement {
+                        textArray.append("Acknowledgement: \(acknowledgement)")
+                    }
+                    
+                
+                    cell.indemityLabl.text = textArray.joined(separator: "\n\n")
+                } else {
+                    cell.indemityLabl.text = "No indemnity data found"
+                }
                 cell.selectionStyle = .none
                 return cell
             default:
@@ -606,49 +774,231 @@ extension ActivityScreenVC: UITableViewDelegate, UITableViewDataSource {
             }
         } else if tableView == thirdView.ReviewsTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ReviewCellClass", for: indexPath) as! ReviewCellClass
+            
+            let data = activityListdetailModelObj?.data?.activity_rating
+            
+            if let review = activityListdetailModelObj?.data?.activity_rating?[indexPath.row] {
+                
+                let currentUserId = UserDefaults.standard.integer(forKey: "myid")
+                
+                // Show edit button only for your own reviews
+                if review.user?.user_id == currentUserId {
+                    cell.ratingeditBtn.isHidden = false
+                    cell.ratingeditBtnAction.isHidden = false
+                    
+                } else {
+                    cell.ratingeditBtn.isHidden = true
+                    cell.ratingeditBtnAction.isHidden = true
+                }
+            }
+            cell.editCommentBtn = {
+                self.blurView.isHidden = false
+                self.texviewF.text = data?[indexPath.row].description
+                self.starRatingView.rating = Double(data?[indexPath.row].rating ?? 0)
+                let cell = self.reviewPhotoCellCollectionView.dequeueReusableCell(withReuseIdentifier: "reviewPhotoCell", for: indexPath) as! reviewPhotoCell
+                // safely get the review images
+                   let baseURL = "https://mobappssolutions.in/uzoefu/public/images/rating_images"
+                   if let imageName = self.activityListdetailModelObj?.data?.activity_rating?[indexPath.row].images?.first,
+                      let url = URL(string: "\(baseURL)/\(imageName)") {
+                       // load image using SDWebImage
+                       cell.uploardimages.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholder"))
+                   } else {
+                       cell.uploardimages.image = UIImage(named: "placeholder")
+                   }
+                self.reviewPhotoCellCollectionView.reloadData()
+                
+                
+            }
+            cell.desciptionOfReviewer.text = data?[indexPath.row].description
+            
+            cell.ratingView.rating = Double(data?[indexPath.row].rating ?? 0)
+
+            cell.nameofreviewer.text = activityListdetailModelObj?.data?.activity_rating?[indexPath.row].user?.name
+            
+            
+            let imgUrl = "https://mobappssolutions.in/uzoefu/public/uploads/users"
+            if let imageName = activityListdetailModelObj?.data?.activity_rating?[indexPath.row].user?.image,
+               let url = URL(string: "\(imgUrl)/\(imageName)") {
+                cell.imageOfReviewer.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholder"))
+            } else {
+                cell.imageOfReviewer.image = UIImage(named: "placeholder")
+            }
+
+
+            
+             
+            let baseURL = "https://mobappssolutions.in/uzoefu/public/images/rating_images"
+            let reviewImages = activityListdetailModelObj?.data?.activity_rating?[indexPath.row].images ?? []
+            cell.images = reviewImages.map { "\(baseURL)/\($0)" }
+
             cell.selectionStyle = .none
             return cell
         } else if tableView == fourthView.faqTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "FAQCell", for: indexPath) as! FAQCell
-            cell.selectionStyle = .none
-            return cell
-        }
+            // Use the section index to fetch the correct FAQ
+            if let faqs = activityListdetailModelObj?.data?.faqs, indexPath.section < faqs.count {
+                    cell.faqLable.text = faqs[indexPath.section].answer ?? "No answer available"
+                } else {
+                    cell.faqLable.text = "No answer available"
+                }
+
+                cell.selectionStyle = .none
+                return cell
+            }
 
         return UITableViewCell()
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == communicationCollection {
+            switch indexPath.row {
+            case 0://Phone
+                print(" Phone tapped")
+                let phoneNumber = "+27634854147"
+                if let phoneURL = URL(string: "tel://\(phoneNumber.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")"),
+                   UIApplication.shared.canOpenURL(phoneURL) {
+                    UIApplication.shared.open(phoneURL, options: [:], completionHandler: nil)
+                } else {
+                    print("⚠️ Cannot make call")
+                }
+            case 1: // Map
+                let address = "5467 Gymnema St Waterberg Fields estate Kosmosdal, Centurion"
+                let encodedAddress = address.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+                if let url = URL(string: "http://maps.apple.com/?q=\(encodedAddress)"),
+                   UIApplication.shared.canOpenURL(url) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                } else {
+                    print("⚠️ Cannot open Maps")
+                }
+                                
+            case 2 :
+                print("🔗 Share tapped")
+                let textToShare = "Check out this location: 5467 Gymnema St Waterberg Fields estate Kosmosdal, Centurion"
+                
+                let activityVC = UIActivityViewController(activityItems: [textToShare], applicationActivities: nil)
+                
+                if let popover = activityVC.popoverPresentationController {
+                    popover.sourceView = self.view
+                    popover.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+                    popover.permittedArrowDirections = []
+                }
+                
+                self.present(activityVC, animated: true, completion: nil)
+            default:
+                break
+            }
+        }
+            
+        
+        else if collectionView == companyDetailCollectionViewSecond {
+            selectedImageIndex = indexPath.row
+                  companyDetailCollectionView.reloadData()
+            
+            
+        }
     }
 }
 extension ActivityScreenVC {
     func activityListdetailApi(category_id: Int) {
-        let param: [String: Any] = ["activity_id": didselctletCategoryId ?? 0]
+        let param: [String: Any] = ["activity_id": didselctletCategoryId]
         print(param)
         
         ActivityDetailViewModel.activitydetailListApi(viewController: self, parameters: param as NSDictionary) { response in
             self.activityListdetailModelObj = response
             print("Api Suceess Called")
             self.companyDetailCollectionViewSecond.reloadData()
+            self.companyDetailCollectionView.reloadData()
             self.categoryNameLabel.text = self.activityListdetailModelObj?.data?.activity?.category?.name ?? "No Category"
             self.activity_nameLable.text = self.activityListdetailModelObj?.data?.activity?.activity_name ?? "No activity"
-            self.priceLable.text = self.activityListdetailModelObj?.data?.price?.group_price ?? "0"
+            UserDefaults.standard.set(self.activity_nameLable.text , forKey: "name")
+            
+            self.activinameLabel.text = self.activityListdetailModelObj?.data?.activity?.activity_name ?? "No activity"
+            
+            self.priceLable.text = "R " + (self.activityListdetailModelObj?.data?.price?.group_price ?? "0")
+            
+            self.adultprice = self.activityListdetailModelObj?.data?.price?.adult_base ?? "0"
+            self.childreenprice = self.activityListdetailModelObj?.data?.price?.children_base ?? "0"
+            
             self.firstView.descriptionTextLable.text = self.activityListdetailModelObj?.data?.description?.description ?? "Nice to Meet You!"
             let branchName = self.activityListdetailModelObj?.data?.activity?.branch?.branch_name ?? ""
             let town = self.activityListdetailModelObj?.data?.activity?.branch?.town ?? ""
-
+            
             self.firstView.branchAndaddressLabel.text = "\(branchName), \(town)"
+            UserDefaults.standard.set("\(branchName), \(town)", forKey: "branchAddress")
+            
             let contactNumber = self.activityListdetailModelObj?.data?.activity?.branch?.contact_number ?? ""
             self.firstView.celllarNumber.text = contactNumber.isEmpty ? "" : "Tel: +\(contactNumber)"
-
+            
+            
             let cellularnum = self.activityListdetailModelObj?.data?.activity?.branch?.contact_number ?? ""
             self.firstView.celllarNumber.text = cellularnum.isEmpty ? "" : "Cel: +\(cellularnum)"
-
             
             
+            self.firstView.timeValue.text = self.activityListdetailModelObj?.data?.today_hours ?? ""
             
             if let highlights = self.activityListdetailModelObj?.data?.description?.highlights {
                 let allHighlights = highlights.compactMap { $0.description }.joined(separator: "\n\n• ")
                 self.firstView.highlight1.text = "• " + allHighlights
+                
+                self.expandedSectionFAQ = Array(repeating: false, count: self.activityListdetailModelObj?.data?.faqs?.count ?? 0)
+                self.fourthView.faqTableView.reloadData()
             }
-
-
+        }
+    }
+    
+    func ratingApi(){
+        let param: [String: Any] = ["activity_id": didselctletCategoryId ?? 0,"rating":ratings ?? 0.0,"description":texviewF.text ?? "","images[]":selectedImages]
+        print(param)
+        ActivityDetailViewModel.ratingApi(viewController: self, parameters: param as NSDictionary, images: selectedImages) { response in
+            self.ratingModelObj = response
+            CommonMethods.showAlertMessage(title: "", message: self.ratingModelObj?.message ?? "", view: self)
+            print("Api Suceess Called")
+            self.ratings = 0.0
+            self.texviewF.text = ""
+            self.starRatingView.rating = 0.0
+            self.postButton.backgroundColor = #colorLiteral(red: 0.4941176471, green: 0.8235294118, blue: 0, alpha: 1)
+            self.postButton.titleLabel?.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+            self.selectedImages.removeAll()
+            self.reviewPhotoCellCollectionView.reloadData()
+            
+        }
+        
+    }
+}
+extension ActivityScreenVC: PHPickerViewControllerDelegate {
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        picker.dismiss(animated: true, completion: nil)
+        
+        for result in results {
+            if result.itemProvider.canLoadObject(ofClass: UIImage.self) {
+                result.itemProvider.loadObject(ofClass: UIImage.self) { [weak self] object, error in
+                    if let image = object as? UIImage {
+                        DispatchQueue.main.async {
+                            self?.selectedImages.append(image)
+                            self?.reviewPhotoCellCollectionViewHeight.constant = 145
+                            self?.reviewPhotoCellCollectionView.isHidden = false
+                            self?.reviewPhotoCellCollectionView.reloadData()
+                        }
+                    }
+                }
+            }
+        }
+    }
+    func wishListApi(activity_id:Int) {
+        let param = ["activity_id":activity_id]
+        
+        print(param)
+        
+        WishListViewModel.wishListApi(viewController: self, parameters: param as NSDictionary) {(response) in
+            self.wishListmodelObj = response
+            print("jai hind")
+            self.companyDetailCollectionView.reloadData()
         }
     }
 }
+//extension ActivityScreenVC: ExploreexpericeFilterDelegate {
+//    func didSelectActivity(activityID: Int) {
+//        let vc = storyboard?.instantiateViewController(withIdentifier: "ActivityScreenVC") as! ActivityScreenVC
+//        vc.didselctletCategoryId = activityID
+//        navigationController?.pushViewController(vc, animated: true)
+//    }
+//}

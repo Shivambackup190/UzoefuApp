@@ -257,6 +257,16 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="fidayLbl" destination="qPG-Th-Cvj" id="JEj-7E-CQu"/>
+                <outlet property="mondayLbl" destination="kfg-u5-0U5" id="J7Z-rc-AIE"/>
+                <outlet property="publicLbl" destination="5YO-be-JaY" id="64x-5X-xcN"/>
+                <outlet property="saturdayLbl" destination="ZrQ-dT-Sov" id="Jmh-eX-Ddt"/>
+                <outlet property="sundayLbl" destination="RmG-Io-oYh" id="CVz-sF-Ouk"/>
+                <outlet property="thrusdayLbl" destination="IqQ-R2-aIp" id="EVE-Sa-46m"/>
+                <outlet property="tuesdayLbl" destination="XAk-hb-AKp" id="hz5-S8-D8F"/>
+                <outlet property="wednesdayLbl" destination="sTI-mc-W0u" id="Rw0-1E-eKA"/>
+            </connections>
             <point key="canvasLocation" x="65.648854961832058" y="121.12676056338029"/>
         </tableViewCell>
     </objects>

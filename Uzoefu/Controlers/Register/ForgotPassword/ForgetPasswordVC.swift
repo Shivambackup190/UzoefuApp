@@ -16,13 +16,9 @@ class ForgetPasswordVC: UIViewController {
 
         
     }
-    
-
     @IBAction func backActionBtn(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
-    
-
     @IBAction func sedOtpActionBtn(_ sender: Any) {
         forgetPasswordApi()
     }
@@ -35,7 +31,7 @@ extension ForgetPasswordVC {
             self.forgetModelobJ = response
             CommonMethods.showAlertMessageWithHandler(title: "", message: response?.message ?? "", view: self) {
                 let nav = self.storyboard?.instantiateViewController(withIdentifier: "OTPVC") as! OTPVC
-                nav.loginId = response?.data
+                nav.loginId = response?.data?.id
                 self.navigationController?.pushViewController(nav, animated: true)
             }
         }

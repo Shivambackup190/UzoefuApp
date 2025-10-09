@@ -27,6 +27,9 @@ class WishListVC: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var createdestinationTf: FloatingTextField!
     
+    @IBOutlet weak var mynextActivitieslbel: UILabel!
+    
+    
     var wishlistdataModelobj: WishlistDataModel?
     var wishlistdataDeleteModelobj: WishlistDataDeleteModel?
     var adtivityId: Int?
@@ -34,8 +37,23 @@ class WishListVC: UIViewController, UITextFieldDelegate {
     var isEditingMode = false
     var TripListModelObj:TripListModel?
     var createTripModelObj:AddTripModel?
+    var notificationcountModelObj:NotificationCountModel?
+    let noDataLabel: UILabel = {
+             let label = UILabel()
+             label.text = "No Data Found!"
+             label.textAlignment = .center
+             label.textColor = .darkGray
+             label.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+             label.isHidden = true
+             return label
+         }()
+    
+    
+    @IBOutlet weak var countLable: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        noDataLabel.frame = wishListTableView.bounds
+        wishListTableView.backgroundView = noDataLabel
         wishListTableView.allowsSelection = true
         tittletripTF.forwardDelegate = self
         destinationTextField.forwardDelegate = self
@@ -65,6 +83,8 @@ class WishListVC: UIViewController, UITextFieldDelegate {
         
         wishListTableView.delegate = self
         wishListTableView.dataSource = self
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -74,6 +94,7 @@ class WishListVC: UIViewController, UITextFieldDelegate {
         wishlistdataApi()
         isEditingMode = false
         tripListApi()
+        notificationCountListApi()
     }
     
     
@@ -106,6 +127,8 @@ class WishListVC: UIViewController, UITextFieldDelegate {
                 // Confirm delete
                 alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { [weak self] _ in
                     self?.wishlistdeletedataApi()
+                   
+
                 }))
                 
                 present(alert, animated: true)
@@ -158,7 +181,10 @@ extension WishListVC: UITableViewDelegate, UITableViewDataSource {
         if tableView == selectTripCellTableView {
             return TripListModelObj?.data?.count ?? 0
         } else {
+            self.noDataLabel.isHidden = wishlistdataModelobj?.data?.count  == 0 ? false : true
+            
             return wishlistdataModelobj?.data?.count ?? 0
+//            return wishlistdataModelobj?.data?.count ?? 0
         }
     }
     
@@ -183,7 +209,7 @@ extension WishListVC: UITableViewDelegate, UITableViewDataSource {
             }
             
             cell.wishlistName.text = wishDict?.name
-            cell.priceable.text = String(wishDict?.price ?? 0)
+            cell.priceable.text = String(wishDict?.price ?? "")
             cell.rating_count.text = "(\(wishDict?.ratingCount ?? 0))"
             
             if let icon = wishDict?.image {
@@ -206,7 +232,7 @@ extension WishListVC: UITableViewDelegate, UITableViewDataSource {
             guard let id = wishlistdataModelobj?.data?[indexPath.row].id else { return }
             
             if isEditingMode {
-                // ✅ Only toggle selection in edit mode
+                //  Only toggle selection in edit mode
                 if let cell = tableView.cellForRow(at: indexPath) as? WishListTableViewCell {
                     if selectedActivityIds.contains(id) {
                         selectedActivityIds.removeAll { $0 == id }
@@ -217,7 +243,7 @@ extension WishListVC: UITableViewDelegate, UITableViewDataSource {
                     }
                 }
             } else {
-                // ✅ Normal mode → navigate//ikmoikomo
+                // Normal mode → navigate//ikmoikomo
                 let nav = self.storyboard?.instantiateViewController(withIdentifier: "ActivityScreenVC") as! ActivityScreenVC
                 nav.didselctletCategoryId = wishlistdataModelobj?.data?[indexPath.row].activity_id
                 self.navigationController?.pushViewController(nav, animated: true)
@@ -248,7 +274,7 @@ extension WishListVC {
             self.wishListTableView.reloadData()
         }
     }
-
+    
     
     func wishlistdeletedataApi() {
         let validIds = Set(wishlistdataModelobj?.data?.compactMap { $0.id } ?? [])
@@ -261,10 +287,16 @@ extension WishListVC {
             guard let self = self else { return }
             self.wishlistdataDeleteModelobj = response
             self.wishlistdataApi()
+            
+            self.blurView.isHidden = true
+            editButtonOutlet.isHidden = false
+            isEditingMode = false
+            
+            
         }
     }
     func tripListApi() {
-       
+        
         let param = [String:Any]()
         print(param)
         
@@ -276,7 +308,7 @@ extension WishListVC {
         }
     }
     func createtripListApi() {
-       
+        
         var param = [String:Any]()
         param = ["title":createTittleTf.text ?? "","destination":destinationTextField.text ?? ""]
         print(param)
@@ -292,5 +324,14 @@ extension WishListVC {
             
         }
     }
-
+    func notificationCountListApi(){
+        let param = [String:Any]()
+        NotificationListViewModel.notificationCountListApi(viewController: self, parameters: param as NSDictionary) {  response in
+            self.notificationcountModelObj = response
+            self.countLable.text = "\(self.notificationcountModelObj?.data ?? 0)"
+            
+            print("Success")
+        }
+    }
+    
 }

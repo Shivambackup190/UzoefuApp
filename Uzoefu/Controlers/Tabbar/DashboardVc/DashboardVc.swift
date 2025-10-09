@@ -1,26 +1,64 @@
 import UIKit
 
-class DashboardVc: UIViewController {
+class DashboardVc: UIViewController, ExploreexpericeFilterDelegate, filterDelegate {
+    func filtervalues() {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "SearcResultExplorVc") as! SearcResultExplorVc
+        vc.ApplyFilterValues = "apply"
+        navigationController?.pushViewController(vc, animated: true)
+    }
     
+    func didSelectActivity(activityID: Int) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "ActivityScreenVC") as! ActivityScreenVC
+        vc.didselctletCategoryId = activityID
+        navigationController?.pushViewController(vc, animated: true)
+    }
     @IBOutlet weak var myImageView: UIImageView!
     @IBOutlet weak var myscrolleview: UIScrollView!
     @IBOutlet weak var experinceActiviyvollotionView: UICollectionView!
     @IBOutlet weak var discovercollectionView: UICollectionView!
     @IBOutlet weak var exploreCollectionView: UICollectionView!
     @IBOutlet weak var experinceActiviyvollotionViewSecond: UICollectionView!
-    
-
-  
     @IBOutlet weak var scroolView: UIScrollView!
+    
+        var isLoading = false
+
+        var current_page = 0
+
+        var total_pages = 0
+
+        var pageId = 1
+
+        var spinner = UIActivityIndicatorView()
+    let noDataLabel: UILabel = {
+                 let label = UILabel()
+                 label.text = "No Activity Found!"
+                 label.textAlignment = .center
+                 label.textColor = .darkGray
+                 label.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+                 label.isHidden = true
+                 return label
+             }()
+    
+    
     var categoriesModelObj:ExploreCategoriesModel?
     var activityListModelObj:ActivityListModel?
     var wishListmodelObj:WishListModel?
     var activity_idselected:Int?
     var selectedIndexes: [IndexPath] = []
     var didselctletCategoryId :Int?
+    var discoverdestinationObj:DiscoverDestinationModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        noDataLabel.frame = experinceActiviyvollotionViewSecond.bounds
+        experinceActiviyvollotionViewSecond.backgroundView = noDataLabel
+        
+        
+        pageId = 1
+            isLoading = false
+            discoverdestinationApi(page: pageId)
+
         exploreCollectionView.allowsMultipleSelection = true
         experinceActiviyvollotionViewSecond.delegate = self
         experinceActiviyvollotionViewSecond.dataSource = self
@@ -51,6 +89,7 @@ class DashboardVc: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         exploreCategoriesApi()
+        discoverdestinationApi(page: pageId)
         activityListApi(isInitialLoad: true)
     }
     
@@ -81,10 +120,9 @@ class DashboardVc: UIViewController {
         
         self.navigationController?.pushViewController(nav, animated: true)
     }
-    
-    
     @IBAction func filterBtnAction(_ sender: UIButton) {
         let vc = storyboard?.instantiateViewController(withIdentifier: "FilterVC") as! FilterVC
+        vc.delegate = self
         vc.modalPresentationStyle = .pageSheet
 
         if let sheet = vc.sheetPresentationController {
@@ -99,25 +137,23 @@ class DashboardVc: UIViewController {
         present(vc, animated: true)
 
     }
-
-    
-    @IBAction func exploreSearchAction(_ sender: UIButton) {
-        let vc = storyboard?.instantiateViewController(withIdentifier: "ExploreexpericeFilter") as! ExploreexpericeFilter
-        vc.modalPresentationStyle = .pageSheet
+@IBAction func exploreSearchAction(_ sender: UIButton) {
+    let vc = storyboard?.instantiateViewController(withIdentifier: "ExploreexpericeFilter") as! ExploreexpericeFilter
         
-        if let sheet = vc.sheetPresentationController {
-            if #available(iOS 16.0, *) {     sheet.detents = [
-                .custom { _ in
-                    return 850
-                }
-            ]
+       
+        vc.delegate = self
+        
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .pageSheet
+        if let sheet = nav.sheetPresentationController {
+            if #available(iOS 16.0, *) {
+                sheet.detents = [.custom { _ in 850 }]
             } else {
                 sheet.detents = [.large()]
             }
             sheet.prefersGrabberVisible = true
         }
-        
-        present(vc, animated: true)
+        present(nav, animated: true)
     }
 }
 //nwcode
@@ -127,26 +163,47 @@ extension DashboardVc: UICollectionViewDelegate, UICollectionViewDataSource, UIC
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == discovercollectionView {
-            return 9
+            return discoverdestinationObj?.data?.count ?? 0
         } else if collectionView == experinceActiviyvollotionView {
-            return activityListModelObj?.data?.activities?.count ?? 0
+            return activityListModelObj?.data?.count ?? 0
             
         } else if collectionView == exploreCollectionView {
             return categoriesModelObj?.data?.count ?? 0
         } else if collectionView == experinceActiviyvollotionViewSecond {
-            return activityListModelObj?.data?.activities?.count ?? 0
-            
+//            return activityListModelObj?.data?.count ?? 0
+            self.noDataLabel.isHidden = activityListModelObj?.data?.count   == 0 ? false : true
+                return activityListModelObj?.data?.count ?? 0
         }
         return 0
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == discovercollectionView {
-            return collectionView.dequeueReusableCell(withReuseIdentifier: "discovercell", for: indexPath) as! discoverdestinationCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "discovercell", for: indexPath) as! discoverdestinationCell
+            cell.branch_name.text = discoverdestinationObj?.data?[indexPath.row].branch_name
+            let activityCount = discoverdestinationObj?.data?[indexPath.row].activity_count ?? 0
+            cell.branchCount.text = "(\(activityCount) Activities)"
+
+            
+            if let activities = discoverdestinationObj?.data, indexPath.row < activities.count {
+                let activity = activities[indexPath.row]
+                if let icon = activity.activity_image {
+                    let cleanedIcon = icon.replacingOccurrences(of: "\\/", with: "/")
+                    let fullURLString = (activityListModelObj?.imagePath ?? "") + "/" + cleanedIcon
+                    if let url = URL(string: fullURLString) {
+                        cell.dasboradImg.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholder"))
+                    } else {
+                        cell.dasboradImg.image = UIImage(named: "placeholder")
+                    }
+                }
+                
+            }
+           return cell
+            
         } else if collectionView == experinceActiviyvollotionView {
 
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "experiencecell", for: indexPath) as! ExperinceactivityCell
             
-            if let activities = self.activityListModelObj?.data?.activities,
+            if let activities = self.activityListModelObj?.data,
                indexPath.row < activities.count {
                 
                 let activity = activities[indexPath.row]
@@ -155,11 +212,24 @@ extension DashboardVc: UICollectionViewDelegate, UICollectionViewDataSource, UIC
                 
                 cell.todayHours.setTodayHoursText(hours: activity.today_hours)
                 
-                cell.rating.text = activity.rating ?? ""
-                cell.activity_price.setPriceText(price: activity.activity_price ?? 0)
+//                cell.rating.text = "\(activity.rating ?? "0.0") (\(activity.rating_count ?? 0))"
                 
-                
-                
+                let ratingValueDouble = activity.rating ?? "0.0"
+            
+                let ratingCount = " (\(activity.rating_count ?? 0))"
+                let text = ratingValueDouble + ratingCount
+
+                let attr = NSMutableAttributedString(string: text)
+                attr.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 14), range: NSRange(location: 0, length: ratingValueDouble.count))
+                attr.addAttribute(.foregroundColor, value: #colorLiteral(red: 0.4, green: 0.4, blue: 0.4, alpha: 1), range: NSRange(location: 0, length: ratingValueDouble.count))
+
+
+                attr.addAttribute(.font, value: UIFont.systemFont(ofSize: 13), range: NSRange(location: ratingValueDouble.count, length: ratingCount.count))
+                attr.addAttribute(.foregroundColor, value: UIColor.gray, range: NSRange(location: ratingValueDouble.count, length: ratingCount.count))
+
+                cell.rating.attributedText = attr
+
+                cell.activity_price.setPriceText(price: activity.activity_price ?? "")
                 
                 cell.activityName.text = activity.name
                 cell.wishListImg.image = activity.is_wish == true
@@ -173,14 +243,11 @@ extension DashboardVc: UICollectionViewDelegate, UICollectionViewDataSource, UIC
                     if let id = activity.id {
                         self.wishListApi(activity_id: id)
                     }
-                    self.activityListModelObj?.data?.activities?[indexPath.row].is_wish?.toggle()
+                    self.activityListModelObj?.data?[indexPath.row].is_wish?.toggle()
                     self.experinceActiviyvollotionView.reloadData()
                 }
             }
-
-            
-            
-            if let activities = activityListModelObj?.data?.activities, indexPath.row < activities.count {
+            if let activities = activityListModelObj?.data, indexPath.row < activities.count {
                 let activity = activities[indexPath.row]
                 if let icon = activity.image {
                     let cleanedIcon = icon.replacingOccurrences(of: "\\/", with: "/")
@@ -212,22 +279,37 @@ extension DashboardVc: UICollectionViewDelegate, UICollectionViewDataSource, UIC
                 }
             }
             didselctletCategoryId = categoriesModelObj?.data?[indexPath.row].id
+        
             cell.setSelected(selectedIndexes.contains(indexPath))
             return cell
             
         } else if collectionView == experinceActiviyvollotionViewSecond {
             let cell = experinceActiviyvollotionViewSecond.dequeueReusableCell(withReuseIdentifier: "experiencecellSecond", for: indexPath) as! ExploreActivitySecondCell
-            let activityDict = activityListModelObj?.data?.activities?[indexPath.row]
+            let activityDict = activityListModelObj?.data?[indexPath.row]
 
             
             cell.activityName.text = activityDict?.name
             
             cell.todayHours.setTodayHoursText(hours: activityDict?.today_hours)
             
-            cell.rating.text = activityDict?.rating ?? ""
-            cell.activity_price.setPriceText(price: activityDict?.activity_price ?? 0)
+//            cell.rating.text = activityDict?.rating ?? ""
+            let ratingValueDouble = activityDict?.rating ?? "0.0"
+        
+            let ratingCount = " (\(activityDict?.rating_count ?? 0))"
+            let text = ratingValueDouble + ratingCount
+
+            let attr = NSMutableAttributedString(string: text)
+            attr.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 14), range: NSRange(location: 0, length: ratingValueDouble.count))
+            attr.addAttribute(.foregroundColor, value: #colorLiteral(red: 0.4, green: 0.4, blue: 0.4, alpha: 1), range: NSRange(location: 0, length: ratingValueDouble.count))
+
+
+            attr.addAttribute(.font, value: UIFont.systemFont(ofSize: 13), range: NSRange(location: ratingValueDouble.count, length: ratingCount.count))
+            attr.addAttribute(.foregroundColor, value: UIColor.gray, range: NSRange(location: ratingValueDouble.count, length: ratingCount.count))
+            cell.rating.attributedText = attr
             
-            if let activity = self.activityListModelObj?.data?.activities?[indexPath.row] {
+            cell.activity_price.setPriceText(price: activityDict?.activity_price ?? "")
+            
+            if let activity = self.activityListModelObj?.data?[indexPath.row] {
                 cell.activityName.text = activity.name
                 cell.wishListImg.image = activity.is_wish == true
                     ? #imageLiteral(resourceName: "greenheart")
@@ -240,13 +322,13 @@ extension DashboardVc: UICollectionViewDelegate, UICollectionViewDataSource, UIC
                     if let id = activity.id {
                         self.wishListApi(activity_id: id)
                     }
-                    self.activityListModelObj?.data?.activities?[indexPath.row].is_wish?.toggle()
+                    self.activityListModelObj?.data?[indexPath.row].is_wish?.toggle()
                     self.experinceActiviyvollotionViewSecond.reloadData()
                 }
             }
             
             
-            if let icon = activityListModelObj?.data?.activities?[indexPath.row].image {
+            if let icon = activityListModelObj?.data?[indexPath.row].image {
                 let cleanedIcon = icon.replacingOccurrences(of: "\\/", with: "/")
                 
                 let fullURLString = imagePathUrl + cleanedIcon
@@ -312,23 +394,37 @@ extension DashboardVc: UICollectionViewDelegate, UICollectionViewDataSource, UIC
         }
         else if collectionView == experinceActiviyvollotionView {
             
-            if let activities = activityListModelObj?.data?.activities,
+            if let activities = activityListModelObj?.data,
                indexPath.row < activities.count,
                let cell = collectionView.cellForItem(at: indexPath) as? ExperinceactivityCell {
                 
                 let categoryId = activities[indexPath.row].id ?? 0
+                UserDefaults.standard.set(categoryId, forKey: "id")
+                
+//                let acname = activities[indexPath.row].name ?? ""
+//                UserDefaults.standard.set(acname, forKey: "name")
                 
                 let nav = self.storyboard?.instantiateViewController(withIdentifier: "ActivityScreenVC") as! ActivityScreenVC
                 nav.didselctletCategoryId = categoryId
+                
+                nav.openTime = activities[indexPath.row].today_hours ?? ""
                 self.navigationController?.pushViewController(nav, animated: true)
                 
             }
         }
         else if collectionView == experinceActiviyvollotionViewSecond {
-            guard let categoryId = activityListModelObj?.data?.activities?[indexPath.row].id,
+            guard let categoryId = activityListModelObj?.data?[indexPath.row].id,
                   let cell = collectionView.cellForItem(at: indexPath) as? ExploreActivitySecondCell else { return }
             let nav = self.storyboard?.instantiateViewController(withIdentifier: "ActivityScreenVC") as! ActivityScreenVC
             nav.didselctletCategoryId = categoryId
+            self.navigationController?.pushViewController(nav, animated: true)
+        }
+        else if collectionView == discovercollectionView {
+            let nav = self.storyboard?.instantiateViewController(withIdentifier: "SearcResultExplorVc") as! SearcResultExplorVc
+       
+            nav.myvalue = "\(discoverdestinationObj?.data?[indexPath.row].branch_name ?? "") (\(discoverdestinationObj?.data?[indexPath.row].activity_count ?? 0))"
+            nav.didselctletCategoryId = discoverdestinationObj?.data?[indexPath.row].branch_id
+            nav.myvalueapicallS = "apicalls"
             self.navigationController?.pushViewController(nav, animated: true)
         }
         
@@ -338,7 +434,7 @@ extension DashboardVc: UICollectionViewDelegate, UICollectionViewDataSource, UIC
     
     extension DashboardVc {
         func exploreCategoriesApi() {
-            var param = [String:Any]()
+            let param = [String:Any]()
             
             print(param)
             
@@ -381,7 +477,59 @@ extension DashboardVc: UICollectionViewDelegate, UICollectionViewDataSource, UIC
                 self.exploreCollectionView.reloadData()
             }
         }
-        
-        
-        
+//        func discoverdestinationApi() {
+//            let param = [String:Any]()
+//            
+//            print(param)
+//            
+//            DiscoverDestinationViewModel.discoverDestinationApi(viewController: self, parameters: param as NSDictionary) {(response) in
+//                self.discoverdestinationObj = response
+//                print("jai hind")
+//                self.discovercollectionView.reloadData()
+//            }
+//        }
+        func discoverdestinationApi(page: Int) {
+            let param = ["page": page]
+            print("📤 Params:", param)
+
+            DiscoverDestinationViewModel.discoverDestinationApi(viewController: self, parameters: param as NSDictionary) { response in
+                guard let response = response else { return }
+
+                if page == 1 {
+                    // 🔄 First page: Replace
+                    self.discoverdestinationObj = response
+                } else {
+                    // 📥 Next pages: Append new data
+                    var existingData = self.discoverdestinationObj?.data ?? []
+                    existingData.append(contentsOf: response.data ?? [])
+                    self.discoverdestinationObj?.data = existingData
+                }
+
+                // 📊 Update pagination info
+                self.current_page = response.current_page ?? 1
+                self.total_pages = response.last_page ?? 1
+                self.isLoading = false
+
+                print("✅ Page \(self.current_page) of \(self.total_pages)")
+                self.discovercollectionView.reloadData()
+            }
+        }
+
+
+
     }
+extension DashboardVc {
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if collectionView == discovercollectionView {
+            let totalItems = discoverdestinationObj?.data?.count ?? 0
+
+            // When last cell is about to show
+            if indexPath.row == totalItems - 1 && !isLoading && current_page < total_pages {
+                isLoading = true
+                pageId += 1
+                discoverdestinationApi(page: pageId)
+            }
+        }
+    }
+
+}

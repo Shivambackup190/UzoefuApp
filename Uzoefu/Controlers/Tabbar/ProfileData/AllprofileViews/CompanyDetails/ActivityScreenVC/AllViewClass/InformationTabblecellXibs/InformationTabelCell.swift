@@ -13,6 +13,21 @@ class InformationTabelCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     
     @IBOutlet weak var contentLable: UILabel!
+
+    @IBOutlet weak var mondayLbl: UILabel!
+    @IBOutlet weak var tuesdayLbl: UILabel!
+    
+    @IBOutlet weak var wednesdayLbl: UILabel!
+    @IBOutlet weak var thrusdayLbl: UILabel!
+    
+    @IBOutlet weak var fidayLbl: UILabel!
+    
+    @IBOutlet weak var saturdayLbl: UILabel!
+    
+    @IBOutlet weak var sundayLbl: UILabel!
+    
+    @IBOutlet weak var publicLbl: UILabel!
+    
     var minusButtom : (()->()) = {}
     override func awakeFromNib() {
         super.awakeFromNib()

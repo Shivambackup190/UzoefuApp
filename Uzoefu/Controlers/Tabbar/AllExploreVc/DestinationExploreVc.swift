@@ -11,51 +11,19 @@ class DestinationExploreVc: UIViewController {
     @IBOutlet weak var backHideShowBtn: UIButton!
     @IBOutlet weak var exploreDestinationColltionView: UICollectionView!
     
+    @IBOutlet weak var countLable: UILabel!
     @IBOutlet weak var destinationplacesCollectionView: UICollectionView!
     var hidevalue:String?
-    var categoryNames = [
-         "Pretotia",
-         "Drakensberg",
-         "Victoria Falls",
-         "Kimberly",
-         "Brits",
-         "Polokwane",
-         "Hout Bay",
-         "Njelele",
-         "New Castle",
-         "Sabie",
-         "Pretotia",
-         "Drakensberg",
-         "Victoria Falls",
-         "Kimberly",
-         "Brits",
-         "Polokwane",
-         "Hout Bay",
-         "Njelele",
-         "New Castle",
-         "Sabie"
-         ]
-    var countValues: [Int] = [
-        400,
-        600,
-        450,
-        1700,
-        350,
-        18,
-        250,
-        66,
-        131,
-        65,
-        50,
-        67,
-        47,
-        32,
-        200,
-        123,47,
-        32,
-        200,
-        123
-    ]
+    var notificationcountModelObj:NotificationCountModel?
+
+    var discoverdestinationObj:DiscoverDestinationModel?
+    var isLoading = false
+    var current_page = 1
+    var total_pages = 1
+    var pageId = 1
+    var spinner = UIActivityIndicatorView(style: .medium)
+
+    var destinationList: [DestinationData] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -63,7 +31,7 @@ class DestinationExploreVc: UIViewController {
             backHideShowBtn.isHidden = false
             weidthBackConstraint.constant = 40
             
-        
+            
         }
         else {
             backHideShowBtn.isHidden = true
@@ -87,6 +55,12 @@ class DestinationExploreVc: UIViewController {
         destinationplacesCollectionView.collectionViewLayout = layout1
         
     }
+    override func viewWillAppear(_ animated: Bool) {
+        pageId = 1
+           isLoading = false
+           discoverdestinationApi(page: pageId)
+        notificationCountListApi()
+    }
     
     @IBAction func bckActionBtn(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
@@ -105,10 +79,10 @@ extension DestinationExploreVc: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == exploreDestinationColltionView {
-            return 4
+            return discoverdestinationObj?.data?.count ?? 0
         }
         else {
-            return 16
+            return discoverdestinationObj?.data?.count ?? 0
         }
         
     }
@@ -118,17 +92,39 @@ extension DestinationExploreVc: UICollectionViewDelegate, UICollectionViewDataSo
         
         if collectionView == destinationplacesCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! DestinationplacesCollectionViewCell
-            cell.categoryLable.text = categoryNames[indexPath.row]
-            cell.countLable.text = "(\(countValues[indexPath.row]))"
+            cell.categoryLable.text = discoverdestinationObj?.data?[indexPath.row].branch_name
+            cell.countLable.text = "(\(discoverdestinationObj?.data?[indexPath.row].activity_count ?? 0))"
             
             return cell
         } else {
             let cell = exploreDestinationColltionView.dequeueReusableCell(
                 withReuseIdentifier: "cell",
                 for: indexPath) as! DestinationExploreCollectionViewCell
+            cell.branchName.text = discoverdestinationObj?.data?[indexPath.row].branch_name
+            let activityCount = discoverdestinationObj?.data?[indexPath.row].activity_count ?? 0
+            cell.branchCount.text = "(\(activityCount) Activities)"
+
+            
+            if let activities = discoverdestinationObj?.data, indexPath.row < activities.count {
+                let activity = activities[indexPath.row]
+                if let icon = activity.activity_image {
+                    let cleanedIcon = icon.replacingOccurrences(of: "\\/", with: "/")
+                    let fullURLString = (discoverdestinationObj?.image_path ?? "") + "/" + cleanedIcon
+                    if let url = URL(string: fullURLString) {
+                        cell.discoverImge.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholder"))
+                    } else {
+                        cell.discoverImge.image = UIImage(named: "placeholder")
+                    }
+                }
+                
+                
+            }
             return cell
         }
+        
+      
     }
+    
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -157,11 +153,11 @@ extension DestinationExploreVc: UICollectionViewDelegate, UICollectionViewDataSo
         
     }
     
-        func collectionView(_ collectionView: UICollectionView,
-                            layout collectionViewLayout: UICollectionViewLayout,
-                            insetForSectionAt section: Int) -> UIEdgeInsets {
-            return UIEdgeInsets(top: 10, left: 5, bottom: 10, right: 5) // smaller side padding
-        }
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 10, left: 5, bottom: 10, right: 5) // smaller side padding
+    }
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
@@ -177,16 +173,101 @@ extension DestinationExploreVc: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == destinationplacesCollectionView {
             let nav = self.storyboard?.instantiateViewController(withIdentifier: "SearcResultExplorVc") as! SearcResultExplorVc
-            nav.myvalue = "\(categoryNames[indexPath.row]) (\(countValues[indexPath.row]))"
+       
+            nav.myvalue = "\(discoverdestinationObj?.data?[indexPath.row].branch_name ?? "") (\(discoverdestinationObj?.data?[indexPath.row].activity_count ?? 0))"
+            nav.didselctletCategoryId = discoverdestinationObj?.data?[indexPath.row].branch_id
+            nav.myvalueapicallS = "apicalls"
 
             self.navigationController?.pushViewController(nav, animated: true)
         }
         else {
             let nav = self.storyboard?.instantiateViewController(withIdentifier: "SearcResultExplorVc") as! SearcResultExplorVc
-          
+            nav.myvalue = "\(discoverdestinationObj?.data?[indexPath.row].branch_name ?? "") (\(discoverdestinationObj?.data?[indexPath.row].activity_count ?? 0))"
+            nav.didselctletCategoryId = discoverdestinationObj?.data?[indexPath.row].branch_id
+            nav.myvalueapicallS = "apicalls"
+
             self.navigationController?.pushViewController(nav, animated: true)
+            
+           
             
         }
         
     }
+}
+extension DestinationExploreVc {
+    //    func discoverdestinationApi() {
+    //        let param = [String:Any]()
+    //
+    //        print(param)
+    //
+    //        DiscoverDestinationViewModel.discoverDestinationApi(viewController: self, parameters: param as NSDictionary) {(response) in
+    //            self.discoverdestinationObj = response
+    //            print("jai hind")
+    //            self.exploreDestinationColltionView.reloadData()
+    //            self.destinationplacesCollectionView.reloadData()
+    //        }
+    //    }
+    func discoverdestinationApi(page: Int) {
+        let param = ["page": page]
+        print(" Params:", param)
+        
+        DiscoverDestinationViewModel.discoverDestinationApi(viewController: self, parameters: param as NSDictionary) { response in
+            guard let response = response else { return }
+            
+            if page == 1 {
+                
+                self.discoverdestinationObj = response
+            } else {
+                
+                var existingData = self.discoverdestinationObj?.data ?? []
+                existingData.append(contentsOf: response.data ?? [])
+                self.discoverdestinationObj?.data = existingData
+            }
+            
+            
+            self.current_page = response.current_page ?? 1
+            self.total_pages = response.last_page ?? 1
+            self.isLoading = false
+            
+            print(" Page \(self.current_page) of \(self.total_pages)")
+            self.destinationplacesCollectionView.reloadData()
+            self.exploreDestinationColltionView.reloadData()
+            
+        }
+    }
+}
+extension DestinationExploreVc {
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if collectionView == destinationplacesCollectionView {
+            let totalItems = discoverdestinationObj?.data?.count ?? 0
+            
+            // 👇 When reaching the last cell, load next page if available
+            if indexPath.row == totalItems - 1 && !isLoading && current_page < total_pages {
+                isLoading = true
+                pageId += 1
+                discoverdestinationApi(page: pageId)
+            }
+        } else {
+            let totalItems = discoverdestinationObj?.data?.count ?? 0
+            
+            // 👇 When reaching the last cell, load next page if available
+            if indexPath.row == totalItems - 1 && !isLoading && current_page < total_pages {
+                isLoading = true
+                pageId += 1
+                discoverdestinationApi(page: pageId)
+            }
+        }
+        
+    }
+}
+extension DestinationExploreVc {
+    func notificationCountListApi(){
+          let param = [String:Any]()
+          NotificationListViewModel.notificationCountListApi(viewController: self, parameters: param as NSDictionary) {  response in
+              self.notificationcountModelObj = response
+              self.countLable.text = "\(self.notificationcountModelObj?.data ?? 0)"
+
+              print("Success")
+          }
+      }
 }

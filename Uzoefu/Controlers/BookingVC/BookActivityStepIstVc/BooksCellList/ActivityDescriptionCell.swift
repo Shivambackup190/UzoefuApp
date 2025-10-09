@@ -8,7 +8,9 @@
 import UIKit
 
 class ActivityDescriptionCell: UITableViewCell {
-
+    
+    @IBOutlet weak var activityDescriptionLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         

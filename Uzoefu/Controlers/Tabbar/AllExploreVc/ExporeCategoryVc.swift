@@ -9,9 +9,11 @@ import UIKit
 
 class ExporeCategoryVc: UIViewController {
     
+    @IBOutlet weak var countLable: UILabel!
     @IBOutlet weak var exporeCatagoriesCollection: UICollectionView!
     var categoriesModelObj:ExploreCategoriesModel?
     var didselctletCategoryId :Int?
+    var notificationcountModelObj:NotificationCountModel?
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -25,6 +27,7 @@ class ExporeCategoryVc: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         exploreCategoriesApi()
+        notificationCountListApi()
     }
     @IBAction func backActionBtn(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
@@ -118,4 +121,14 @@ extension ExporeCategoryVc {
                self.exporeCatagoriesCollection.reloadData()
            }
        }
+    func notificationCountListApi(){
+               let param = [String:Any]()
+               NotificationListViewModel.notificationCountListApi(viewController: self, parameters: param as NSDictionary) {  response in
+                   self.notificationcountModelObj = response
+                   self.countLable.text = "\(self.notificationcountModelObj?.data ?? 0)"
+
+                   print("Success")
+               }
+           }
+
    }

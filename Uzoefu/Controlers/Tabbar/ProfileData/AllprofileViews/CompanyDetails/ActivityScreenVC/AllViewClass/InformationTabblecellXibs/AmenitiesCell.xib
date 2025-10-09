@@ -17,7 +17,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gnh-45-6xR">
-                        <rect key="frame" x="10" y="10" width="340" height="199"/>
+                        <rect key="frame" x="20" y="10" width="320" height="199"/>
                         <string key="text">Magalies Adventures is operated on a working farm and as such holds risk per se, \
         that includes loss of property, personal injury and/or death. Horses and animals \
         may act out of their nature, kick, bite, or be the cause of physical harm or death.
@@ -32,11 +32,14 @@
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="gnh-45-6xR" secondAttribute="bottom" constant="10" id="SAl-AM-jLz"/>
                     <constraint firstItem="gnh-45-6xR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="afO-V1-En0"/>
-                    <constraint firstItem="gnh-45-6xR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="dTp-4d-s9t"/>
-                    <constraint firstAttribute="trailing" secondItem="gnh-45-6xR" secondAttribute="trailing" constant="10" id="sDy-lY-5pq"/>
+                    <constraint firstItem="gnh-45-6xR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="dTp-4d-s9t"/>
+                    <constraint firstAttribute="trailing" secondItem="gnh-45-6xR" secondAttribute="trailing" constant="20" id="sDy-lY-5pq"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="amethiLable" destination="gnh-45-6xR" id="BwN-0u-cFi"/>
+            </connections>
             <point key="canvasLocation" x="154.19847328244273" y="29.225352112676056"/>
         </tableViewCell>
     </objects>

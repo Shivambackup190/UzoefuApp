@@ -18,7 +18,7 @@
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JSY-3N-cfa">
                         <rect key="frame" x="10" y="10" width="374" height="194"/>
-                        <mutableString key="text">Acknowledgement of Risk and Indemnity Agreement
+                        <string key="text">Acknowledgement of Risk and Indemnity Agreement
 
 I, the undersigned, acknowledge that Magalies Adventures is operated on a working farm and understand that participation in any activities may involve inherent risks. These risks may include, but are not limited to, loss or damage to personal property, personal injury, or even death.
 
@@ -29,7 +29,7 @@ By signing this agreement, I voluntarily assume all such risks and agree that Ma
 I hereby release and indemnify Magalies Adventures from any claims, demands, or legal actions arising out of or in connection with my participation in the activities.
 
 Participant Name &amp; Signature: _______________________
-Date: _______________________</mutableString>
+Date: _______________________</string>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -43,6 +43,9 @@ Date: _______________________</mutableString>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="agrrementLable" destination="JSY-3N-cfa" id="O8p-gb-JeC"/>
+            </connections>
             <point key="canvasLocation" x="186.25954198473281" y="27.464788732394368"/>
         </tableViewCell>
     </objects>

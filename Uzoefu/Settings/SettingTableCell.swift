@@ -15,6 +15,5 @@ class SettingTableCell: UITableViewCell {
         super.awakeFromNib()
         
     }
-
    
 }

@@ -183,6 +183,14 @@
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <textInputTraits key="textInputTraits"/>
                                                                 </textField>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b5B-zl-8K2">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="353" height="50"/>
+                                                                    <state key="normal" title="Button"/>
+                                                                    <buttonConfiguration key="configuration" style="plain"/>
+                                                                    <connections>
+                                                                        <action selector="datesectionAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="di1-uY-GEY"/>
+                                                                    </connections>
+                                                                </button>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Calendar" translatesAutoresizingMaskIntoConstraints="NO" id="Enc-N5-RTv">
                                                                     <rect key="frame" x="318" y="12.666666666666657" width="25" height="25"/>
                                                                     <constraints>
@@ -193,12 +201,16 @@
                                                             </subviews>
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                             <constraints>
+                                                                <constraint firstItem="b5B-zl-8K2" firstAttribute="leading" secondItem="eub-x0-d1B" secondAttribute="leading" id="0If-Bd-1WB"/>
                                                                 <constraint firstItem="T9R-1q-fEA" firstAttribute="top" secondItem="eub-x0-d1B" secondAttribute="top" id="3gW-vD-KqW"/>
+                                                                <constraint firstItem="b5B-zl-8K2" firstAttribute="top" secondItem="eub-x0-d1B" secondAttribute="top" id="LCg-ZS-fmY"/>
                                                                 <constraint firstItem="T9R-1q-fEA" firstAttribute="leading" secondItem="eub-x0-d1B" secondAttribute="leading" id="RzZ-5W-zGR"/>
                                                                 <constraint firstAttribute="bottom" secondItem="T9R-1q-fEA" secondAttribute="bottom" id="SpH-Aa-sKm"/>
                                                                 <constraint firstItem="Enc-N5-RTv" firstAttribute="leading" secondItem="T9R-1q-fEA" secondAttribute="trailing" constant="-35" id="WAb-KO-rWD"/>
+                                                                <constraint firstAttribute="bottom" secondItem="b5B-zl-8K2" secondAttribute="bottom" id="YYD-3y-zSN"/>
                                                                 <constraint firstAttribute="trailing" secondItem="Enc-N5-RTv" secondAttribute="trailing" constant="10" id="dMW-XU-JHy"/>
                                                                 <constraint firstItem="Enc-N5-RTv" firstAttribute="centerY" secondItem="eub-x0-d1B" secondAttribute="centerY" id="dgz-gr-c4R"/>
+                                                                <constraint firstAttribute="trailing" secondItem="b5B-zl-8K2" secondAttribute="trailing" id="zPI-wq-VIW"/>
                                                             </constraints>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -558,7 +570,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBrownColor">
-            <color red="0.63529411759999999" green="0.51764705879999995" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.63529411764705879" green="0.51764705882352946" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

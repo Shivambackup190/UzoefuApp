@@ -10,12 +10,15 @@ import Foundation
 struct ForgetPasswordModel: Codable {
     let success: Bool?
     let message: String?
-    let data: Int?
+    let data: value?
+    
+}
+struct value :Codable {
+    let id:Int?
 }
 struct VerificationModel: Codable {
     let success: Bool?
     let message: String?
-    let data: Int?
 }
 struct confirmModel: Codable {
     let success: Bool?

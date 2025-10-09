@@ -82,9 +82,6 @@ extension WelcomeScreenVc: UICollectionViewDelegate, UICollectionViewDataSource 
         
         cell.videoName = videoNames[indexPath.item]
         
-    
-        
-        
         cell.skipBtnClick = {
             let nav = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
             self.navigationController?.pushViewController(nav, animated: true)

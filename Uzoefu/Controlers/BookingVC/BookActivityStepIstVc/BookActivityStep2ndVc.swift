@@ -14,9 +14,10 @@ class BookActivityStep2ndVc: UIViewController {
     @IBOutlet weak var firstNameTf: FloatingTextField!
     
     
+    @IBOutlet weak var countLable: UILabel!
     @IBOutlet weak var addressTf: FloatingTextField!
     @IBOutlet weak var mobileNumberTf: FloatingTextField!
-    
+    var notificationcountModelObj:NotificationCountModel?
     var getProfileModelObj:ProfileModel?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +26,7 @@ class BookActivityStep2ndVc: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         getprofileApi()
+        notificationCountListApi()
     }
     
     @IBAction func backBtnAction(_ sender: Any) {
@@ -34,6 +36,9 @@ class BookActivityStep2ndVc: UIViewController {
     @IBAction func nextBtnAction(_ sender: UIButton) {
         let nav = self.storyboard?.instantiateViewController(withIdentifier: "BookActivityStep3rdVc") as! BookActivityStep3rdVc
         self.navigationController?.pushViewController(nav, animated: false)
+        UserDefaults.standard.setValue(self.mobileNumberTf.text, forKey: "mobile")
+        UserDefaults.standard.setValue(self.addressTf.text, forKey: "add")
+        UserDefaults.standard.setValue(self.fullNameTf.text, forKey: "user")
     }
     
     
@@ -56,12 +61,50 @@ extension BookActivityStep2ndVc {
             self.sirNameTF.text = self.getProfileModelObj?.data?.lastname ?? ""
             self.fullNameTf.text = "\(self.getProfileModelObj?.data?.name ?? "") \(self.getProfileModelObj?.data?.lastname ?? "")"
             
-            self.mobileNumberTf.text = self.getProfileModelObj?.data?.mobile ?? ""
-            self.addressTf.text = self.getProfileModelObj?.data?.city ?? ""
             
-          
             
+            
+            
+            if let apiMobile = self.getProfileModelObj?.data?.mobile, !apiMobile.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                // API ne non-empty value di
+                self.mobileNumberTf.text = apiMobile
+            } else {
+                // API value empty ya nil hai -> user ka input allow karein
+                // Textfield ko blank hi rehne dein
+                self.mobileNumberTf.text = self.mobileNumberTf.text
+                UserDefaults.standard.setValue(self.mobileNumberTf.text, forKey: "mobile")
+            }
+            if let apiadd = self.getProfileModelObj?.data?.city, !apiadd.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                // API ne non-empty value di
+                self.addressTf.text = apiadd
+            } else {
+                // API value empty ya nil hai -> user ka input allow karein
+                // Textfield ko blank hi rehne dein
+                self.addressTf.text = self.mobileNumberTf.text
+                UserDefaults.standard.setValue(self.mobileNumberTf.text, forKey: "add")
+            }
+            if let apiuser = self.getProfileModelObj?.data?.username, !apiuser.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                // API ne non-empty value di
+                self.fullNameTf.text = apiuser
+            } else {
+                // API value empty ya nil hai -> user ka input allow karein
+                // Textfield ko blank hi rehne dein
+                self.fullNameTf.text = self.fullNameTf.text
+                UserDefaults.standard.setValue(self.fullNameTf.text, forKey: "user")
+            }
+
+
             
         }
     }
+    func notificationCountListApi(){
+           let param = [String:Any]()
+           NotificationListViewModel.notificationCountListApi(viewController: self, parameters: param as NSDictionary) {  response in
+               self.notificationcountModelObj = response
+               self.countLable.text = "\(self.notificationcountModelObj?.data ?? 0)"
+
+               print("Success")
+           }
+       }
+
 }

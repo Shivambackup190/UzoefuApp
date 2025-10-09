@@ -11,6 +11,7 @@ import Cosmos
 class OverViewClassUiView: UIView {
     var BookingActionBtn : (()->()) = {}
 
+    @IBOutlet weak var timeValue: UILabel!
     @IBOutlet weak var descriptionTextLable: UILabel!
     @IBOutlet weak var highlight1: UILabel!
     @IBOutlet weak var ratingView: CosmosView!

@@ -12,7 +12,8 @@ class SettingsVC: UIViewController {
     
     @IBOutlet weak var showSettingPopUp: UIView!
     @IBOutlet weak var SettingblurView: UIView!
-    
+    @IBOutlet weak var countLable: UILabel!
+    var notificationcountModelObj:NotificationCountModel?
     let menuItems: [(icon: String, title: String)] = [
         ("about_icon", "About"),
         ("settings_icon", "Settings"),
@@ -31,6 +32,9 @@ class SettingsVC: UIViewController {
       //  SettingblurView.isHidden = true
         setttleTbleView.separatorStyle = .none
        
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        notificationCountListApi()
     }
     
     
@@ -64,4 +68,15 @@ extension SettingsVC :UITableViewDelegate,UITableViewDataSource {
         let nav = self.storyboard?.instantiateViewController(identifier: "SettingsVC") as! SettingsVC
         SettingblurView.isHidden = true
     }
+}
+extension SettingsVC {
+    func notificationCountListApi(){
+           let param = [String:Any]()
+           NotificationListViewModel.notificationCountListApi(viewController: self, parameters: param as NSDictionary) {  response in
+               self.notificationcountModelObj = response
+               self.countLable.text = "\(self.notificationcountModelObj?.data ?? 0)"
+
+               print("Success")
+           }
+       }
 }

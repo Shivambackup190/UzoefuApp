@@ -11,7 +11,6 @@ class ConfirmpwdVC: UIViewController {
    
     @IBOutlet weak var newPasswordTf: UITextField!
     
-    
     @IBOutlet weak var confirmPasswordTf: UITextField!
     var loginId:Int?
     var confirmModelObj:confirmModel?

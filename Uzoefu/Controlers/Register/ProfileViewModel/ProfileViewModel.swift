@@ -44,24 +44,6 @@ class ProfileViewModel{
             }
         }
     }
-//    class func updateProfileImageApi(viewController:UIViewController, parameters:NSDictionary,completion: @escaping (UpdateProfileImageModel?) -> Void) {
-//        DataManager.alamofireNewPostwithHadderRequest(url: updateProfileImageUrl, viewcontroller: viewController, parameters:parameters as? [String:AnyObject]){(response, error) in
-//            print(response!)
-//            if let userResponse = response{
-//                
-//                let userData = try! JSONDecoder().decode(UpdateProfileImageModel.self, from: userResponse)
-//                if userData.success == true {
-//                    completion(userData)
-//                    
-//                }
-//                
-//                else{
-//                    CommonMethods.showAlertMessage(title:"", message: userData.message ?? "", view: viewController)
-//                }
-//            }
-//        }
-//    }
-//}
     class func updateProfileImageApi(viewController:UIViewController, parameters:NSDictionary, image: Data, imageName: String,completion: @escaping (UpdateProfileImageModel?) -> Void) {
         
         DataManager.alamofireNewUpdatePutRßequest(urlmethod: updateProfileImageUrl, parameter: parameters as! [String: Any], userImage: image, imageName: imageName, fileType: "image/jpeg", viewcontroller: viewController) { (responseObject, responseDict) in

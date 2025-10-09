@@ -7,34 +7,56 @@
 
 import UIKit
 
-class SearcResultExplorVc: UIViewController {
+class SearcResultExplorVc: UIViewController, filterDelegate {
+    func filtervalues() {
+        self.dismiss(animated: true) { [weak self] in
+            guard let self = self else { return }
+            self.ApplyFilterValues = "apply"
+            self.hideView.isHidden = false
+            self.hideViewheight.constant = 35
+            self.filterActivityListApi()
+        }
+    }
+
+    
   
     @IBOutlet weak var categoryLbl: UILabel!
     @IBOutlet weak var fileterView: UIView!
     @IBOutlet weak var hideView: UIView!
     @IBOutlet weak var exploreCollectionView: UICollectionView!
     
+    @IBOutlet weak var countLable: UILabel!
     @IBOutlet weak var hideViewheight: NSLayoutConstraint!
     
     @IBOutlet weak var fileterViewHeight: NSLayoutConstraint!
     @IBOutlet weak var expolreTableview: UITableView!
     var myvalue:String?
     var myvalueapicall:String?
+    var myvalueapicallS:String?
     var activityListModelObj:ActivityListModel?
     var didselctletCategoryId :Int?
+    var branchId:Int?
     var wishListmodelObj:WishListModel?
+    var filteractivtyObj:FilterActivitiesModel?
+    var ApplyFilterValues:String?
+    var notificationcountModelObj:NotificationCountModel?
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(didselctletCategoryId)
+        if ApplyFilterValues == "apply" {
+            hideView.isHidden = false
+            hideViewheight.constant = 35
+        }
+        else {
+            hideViewheight.constant = 0
+            hideView.isHidden = true
+        }
         
         categoryLbl.text = myvalue
-        hideViewheight.constant = 0
-        hideView.isHidden = true
+        
         exploreCollectionView.register(
             UINib(nibName: "SearcResultExplorCell", bundle: nil),
             forCellWithReuseIdentifier: "cell"
         )
-        
         exploreCollectionView.delegate = self
         exploreCollectionView.dataSource = self
         
@@ -52,21 +74,35 @@ class SearcResultExplorVc: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         if myvalueapicall == "apicall" {
-            activityListApi(category_id: didselctletCategoryId ?? 0)
-        }
-        else {
+            activityListApi( category_id: didselctletCategoryId ?? 0)
+        } else if myvalueapicallS == "apicalls" {
+            activityListApi(branch_id: didselctletCategoryId ?? 0)
+        } else {
             activityListApi()
         }
-
+        notificationCountListApi()
     }
+    
     
     @IBAction func backActionBtn(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true
         )
+       
+    }
+    
+    @IBAction func notificationAction(_ sender: UIButton) {
+        
+        let nav = self.storyboard?.instantiateViewController(withIdentifier: "NotificationVc") as! NotificationVc
+                      self.navigationController?.pushViewController(nav, animated: true)
+    }
+    @IBAction func menuBtnAction(_ sender: UIButton) {
+        let nav = self.storyboard?.instantiateViewController(withIdentifier: "SettingsVC") as! SettingsVC
+                     self.navigationController?.pushViewController(nav, animated: true)
     }
     
     @IBAction func filterActionBtn(_ sender: UIButton) {
         let vc = storyboard?.instantiateViewController(withIdentifier: "FilterVC") as! FilterVC
+        vc.delegate = self
         vc.modalPresentationStyle = .pageSheet
 
         if let sheet = vc.sheetPresentationController {
@@ -79,6 +115,7 @@ class SearcResultExplorVc: UIViewController {
         }
 
         present(vc, animated: true)
+
     }
 }
 
@@ -86,7 +123,7 @@ extension SearcResultExplorVc: UICollectionViewDelegate, UICollectionViewDataSou
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 //        return activityListModelObj?.data?.count ?? 0
-        let count = activityListModelObj?.data?.activities?.count ?? 0
+        let count = activityListModelObj?.data?.count ?? 0
             return min(count, 2)
     }
     
@@ -94,14 +131,27 @@ extension SearcResultExplorVc: UICollectionViewDelegate, UICollectionViewDataSou
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! SearcResultExplorCell
-        let activityDict = activityListModelObj?.data?.activities?[indexPath.row]
+        let activityDict = activityListModelObj?.data?[indexPath.row]
         
         cell.activityName.text = activityDict?.name
      
         cell.todayHours.setTodayHoursText(hours: activityDict?.today_hours)
 
-        cell.rating.text = activityDict?.rating ?? ""
-        cell.activity_price.setPriceText(price: activityDict?.activity_price ?? 0)
+//        cell.rating.text = activityDict?.rating ?? ""
+        let ratingValueDouble = activityDict?.rating ?? "0.0"
+    
+        let ratingCount = " (\(activityDict?.rating_count ?? 0))"
+        let text = ratingValueDouble + ratingCount
+
+        let attr = NSMutableAttributedString(string: text)
+        attr.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 14), range: NSRange(location: 0, length: ratingValueDouble.count))
+        attr.addAttribute(.foregroundColor, value: #colorLiteral(red: 0.4, green: 0.4, blue: 0.4, alpha: 1), range: NSRange(location: 0, length: ratingValueDouble.count))
+
+
+        attr.addAttribute(.font, value: UIFont.systemFont(ofSize: 13), range: NSRange(location: ratingValueDouble.count, length: ratingCount.count))
+        attr.addAttribute(.foregroundColor, value: UIColor.gray, range: NSRange(location: ratingValueDouble.count, length: ratingCount.count))
+        cell.rating.attributedText = attr
+        cell.activity_price.setPriceText(price: activityDict?.activity_price ?? "")
         
         
         cell.wishListImg.image = activityDict?.is_wish == true
@@ -113,13 +163,13 @@ extension SearcResultExplorVc: UICollectionViewDelegate, UICollectionViewDataSou
                             guard let self = self else { return }
                             
 
-                            if let id = activityListModelObj?.data?.activities?[indexPath.row].id {
+                            if let id = activityListModelObj?.data?[indexPath.row].id {
                                 self.wishListApi(activity_id: id)
                             }
-                            self.activityListModelObj?.data?.activities?[indexPath.row].is_wish?.toggle()
+                            self.activityListModelObj?.data?[indexPath.row].is_wish?.toggle()
                             self.exploreCollectionView.reloadData()
                         }
-        if let icon = activityListModelObj?.data?.activities?[indexPath.row].image {
+        if let icon = activityListModelObj?.data?[indexPath.row].image {
             let cleanedIcon = icon.replacingOccurrences(of: "\\/", with: "/")
             
             let fullURLString = imagePathUrl + cleanedIcon
@@ -171,115 +221,159 @@ extension SearcResultExplorVc: UICollectionViewDelegate, UICollectionViewDataSou
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! SearcResultExplorCell
         
         let nav = self.storyboard?.instantiateViewController(identifier: "ActivityScreenVC") as! ActivityScreenVC
-        nav.didselctletCategoryId = activityListModelObj?.data?.activities?[indexPath.row].id
+        nav.didselctletCategoryId = activityListModelObj?.data?[indexPath.row].id
         self.navigationController?.pushViewController(nav, animated: true)
         
     }
 }
 extension SearcResultExplorVc : UITableViewDataSource,UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return activityListModelObj?.data?.activities?.count ?? 0
+//        return activityListModelObj?.data?.count ?? 0
+        let totalCount = activityListModelObj?.data?.count ?? 0
+        return totalCount > 2 ? totalCount - 2 : 0
     }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ExploreFilterTableCell
-//        cell.selectionStyle = .none
-//        return cell
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ExploreFilterTableCell
-        let activityDict = activityListModelObj?.data?.activities?[indexPath.row]
+        
+        
+        let activityDict = activityListModelObj?.data?[indexPath.row + 2]
         
         cell.activityName.text = activityDict?.name
-     
         cell.todayHours.setTodayHoursText(hours: activityDict?.today_hours)
 
-        cell.rating.text = activityDict?.rating ?? ""
-        cell.activity_price.setPriceText(price: activityDict?.activity_price ?? 0)
-        cell.wishListImg.image = activityDict?.is_wish == true
-            ? UIImage(named: "greenheart")
-            : UIImage(named: "hearttt")
+        let ratingValueDouble = activityDict?.rating ?? "0.0"
+        let ratingCount = " (\(activityDict?.rating_count ?? 0))"
+        let text = ratingValueDouble + ratingCount
+
+        let attr = NSMutableAttributedString(string: text)
+        attr.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 14), range: NSRange(location: 0, length: ratingValueDouble.count))
+        attr.addAttribute(.foregroundColor, value: #colorLiteral(red: 0.4, green: 0.4, blue: 0.4, alpha: 1), range: NSRange(location: 0, length: ratingValueDouble.count))
+        attr.addAttribute(.font, value: UIFont.systemFont(ofSize: 13), range: NSRange(location: ratingValueDouble.count, length: ratingCount.count))
+        attr.addAttribute(.foregroundColor, value: UIColor.gray, range: NSRange(location: ratingValueDouble.count, length: ratingCount.count))
+        cell.rating.attributedText = attr
+        cell.activity_price.setPriceText(price: activityDict?.activity_price ?? "")
+
+        cell.wishListImg.image = activityDict?.is_wish == true ? UIImage(named: "greenheart") : UIImage(named: "hearttt")
+
         cell.likeBtn = { [weak self] in
             guard let self = self else { return }
-            
-
-            if let id = activityListModelObj?.data?.activities?[indexPath.row].id {
+            if let id = self.activityListModelObj?.data?[indexPath.row + 2].id {
                 self.wishListApi(activity_id: id)
             }
-            self.activityListModelObj?.data?.activities?[indexPath.row].is_wish?.toggle()
+            self.activityListModelObj?.data?[indexPath.row + 2].is_wish?.toggle()
             self.expolreTableview.reloadData()
         }
-        
-        
-        if let icon = activityListModelObj?.data?.activities?[indexPath.row].image {
+
+        if let icon = activityListModelObj?.data?[indexPath.row + 2].image {
             let cleanedIcon = icon.replacingOccurrences(of: "\\/", with: "/")
-            
             let fullURLString = imagePathUrl + cleanedIcon
-            
             if let url = URL(string: fullURLString) {
                 cell.searchimg.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholder"))
-                print(fullURLString)
             } else {
                 cell.searchimg.image = UIImage(named: "placeholder")
             }
         }
         cell.selectionStyle = .none
-    
+        
         return cell
     }
+
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let nav = self.storyboard?.instantiateViewController(identifier: "ActivityScreenVC") as! ActivityScreenVC
-        nav.didselctletCategoryId = activityListModelObj?.data?.activities?[indexPath.row].id
+        nav.didselctletCategoryId = activityListModelObj?.data?[indexPath.row].id
         self.navigationController?.pushViewController(nav, animated: true)
     }
 }
 extension SearcResultExplorVc {
     
-//    func activityListApi(category_id: Int) {
-//        let param: [String: Any] = ["category_id": category_id]
-//        print("API Params:", param)
-//        
-//        ActivityListViewModel.activityListApi(viewController: self, parameters: param as NSDictionary) { response in
-//            self.activityListModelObj = response
-//            self.exploreCollectionView.reloadData()
-//            self.expolreTableview.reloadData()
-//        }
-//    }
-    func activityListApi(category_id: Int? = nil, isInitialLoad: Bool = false) {
+    //    func activityListApi(category_id: Int) {
+    //        let param: [String: Any] = ["category_id": category_id]
+    //        print("API Params:", param)
+    //
+    //        ActivityListViewModel.activityListApi(viewController: self, parameters: param as NSDictionary) { response in
+    //            self.activityListModelObj = response
+    //            self.exploreCollectionView.reloadData()
+    //            self.expolreTableview.reloadData()
+    //        }
+    //    }branch_id
+    func activityListApi(branch_id: Int? = nil, category_id: Int? = nil, isInitialLoad: Bool = false) {
         var param: [String: Any] = [:]
-
-        if let id = category_id {
-            param["category_id"] = id
+        
+        //  Add branch_id if available
+        if let branchId = branch_id {
+            param["branch_id"] = branchId
+        } else {
+            param["branch_id"] = ""
+        }
+        
+        //  Add category_id if available
+        if let categoryId = category_id {
+            param["category_id"] = categoryId
         } else {
             param["category_id"] = ""
         }
-
-        print("API Params:", param)
-
+        
+        print("📡 API Params:", param)
+        
+        
+        
         ActivityListViewModel.activityListApi(viewController: self, parameters: param as NSDictionary) { response in
             self.activityListModelObj = response
-
+            
             if isInitialLoad {
-               
+                
                 self.expolreTableview.reloadData()
                 self.exploreCollectionView.reloadData()
             } else {
-               
+                
                 self.exploreCollectionView.reloadData()
                 self.expolreTableview.reloadData()
             }
         }
     }
     func wishListApi(activity_id:Int) {
-                let param = ["activity_id":activity_id]
-                
-                print(param)
-                
-                WishListViewModel.wishListApi(viewController: self, parameters: param as NSDictionary) {(response) in
-                    self.wishListmodelObj = response
-                    print("jai hind")
-                    self.exploreCollectionView.reloadData()
-                }
-            }
+        let param = ["activity_id":activity_id]
+        
+        print(param)
+        
+        WishListViewModel.wishListApi(viewController: self, parameters: param as NSDictionary) {(response) in
+            self.wishListmodelObj = response
+            print("jai hind")
+            self.exploreCollectionView.reloadData()
+        }
+    }
     
 }
+//for searching FileterValues
+extension SearcResultExplorVc {
+    func filterActivityListApi() {
+        var param = [String: Any]()
+        param = [
+                "province_id": 3239,
+                "price": "0-2599",
+                "rating": 2.5,
+                "category_id": 2
+            ]
+            
+         
+        FilterActivitiesViewModel.filterActivitiesListApi(viewController: self, parameters: param as NSDictionary) { response in
+             self.filteractivtyObj = response
+             DispatchQueue.main.async {
+                 self.exploreCollectionView.reloadData()
+                 self.expolreTableview.reloadData()
+             }
+         }
+     }
+    func notificationCountListApi(){
+          let param = [String:Any]()
+          NotificationListViewModel.notificationCountListApi(viewController: self, parameters: param as NSDictionary) {  response in
+              self.notificationcountModelObj = response
+              self.countLable.text = "\(self.notificationcountModelObj?.data ?? 0)"
 
+              print("Success")
+          }
+      }
+
+
+}

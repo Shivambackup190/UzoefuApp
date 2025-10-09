@@ -18,7 +18,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OJu-iX-eMG">
-                        <rect key="frame" x="5" y="5" width="279" height="71"/>
+                        <rect key="frame" x="20" y="5" width="249" height="71"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <string key="text">Participants with respiratory or cardiovascular conditions may be at increased risk at high altitudes. Consult your doctor if you have any concerns.</string>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -28,13 +28,16 @@
                 </subviews>
                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 <constraints>
-                    <constraint firstItem="OJu-iX-eMG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="NZw-oL-bQi"/>
+                    <constraint firstItem="OJu-iX-eMG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="NZw-oL-bQi"/>
                     <constraint firstItem="OJu-iX-eMG" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="YPw-4A-wcl"/>
-                    <constraint firstAttribute="trailing" secondItem="OJu-iX-eMG" secondAttribute="trailing" constant="5" id="ZR1-qU-4VB"/>
+                    <constraint firstAttribute="trailing" secondItem="OJu-iX-eMG" secondAttribute="trailing" constant="20" id="ZR1-qU-4VB"/>
                     <constraint firstAttribute="bottom" secondItem="OJu-iX-eMG" secondAttribute="bottom" constant="5" id="b9I-q4-sZT"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="faqLable" destination="OJu-iX-eMG" id="UCa-9b-VC0"/>
+            </connections>
             <point key="canvasLocation" x="51.145038167938928" y="13.028169014084508"/>
         </tableViewCell>
     </objects>

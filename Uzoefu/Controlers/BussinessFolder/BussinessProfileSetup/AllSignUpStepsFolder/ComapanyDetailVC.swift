@@ -6,8 +6,8 @@ class ComapanyDetailVC: UIViewController, CLLocationManagerDelegate {
 
     @IBOutlet weak var addressTextfield: FloatingTextField!
     @IBOutlet weak var mapUiView: UIView!
-
     @IBOutlet weak var dtf: FloatingTextField!
+    
     private var mapView: MKMapView!
     private let locationManager = CLLocationManager()
     private let geocoder = CLGeocoder()

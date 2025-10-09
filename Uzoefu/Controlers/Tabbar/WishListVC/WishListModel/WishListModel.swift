@@ -35,7 +35,7 @@ struct WishlistItem: Codable {
     let activity_id:Int?
     let name: String?
     let image: String?
-    let price: Double?
+    let price: String?
     let ratingCount: Int?
 
     enum CodingKeys: String, CodingKey {

@@ -1,9 +1,6 @@
 //
 //  LogOutViewModel.swift
 //  Uzoefu
-//
-//  Created by Narendra Kumar on 15/09/25.
-//
 
 import Foundation
 import UIKit
@@ -18,9 +15,7 @@ class LogoutViewModel{
                 let userData = try! JSONDecoder().decode(LogOutModel.self, from: userResponse)
                 if userData.status == true {
                     completion(userData)
-                    
                 }
-                
                 else{
                     CommonMethods.showAlertMessage(title:"", message: userData.message ?? "", view: viewController)
                 }

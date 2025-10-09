@@ -9,6 +9,7 @@ import UIKit
 
 class Acknowledgement: UITableViewCell {
 
+    @IBOutlet weak var acknowledgeLable: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

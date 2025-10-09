@@ -1,6 +1,5 @@
 
 
-
 import Foundation
 import UIKit
 import SystemConfiguration
@@ -214,32 +213,7 @@ class CommonMethods: NSObject {
         return attributedString
     }
 
-    /*
-     @developer: pkram
-     @description: This method will used for clear core data.
-     @parameter: (entity: String)
-     @returns:nil
-     */
-    
-    /*
-    class func deleteAllData(entity: String) {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let managedContext = appDelegate.persistentContainer.viewContext
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
-        fetchRequest.returnsObjectsAsFaults = false
-        do {
-            let results = try managedContext.fetch(fetchRequest)
-            for managedObject in results {
-                let managedObjectData:NSManagedObject = managedObject as! NSManagedObject
-                managedContext.delete(managedObjectData)
-                try managedContext.save()
-            }
-        } catch let error as NSError {
-            print(error.localizedDescription)
-        }
-    }
-    */
-    
+ 
     /*****-------***** Save Status *****-------*****/
     class func saveStatusForKey(status:Bool, forKey:String) {
         UserDefaults.standard.set(status, forKey: forKey)

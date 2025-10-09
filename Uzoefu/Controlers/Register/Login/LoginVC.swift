@@ -14,6 +14,7 @@ class LoginVC: UIViewController {
     
     @IBOutlet weak var emailTf: UITextField!
     
+    @IBOutlet weak var loackImg: UIImageView!
     @IBOutlet weak var passwordTf: UITextField!
     
     @IBOutlet weak var remeberImg: UIImageView!
@@ -32,32 +33,32 @@ class LoginVC: UIViewController {
             config.background.backgroundColor = .clear
             button.configuration = config
         }
-     let evalue  = UserDefaults.standard.string(forKey: "email")
-//        emailTf.text = evalue
+        let evalue  = UserDefaults.standard.string(forKey: "email")
+        //        emailTf.text = evalue
         //qwerty786@gmail.com
         
-        emailTf.text    = "qwerty@gmail.com"
+        emailTf.text    = "Nnewgmail@gmail.com"
         let pvalue =  UserDefaults.standard.string(forKey: "password")
-       
-//        passwordTf.text = pvalue
-        passwordTf.text = "1234@abcD"
-
+        
+        //        passwordTf.text = pvalue
+        passwordTf.text = "1234@abD"
+        
         mainView.layer.cornerRadius = 20
         mainView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         mainView.layer.masksToBounds = true
         
         
         
-       
+        
         setupVideoPlayer()
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
-            view.addGestureRecognizer(tapGesture)
-        }
-
-        @objc func hideKeyboard() {
-            view.endEditing(true)
-        }
-
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc func hideKeyboard() {
+        view.endEditing(true)
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
@@ -76,20 +77,29 @@ class LoginVC: UIViewController {
         self.navigationController?.pushViewController(nav, animated: true)
     }
     
+    @IBAction func passShowHideBtn(_ sender: UIButton) {
+        passwordTf.isSecureTextEntry.toggle()
+        if passwordTf.isSecureTextEntry {
+            loackImg.image = UIImage(named: "hidden")
+        } else {
+            loackImg.image = UIImage(named: "eye")
+        }
+    }
+    
     @IBAction func rememberBtnAction(_ sender: UIButton) {
         
         sender.isSelected.toggle()
-           
-           if sender.isSelected {
-               remeberImg.image = UIImage(named: "check")
-               UserDefaults.standard.set(emailTf.text, forKey: "email")
-               UserDefaults.standard.set(passwordTf.text, forKey: "password")
-           } else {
-               remeberImg.image = UIImage(named: "unchecked")
-               UserDefaults.standard.removeObject(forKey: "email")
-               UserDefaults.standard.removeObject(forKey: "password")
-           }
-       }
+        
+        if sender.isSelected {
+            remeberImg.image = UIImage(named: "check")
+            UserDefaults.standard.set(emailTf.text, forKey: "email")
+            UserDefaults.standard.set(passwordTf.text, forKey: "password")
+        } else {
+            remeberImg.image = UIImage(named: "unchecked")
+            UserDefaults.standard.removeObject(forKey: "email")
+            UserDefaults.standard.removeObject(forKey: "password")
+        }
+    }
     
     private func setupVideoPlayer() {
         guard let url = Bundle.main.url(forResource: "onboard", withExtension: "mp4") else {
@@ -98,15 +108,15 @@ class LoginVC: UIViewController {
         }
         videoPlayer = AVPlayer(url: url)
         videoPlayerLayer = AVPlayerLayer(player: videoPlayer)
-
+        
         guard let videoPlayerLayer = videoPlayerLayer else { return }
-
+        
         videoPlayerLayer.frame = videoView.bounds
         videoPlayerLayer.videoGravity = .resizeAspectFill
-
+        
         videoView.layer.insertSublayer(videoPlayerLayer, at: 0)
         videoPlayer?.play()
-
+        
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(videoDidFinishPlaying),
@@ -114,16 +124,16 @@ class LoginVC: UIViewController {
             object: videoPlayer?.currentItem
         )
     }
-
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         videoPlayerLayer?.frame = videoView.bounds
     }
-
+    
     @objc func videoDidFinishPlaying() {
         print("Video finished playing")
-         videoPlayer?.seek(to: .zero)
-         videoPlayer?.play()
+        videoPlayer?.seek(to: .zero)
+        videoPlayer?.play()
     }
 }
 extension LoginVC {
@@ -141,6 +151,8 @@ extension LoginVC {
             guard let data = response?.data else { return }
             let authToken = data.token ?? ""
             UserDefaults.standard.set(authToken, forKey: "token")
+            let myId = data.user_id ?? 0
+            UserDefaults.standard.setValue(myId, forKey: "myid")
             
         }
     }

@@ -1,9 +1,6 @@
 //
 //  LoginModel.swift
 //  Uzoefu
-//
-//  Created by Narendra Kumar on 12/09/25.
-//
 
 import Foundation
 struct LoginModel: Codable {
@@ -24,14 +21,17 @@ struct LoginModel: Codable {
 }
 struct logindetails: Codable {
     let token: String?
+    let user_id:Int?
     let expires_at: String?
     enum CodingKeys: CodingKey {
         case token
         case expires_at
+        case user_id
     }
     init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.token = try container.decodeIfPresent(String.self, forKey: .token)
+        self.user_id = try container.decodeIfPresent(Int.self, forKey: .user_id)
         self.expires_at = try container.decodeIfPresent(String.self, forKey: .expires_at)
     }
 }

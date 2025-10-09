@@ -19,13 +19,16 @@ class SecondView: UIView {
     @IBOutlet weak var selectFoavariteCollection: UICollectionView!
     var nearloactionBtn : (()->()) = {}
     var profileSaveBtnAction : (()->()) = {}
-    
+    var dateSelectionBtnaction : (()->()) = {}
     @IBAction func nearBtnAction(_ sender: UIButton) {
         nearloactionBtn()
     }
     
     @IBAction func profileSaveBtnAction(_ sender: UIButton) {
         profileSaveBtnAction()
+    }
+    @IBAction func datesectionAction(_ sender: UIButton) {
+        dateSelectionBtnaction()
     }
 }
 

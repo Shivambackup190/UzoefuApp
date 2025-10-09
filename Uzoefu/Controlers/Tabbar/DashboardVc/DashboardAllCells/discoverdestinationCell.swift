@@ -10,6 +10,9 @@ import UIKit
 class discoverdestinationCell: UICollectionViewCell {
     @IBOutlet weak var dasboradImg: UIImageView!
     
+    @IBOutlet weak var branch_name: UILabel!
+    
+    @IBOutlet weak var branchCount: UILabel!
     @IBOutlet weak var viewlayer: UIView!
     override func awakeFromNib() {
         super.awakeFromNib()

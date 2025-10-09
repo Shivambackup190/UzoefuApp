@@ -18,7 +18,7 @@
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ayg-OX-u0i">
                         <rect key="frame" x="10" y="10" width="476" height="618"/>
-                        <mutableString key="text">By using this application, you agree to comply with and be bound by these Terms and Conditions.
+                        <string key="text">By using this application, you agree to comply with and be bound by these Terms and Conditions.
 
 All information provided by you must be accurate, current, and complete.
 
@@ -36,7 +36,7 @@ Any disputes arising from the use of this app shall be subject to the jurisdicti
 
 The company may update these Terms &amp; Conditions at any time without prior notice.
 
-Continued use of the app after changes implies acceptance of the revised terms.</mutableString>
+Continued use of the app after changes implies acceptance of the revised terms.</string>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <color key="textColor" red="0.37647058820000001" green="0.40784313729999999" blue="0.41960784309999999" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -50,6 +50,9 @@ Continued use of the app after changes implies acceptance of the revised terms.<
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="termsLable" destination="ayg-OX-u0i" id="nT8-Na-Q6o"/>
+            </connections>
             <point key="canvasLocation" x="258.01526717557249" y="176.7605633802817"/>
         </tableViewCell>
     </objects>

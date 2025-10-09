@@ -1,40 +1,36 @@
 import UIKit
+import PhotosUI
 
 class ProfileVc: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     
     // MARK: - Outlets
     @IBOutlet weak var stackView: UIStackView!
-    
     @IBOutlet weak var containerView: UIView!
-    
     @IBOutlet weak var overviewButton: UIButton!
-    
     @IBOutlet weak var overViewLable: UILabel!
-    
     @IBOutlet weak var overViewcolor: UIView!
     @IBOutlet weak var profileButton: UIButton!
     @IBOutlet weak var rewardsButton: UIButton!
-    @IBOutlet weak var companiesButton: UIButton!
-    
     @IBOutlet weak var profileColor: UIView!
-    
-    
-    @IBOutlet weak var companiesLabel: UILabel!
     @IBOutlet weak var rewardsColor: UIView!
-    
     @IBOutlet weak var profileLabel: UILabel!
-    
     @IBOutlet weak var rewardsLabel: UILabel!
     
+    @IBOutlet weak var reviewsColr: UIView!
+    @IBOutlet weak var calenderView: UIView!
     
-    @IBOutlet weak var companiesColor: UIView!
-    
+    @IBOutlet weak var reviewLable: UILabel!
+    @IBOutlet weak var datePicker: UIDatePicker!
+    @IBOutlet weak var okBtnTappedAcion: UIButton!
+    var selectedIDs : [Int]?
+    var preselectedCategoryIDs: [Int] = []
     var currentIndex = 0
     private var currentView: UIView?
     var firstView:FirstView!
     var secondView:SecondView!
-    var thirdView:ThirdView!
-    var fourthView:FourthView!
+    
+    var thirdView:UserReviewClass!
+    var fourthView:ThirdView!
     var loadNib = [UIView]()
     
     var logoutObj:LogOutModel?
@@ -42,17 +38,22 @@ class ProfileVc: UIViewController, UIImagePickerControllerDelegate & UINavigatio
     var updateProfileModelObj:UpdateProfileModel?
     var updateProfileImageModelObj:UpdateProfileImageModel?
     var categoriesModelObj:ExploreCategoriesModel?
+    var overViewCountObj:OverViewModel?
     var didselctletCategoryId:Int?
     var profieImg:UIImage?
     var selectedIndexes: [IndexPath] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        calenderView.isHidden = true
         
         firstView = (Bundle.main.loadNibNamed("FirstView", owner: self, options: nil)![0] as! FirstView)
         secondView = (Bundle.main.loadNibNamed("SecondView", owner: self, options: nil)![0] as! SecondView)
-        thirdView = (Bundle.main.loadNibNamed("ThirdView", owner: self, options: nil)![0] as! ThirdView)
-        fourthView = (Bundle.main.loadNibNamed("FourthView", owner: self, options: nil)![0] as! FourthView)
+        thirdView = (Bundle.main.loadNibNamed("UserReviewClass", owner: self, options: nil)![0] as! UserReviewClass)
+        
+        
+        fourthView = (Bundle.main.loadNibNamed("ThirdView", owner: self, options: nil)![0] as! ThirdView)
+        
         
         
         loadNib.append(firstView)
@@ -75,15 +76,17 @@ class ProfileVc: UIViewController, UIImagePickerControllerDelegate & UINavigatio
         
         bookingBtnAction()
         logOutAction()
+        ProfileDeatilsAction()
+        editProfileDeatilsAction()
         getprofileApi()
         exploreCategoriesApi()
         
         wishlistBtnAction()
-        plusCompannyActionBtn()
         nearbyActionBtn()
         saveProfileAction()
         profilechangeBtnAction()
-        
+        termsandconditionsActionButton()
+        privacyActionButton()
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         tapGesture.cancelsTouchesInView = false
         view.addGestureRecognizer(tapGesture)
@@ -95,7 +98,26 @@ class ProfileVc: UIViewController, UIImagePickerControllerDelegate & UINavigatio
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
         swipeRight.direction = .right
         containerView.addGestureRecognizer(swipeRight)
+        datePicker.preferredDatePickerStyle = .inline
+        datePicker.datePickerMode = .date
+        datePicker.maximumDate = Date()
+        datePicker.tintColor = .link
+        datePicker.addTarget(self, action: #selector(dateSelected), for: .valueChanged)
         
+       
+    }
+    
+    @objc func dateSelected() {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd" // 👈 year-month-day
+        secondView.dobTf.text = dateFormatter.string(from: datePicker.date)
+    }
+        
+
+    override func viewWillAppear(_ animated: Bool) {
+        getprofileApi()
+        overViewCountApi()
+        dateofBirthSelectaction()
     }
     @objc func handleSwipe(_ gesture: UISwipeGestureRecognizer) {
         if gesture.direction == .left {
@@ -106,6 +128,11 @@ class ProfileVc: UIViewController, UIImagePickerControllerDelegate & UINavigatio
             if currentIndex > 0 {
                 changeTab(index: currentIndex - 1)
             }
+        }
+    }
+    func dateofBirthSelectaction(){
+        secondView.dateSelectionBtnaction = {
+            self.calenderView.isHidden = false
         }
     }
     
@@ -131,8 +158,9 @@ class ProfileVc: UIViewController, UIImagePickerControllerDelegate & UINavigatio
         switch index {
         case 0: selectTab(colorView: overViewcolor, label: overViewLable)
         case 1: selectTab(colorView: profileColor, label: profileLabel)
-        case 2: selectTab(colorView: rewardsColor, label: rewardsLabel)
-       // case 3: selectTab(colorView: companiesColor, label: companiesLabel)
+        case 2: selectTab(colorView: reviewsColr, label: reviewLable)
+        case 3: selectTab(colorView: rewardsColor, label: rewardsLabel)
+        
         default: break
         }
         
@@ -153,23 +181,33 @@ class ProfileVc: UIViewController, UIImagePickerControllerDelegate & UINavigatio
     
     @IBAction func profileBtnAction(_ sender: UIButton) {
         changeTab(index: 1)
+        getprofileApi()
     }
     
     @IBAction func rewardBtnAction(_ sender: UIButton) {
+        changeTab(index: 3)
+    }
+    
+    @IBAction func reviewsActionBtn(_ sender: UIButton) {
         changeTab(index: 2)
     }
     
-    @IBAction func companiesBtnAction(_ sender: UIButton) {
-        changeTab(index: 3)
+    @IBAction func okBtnactionCalender(_ sender: UIButton) {
+        dateSelected()
+        calenderView.isHidden = true
+    }
+    
+    @IBAction func cancelBtnforcalnder(_ sender: UIButton) {
+        calenderView.isHidden = true
     }
     
     func loadthirdViewCell() {
         let nib = UINib(nibName: "CompanyTableCell", bundle: nil)
-        thirdView.rewardTableView.register(nib, forCellReuseIdentifier: "CompanyTableCell")
+        fourthView.rewardTableView.register(nib, forCellReuseIdentifier: "CompanyTableCell")
         
-        thirdView.rewardTableView.delegate = self
-        thirdView.rewardTableView.dataSource = self
-        thirdView.rewardTableView.allowsSelection = true
+        fourthView.rewardTableView.delegate = self
+        fourthView.rewardTableView.dataSource = self
+        fourthView.rewardTableView.allowsSelection = true
     }
     func selectFavourteNib() {
         let nibb = UINib(nibName: "SelectFavouriteActivityCell", bundle: nil)
@@ -186,13 +224,13 @@ extension ProfileVc:UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = thirdView.rewardTableView.dequeueReusableCell(withIdentifier: "CompanyTableCell", for: indexPath) as! CompanyTableCell
+        let cell = fourthView.rewardTableView.dequeueReusableCell(withIdentifier: "CompanyTableCell", for: indexPath) as! CompanyTableCell
         cell.selectionStyle = .none
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-     //   let nav = self.storyboard?.instantiateViewController(identifier: "CompanyDetailsVC") as! CompanyDetailsVC
-       // self.navigationController?.pushViewController(nav, animated: true)
+        //   let nav = self.storyboard?.instantiateViewController(identifier: "CompanyDetailsVC") as! CompanyDetailsVC
+        // self.navigationController?.pushViewController(nav, animated: true)
     }
     func resetAllTabs() {
         let defaultColor = #colorLiteral(red: 0.4512393475, green: 0.4832214117, blue: 0.4951165318, alpha: 1)
@@ -200,16 +238,19 @@ extension ProfileVc:UITableViewDelegate,UITableViewDataSource {
         overViewcolor.isHidden = true
         profileColor.isHidden = true
         rewardsColor.isHidden = true
-     
+        reviewsColr.isHidden = true
+        
         
         overViewcolor.backgroundColor = defaultColor
         profileColor.backgroundColor = defaultColor
         rewardsColor.backgroundColor = defaultColor
-    
+        reviewsColr.backgroundColor = defaultColor
+        
         overViewLable.textColor = defaultText
         profileLabel.textColor = defaultText
         rewardsLabel.textColor = defaultText
-   
+        reviewLable.textColor = defaultText
+        
     }
     func selectTab(colorView: UIView, label: UILabel) {
         let selectedColor = #colorLiteral(red: 0.1960784314, green: 0.8039215686, blue: 0.03807460484, alpha: 1)
@@ -231,7 +272,7 @@ extension ProfileVc: UICollectionViewDelegate, UICollectionViewDataSource, UICol
         cell.activityLable.text = categoriesModelObj?.data?[indexPath.row].name
         
         if let icon = categoriesModelObj?.data?[indexPath.row].icon {
-          
+            
             let cleanedIcon = icon.replacingOccurrences(of: "\\/", with: "/")
             
             let fullURLString = image_Url + cleanedIcon
@@ -244,29 +285,32 @@ extension ProfileVc: UICollectionViewDelegate, UICollectionViewDataSource, UICol
         }
         didselctletCategoryId = categoriesModelObj?.data?[indexPath.row].id
         cell.setSelected(selectedIndexes.contains(indexPath))
-       
+        
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = secondView.selectFoavariteCollection.dequeueReusableCell(withReuseIdentifier: "SelectFavouriteActivityCell", for: indexPath) as! SelectFavouriteActivityCell
-        if selectedIndexes.contains(indexPath) {
-            selectedIndexes.removeAll { $0 == indexPath }
-            secondView.selectFoavariteCollection.deselectItem(at: indexPath, animated: false)
-            cell.setSelected(false)
+      
+        if let index = selectedIndexes.firstIndex(of: indexPath) {
+            selectedIndexes.remove(at: index)
         } else {
-           
-            selectedIndexes.removeAll()
-            for visibleIndex in secondView.selectFoavariteCollection.indexPathsForVisibleItems {
-                if let visibleCell = secondView.selectFoavariteCollection.cellForItem(at: visibleIndex) as? ExplreCatagoriesCell {
-                    visibleCell.setSelected(false)
-                }
-            }
+          
             selectedIndexes.append(indexPath)
-            cell.setSelected(true)
-            
-            
         }
+
+      
+        if let cell = collectionView.cellForItem(at: indexPath) as? SelectFavouriteActivityCell {
+            cell.setSelected(selectedIndexes.contains(indexPath))
+        }
+        
+      
+        didselctletCategoryId = categoriesModelObj?.data?[indexPath.row].id
+         selectedIDs = selectedIndexes.compactMap { categoriesModelObj?.data?[$0.row].id }
+        print("Selected Category IDs:", selectedIDs)
+       
+        secondView.selectFoavariteCollection.reloadData()
     }
+
+
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -291,6 +335,39 @@ extension ProfileVc: UICollectionViewDelegate, UICollectionViewDataSource, UICol
         }
         
     }
+    func ProfileDeatilsAction() {
+        firstView.profileDetailsActionBtn = {
+            self.changeTab(index: 1)
+        }
+    }
+    func editProfileDeatilsAction() {
+        firstView.profileeditBtn = {
+            self.changeTab(index: 1)
+        }
+    }
+    func termsandconditionsActionButton() {
+        firstView.TermsActionBtn = {
+            let nav = self.storyboard?.instantiateViewController(withIdentifier: "TermsVc") as!
+            TermsVc
+            nav.urlString = "https://mobappssolutions.in/uzoefu/termcondition"
+            nav.headingLbl = "Terms and Conditions"
+            self.navigationController?.pushViewController(nav, animated: true)
+            
+        }
+    }
+    func privacyActionButton() {
+        firstView.privacyActionBtn = {
+            let nav = self.storyboard?.instantiateViewController(withIdentifier: "TermsVc") as!
+            TermsVc
+            nav.urlString = "https://mobappssolutions.in/uzoefu/privacy/policy"
+            nav.headingLbl = "Privacy and Policy"
+            self.navigationController?.pushViewController(nav, animated: true)
+            
+        }
+        
+    }
+    
+    
     func logOutAction() {
         firstView.logOutActionAction = {
             let alert = UIAlertController(
@@ -329,7 +406,6 @@ extension ProfileVc: UICollectionViewDelegate, UICollectionViewDataSource, UICol
                 self.showImagePicker(selectedSource: .photoLibrary)
             }))
             
-            // Cancel Button - Dismisses the alert
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
             
             self.present(alert, animated: true, completion: nil)
@@ -347,15 +423,15 @@ extension ProfileVc: UICollectionViewDelegate, UICollectionViewDataSource, UICol
         picker.allowsEditing = false
         self.present(picker, animated: true, completion: nil)
     }
-      
-        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-            if let img = info[.originalImage]as? UIImage{
-                self.firstView.profileImageOutLet.image = img
-                profileImageUpdateApi()
-                //self.selectedProfile = img
-            }
-            self.dismiss(animated: true, completion: nil)
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let img = info[.originalImage]as? UIImage{
+            self.firstView.profileImageOutLet.image = img
+            profileImageUpdateApi()
+            //self.selectedProfile = img
         }
+        self.dismiss(animated: true, completion: nil)
+    }
     
     
     func wishlistBtnAction() {
@@ -367,13 +443,7 @@ extension ProfileVc: UICollectionViewDelegate, UICollectionViewDataSource, UICol
             //            self.tabBarController?.selectedIndex = 2
         }
     }
-    func plusCompannyActionBtn() {
-        fourthView.addMoreCampanyActionBtn = {
-            let nav = self.storyboard?.instantiateViewController(withIdentifier: "BussinessProfileSetupVc") as! BussinessProfileSetupVc
-            
-            self.navigationController?.pushViewController(nav, animated: true)
-        }
-    }
+    
     func nearbyActionBtn() {
         secondView.nearloactionBtn = { [weak self] in
             guard let self = self else { return }
@@ -410,8 +480,6 @@ extension ProfileVc: UICollectionViewDelegate, UICollectionViewDataSource, UICol
             self.UpdateProfileApi()
         }
     }
-    
-    
 }
 extension ProfileVc {
     func logOutApi() {
@@ -443,14 +511,38 @@ extension ProfileVc {
             self.getProfileModelObj = response
             self.firstView.userNameLabel.text = "\(self.getProfileModelObj?.data?.name ?? "") \(self.getProfileModelObj?.data?.lastname ?? "")"
             
+            self.firstView.nikNameLabl.text = self.getProfileModelObj?.data?.username ?? ""
+            
             self.secondView.firstNameLable.text = self.getProfileModelObj?.data?.name ?? ""
             self.secondView.lastNameLable.text = self.getProfileModelObj?.data?.lastname ?? ""
-            self.secondView.fullnameTxt.text = "\(self.getProfileModelObj?.data?.name ?? "") \(self.getProfileModelObj?.data?.lastname ?? "")"
+            //            self.secondView.fullnameTxt.text = "\(self.getProfileModelObj?.data?.name ?? "") \(self.getProfileModelObj?.data?.lastname ?? "")"
+            self.secondView.fullnameTxt.text =  self.getProfileModelObj?.data?.username ?? ""
             self.secondView.emailTf.text = self.getProfileModelObj?.data?.email ?? ""
             self.secondView.mobiletf.text = self.getProfileModelObj?.data?.mobile ?? ""
             self.secondView.addressTf.text = self.getProfileModelObj?.data?.city ?? ""
             self.secondView.dobTf.text = self.getProfileModelObj?.data?.dateofbirth ?? ""
             self.secondView.rangeTextField.text = "\(self.getProfileModelObj?.data?.distance ?? "") Km"
+            
+            //  Get already-selected category IDs
+            if let categoryList = self.getProfileModelObj?.data?.category {
+                self.preselectedCategoryIDs = categoryList.compactMap { $0.category_id }
+                print(" Preselected category IDs from API:", self.preselectedCategoryIDs)
+                self.exploreCategoriesApi()
+            }
+          
+            let baseURL = "https://mobappssolutions.in/uzoefu/public/uploads/users/"
+            if let profilePath = self.getProfileModelObj?.data?.profile_photo_path {
+                let cleanedPath = profilePath.replacingOccurrences(of: "\\/", with: "/")
+                
+                let fullURLString = baseURL + cleanedPath
+                if let imageURL = URL(string: fullURLString) {
+                    self.firstView.profileImageOutLet.sd_setImage(with: imageURL, placeholderImage: UIImage(named: "placeholder"))
+                } else {
+                    print(" Invalid URL: \(fullURLString)")
+                }
+            } else {
+                print("profile_photo_path is nil")
+            }
             
             
         }
@@ -466,16 +558,15 @@ extension ProfileVc {
             "mobile": secondView.mobiletf.text ?? "",
             "city": secondView.addressTf.text ?? "",
             "dateofbirth": secondView.dobTf.text ?? "",
-            "distance": secondView.rangeTextField.text?.replacingOccurrences(of: " Km", with: "") ?? "","category_id": [1,2]
+            "distance": secondView.rangeTextField.text?.replacingOccurrences(of: " Km", with: "") ?? "","category_id": selectedIDs ?? []
         ]
-        
         print("Update Profile Params:", param)
         
-        
-        ProfileViewModel.updateProfileApi(viewController: self, parameters: param as NSDictionary) {(response) in
+        ProfileViewModel.updateProfileApi(viewController: self, parameters: param as NSDictionary) { [self](response) in
             self.updateProfileModelObj = response
             CommonMethods.showAlertMessage(title: "", message: response?.message ?? "", view: self)
             print( "Succes Updated")
+            getprofileApi()
         }
     }
     
@@ -489,6 +580,7 @@ extension ProfileVc {
         ProfileViewModel.updateProfileImageApi(viewController: self, parameters: param as NSDictionary,image: imgData, imageName: "image") { response in
             self.updateProfileImageModelObj = response
             print("API success!")
+            self.getprofileApi()
             CommonMethods.showAlertMessageWithHandler(title: "", message: self.updateProfileImageModelObj?.message ?? "", view: self) {
                 self.navigationController?.popViewController(animated: true)
             }
@@ -497,12 +589,44 @@ extension ProfileVc {
     
     func exploreCategoriesApi() {
         let param = [String:Any]()
+        print(param)
+
+        ExploreCategoriesViewModel.exploreCategoriesApi(viewController: self, parameters: param as NSDictionary) { response in
+            self.categoriesModelObj = response
+            print("jai hind")
+
+            self.selectedIndexes.removeAll()
+
+        
+            for (index, category) in (self.categoriesModelObj?.data ?? []).enumerated() {
+                if let catId = category.id, self.preselectedCategoryIDs.contains(catId) {
+                    self.selectedIndexes.append(IndexPath(item: index, section: 0))
+                }
+            }
+
+
+            self.selectedIDs = self.selectedIndexes.compactMap { self.categoriesModelObj?.data?[$0.row].id }
+            print("✅ Initially selectedIDs:", self.selectedIDs ?? [])
+
+            self.secondView.selectFoavariteCollection.reloadData()
+        }
+    }
+
+    func overViewCountApi() {
+        let param = [String:Any]()
         
         print(param)
         
-        ExploreCategoriesViewModel.exploreCategoriesApi(viewController: self, parameters: param as NSDictionary) {(response) in
-            self.categoriesModelObj = response
-            print("jai hind")
+        OverViewViewModel.overViewCountApi(viewController: self, parameters: param as NSDictionary) {(response) in
+            self.overViewCountObj = response
+            print("succes")
+            let countData = self.overViewCountObj?.data?.overview
+            self.firstView.wishListCount.text = String(countData?.wishlistcount ?? 0)
+            self.firstView.bookingCount.text = String(countData?.bookingcount ?? 0)
+           self.firstView.reviewsCount.text = String(countData?.reviewcount ?? 0)
+
+
+            
             self.secondView.selectFoavariteCollection.reloadData()
         }
     }

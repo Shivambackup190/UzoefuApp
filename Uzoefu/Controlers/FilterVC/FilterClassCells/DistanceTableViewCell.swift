@@ -4,7 +4,8 @@ protocol DistanceTableViewCellDelegate: AnyObject {
 }
 
 class DistanceTableViewCell: UITableViewCell {
-    
+    var cities: [String] = []
+
     @IBOutlet weak var citiesLabel: UILabel!
     @IBOutlet weak var rangeLabel: UILabel!
     weak var delegate: DistanceTableViewCellDelegate?
@@ -16,8 +17,7 @@ class DistanceTableViewCell: UITableViewCell {
     
     // MARK: - Actions
     @IBAction func selectCityAction(_ sender: UIButton) {
-        delegate?.showOptions(title: "Select City",
-                              options: ["Delhi", "Noida", "Goa"]) { selected in
+        delegate?.showOptions(title: "Select City", options: cities) { selected in
             self.citiesLabel.text = selected
         }
     }

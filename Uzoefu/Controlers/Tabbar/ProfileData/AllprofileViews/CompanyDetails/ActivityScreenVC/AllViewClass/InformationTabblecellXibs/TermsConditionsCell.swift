@@ -9,6 +9,7 @@ import UIKit
 
 class TermsConditionsCell: UITableViewCell {
 
+    @IBOutlet weak var termsLable: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

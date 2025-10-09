@@ -33,5 +33,8 @@
 			</array>
 		</dict>
 	</dict>
+    <!-- Add this key for camera usage -->
+    <key>NSCameraUsageDescription</key>
+    <string>We need access to your camera to allow you to take photos for your profile.</string>
 </dict>
 </plist>

@@ -9,6 +9,7 @@ import UIKit
 
 class AgreementCell: UITableViewCell {
 
+    @IBOutlet weak var agrrementLable: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

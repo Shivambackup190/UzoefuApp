@@ -9,6 +9,7 @@ import UIKit
 
 class IndemnityCell: UITableViewCell {
 
+    @IBOutlet weak var indemityLabl: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
     }
